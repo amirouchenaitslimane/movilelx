@@ -209,7 +209,7 @@ class Usuario
     }
 
 
-    public function IsCliente()
+    public function isCliente()
     {
       return ($this->getRole() === (string) self::$ROLE_CLIENTE);
     }

@@ -20,8 +20,8 @@ class Database
 
 
             try{
-                $config  = self::getConfigDataBase();
-                self::$instance = new PDO("mysql:host=".$config['db_host'].';dbname='.$config['db_name'], $config['db_user'], $config['db_password'],[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+                self::$instance = new PDO("mysql:host=".DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             }catch (\Exception $error){
                 die(" Fallo de connexion ".$error->getMessage());
         }
@@ -29,21 +29,6 @@ class Database
             return self::$instance;
     }
 
-    /**
-     * @throws \Exception
-     */
-    private static function getConfigDataBase(){
-        if(!file_exists(dirname(__DIR__)."/config/config_database.php")){
-
-
-            throw new \Exception('El fichero de configuracion no existe');
-        }
-        $file =  include dirname(__DIR__)."/config/config_database.php";
-        return $file;
-
-
-
-    }
 
 
 

@@ -30,7 +30,6 @@ class UsuarioManager
 
             $q = $this->db->prepare($sql);
 
-
             $q->bindValue(':nombre',$usuario->getNombre());
             $q->bindValue(':apellido',$usuario->getApellido());
             $q->bindValue(':direccion',$usuario->getDireccion());
