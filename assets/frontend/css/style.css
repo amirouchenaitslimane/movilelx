@@ -5,6 +5,12 @@ section {
 	padding: 30px 0;
 	width: 100%;
 }
+.splink{
+	color:#781d46;
+}
+.splink:hover{
+	color: #2aabd2;
+}
 .card-block {
 	padding: 0.5rem 1.25rem;
 }
@@ -93,7 +99,7 @@ i {
 	margin-bottom: 20px;
 }
 footer {
-	background: #3d3d3d;
+	background: #78284a;
 	color: #fff;
 	float: left;
 	width: 100%;
@@ -104,6 +110,9 @@ footer li a {
 	float: left;
 	padding-bottom: 15px;
 	width: 100%
+}
+footer li a:hover {
+	color: #000;
 }
 .top-nav {
 	background: #78284a;
@@ -144,7 +153,7 @@ aside {
 	width: 100%
 }
 .copyright p {
-	text-align: left;
+	text-align: center;
 	color: #FFF;
 	padding: 10px 0;
 	margin-bottom: 0px;

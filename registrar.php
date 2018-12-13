@@ -1,19 +1,19 @@
 <?php
 $title = "Registrar";
 require_once 'application/parts/frontend/header.php';
-echo $_SERVER['SERVER_NAME'];
+
 ?>
 <div class="container">
     <div class="row">
         <?php require_once 'application/parts/frontend/categories.php'?>
 
         <div class="col-md-9">
-            <div class="col-md-6 ">
+            <div class="col-md-8 ">
                 <div class="card p-2" >
                     <div class="card-body">
                         <h5 class="card-title">Registrarse</h5>
-
-                        <h6 class="card-subtitle mb-2 text-muted"><a href="?p=login">Login</a></h6>
+												<hr>
+												<h6 class="card-subtitle mb-2 text-muted"><strong>¿Eres Cliente?</strong> Accede aquí <a href="?p=login" class="splink">Login</a></h6>
                         <?php
 
                         if(isset($_POST['submit'])){

@@ -6,41 +6,31 @@
         <div class="row">
             <div class="col-md-3">
                 <ul class="list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Product</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="#">Quienes Somos</a></li>
+										<li><a href="#">Women</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
                 <ul class="list-unstyled">
-                    <li><a href="#">Mobile</a></li>
-                    <li><a href="#">Computers</a></li>
-                    <li><a href="#">Storage</a></li>
-                    <li><a href="#">Power Bank</a></li>
-                    <li><a href="#">Cables</a></li>
+                    <li><a href="#">RGPD</a></li>
+                    <li><a href="#">politica</a></li>
+										<li><a href="#">Men</a></li>
+
+
                 </ul>
             </div>
-            <div class="col-md-3">
-                <ul class="list-unstyled">
-                    <li><a href="#">Men</a></li>
-                    <li><a href="#">Women</a></li>
-                    <li><a href="#">Kids</a></li>
-                    <li><a href="#">Clothes</a></li>
-                    <li><a href="#">Automobiles</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
+
+            <div class="col-md-6">
                 <address>
-                    <strong>Twitter, Inc.</strong><br>
-                    1355 Market St, Suite 900<br>
-                    San Francisco, CA 94103<br>
-                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                    <strong>Contactar con nosotros</strong><br>
+                    Te esperamos en Carrer Illueca, 28, 03206 Elx, Alacant<br>
+                   <br>
+                    <abbr title="Phone">Tel: </abbr> (34) 966 91 22 60
                 </address>
                 <address>
-                    <strong>Full Name</strong><br>
-                    <a href="mailto:#">first.last@example.com</a>
+                    <strong>creado por:</strong><br>
+                    <a href="mailto:#">amirouchenaitslimane@gmail.com</a>
                 </address>
             </div>
         </div>
@@ -49,19 +39,10 @@
 <div class="copyright">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <p>© 2016 - All Rights are Reserved</p>
+            <div class="col-md-12 ">
+                <p>© 201 - Amirouche Naitslimane IES SEVERO OCHOA</p>
             </div>
-            <div class="col-md-6">
-                <ul class="bottom_ul">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Call to Action</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
+
         </div>
     </div>
 </div>
