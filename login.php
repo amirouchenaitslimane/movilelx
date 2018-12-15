@@ -10,22 +10,15 @@ if(isset($_SESSION['user'])){
         <?php
         include_once 'application/parts/frontend/categories.php';
         ?>
-
         <div class="col-md-9">
 						<div class="card card-form  ">
 								<div class="card-header card-header-primary">
 										<h4 class="card-title"><?= $title ?></h4>
-										<p class="card-sub-title"><strong>¿Quieres unirte a movilelx ?</strong> registrate  <a href="login.php">aqui</a>	</p>
+										<p class="card-sub-title"><strong>¿Quieres unirte a movilelx ?</strong> registrate  <a href="registrar.php">aqui</a>	</p>
 								</div>
 								<div class="card-body">
                     <?php
-                    //session_destroy();
                     flash('info');
-                    //DEBUG($_SESSION);
-                    //                $p = password_hash('123456',PASSWORD_DEFAULT);
-                    //
-                    //                DEBUG(password_verify('123456',$p));
-
                     if(isset($_POST['submit']))
                     {
                         $errors = [];
@@ -37,14 +30,8 @@ if(isset($_SESSION['user'])){
                         if(empty($password)){
                             $errors[] = "contraseña obligatoria para acceder";
                         }
-
-
-
-
                         $user = $usuario_manager->getByEmail($email);
-
-
-                        if($user === null){
+                       if($user === null){
                             $errors[] = 'usuario no existe en la base de datos';
 
                         }else {
@@ -62,7 +49,6 @@ if(isset($_SESSION['user'])){
                         }
                     }
                     ?>
-
 										<div class="col-md-6">
 										<form class="form-register" method="post" action="login.php">
 												<div class="form-group">

@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-3">
                 <ul class="list-unstyled">
-                    <li><a href="#">RGPD</a></li>
+                    <li><a href="rgpd.php">RGPD</a></li>
                     <li><a href=""><i class="fa fa-facebook"></i> Nuestra Pagina de facebook</a></li>
 										<li><a href="#">IES Severo Ochoa</a></li>
                 </ul>

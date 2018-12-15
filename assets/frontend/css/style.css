@@ -304,3 +304,6 @@ aside {
 	list-style: none;
 	margin: 10px 0 0 10px;
 }
+.text-ju p{
+	text-align: justify;
+}

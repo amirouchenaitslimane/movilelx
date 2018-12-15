@@ -1,9 +1,7 @@
 <?php
-$title = "Login";
+$title = "Qiuenes Somos";
 require_once 'application/parts/frontend/header.php';
-if(isset($_SESSION['user'])){
-    redidect('index');
-}
+
 ?>
 <div class="container">
     <div class="row">
@@ -15,11 +13,10 @@ if(isset($_SESSION['user'])){
             <div class="card card-form  ">
                 <div class="card-header card-header-primary">
                     <h4 class="card-title"><?= $title ?></h4>
-                    <p class="card-sub-title"><strong>¿Quieres unirte a movilelx ?</strong> registrate  <a href="login.php">aqui</a>	</p>
-                </div>
+                    </div>
                 <div class="card-body">
                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deserunt dignissimos distinctio fugit illo ipsum, minus nemo obcaecati optio quam qui quidem quis saepe, similique suscipit tempore, vel. Ipsam, numquam.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque debitis minima nam nesciunt, nostrum quia rerum ut. Accusamus aut eveniet harum inventore sequi suscipit veritatis? Omnis optio placeat qui sapiente?</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque debitis minima nam nesciunt, nostrum quia rerum ut. Accusamus aut eveniet harum inventore sequi suscipit veritatis? Omnis optio placeat qui sapiente?</p>
 
                 </div>
             </div>

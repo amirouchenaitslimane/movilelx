@@ -10,7 +10,7 @@ include_once "application/includes.php";
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <title>TiendaDaw | <?= (isset($title) ? $title: "no title ")?></title>
+    <title>Movilelx | <?= (isset($title) ? $title: "no title ")?></title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="assets/frontend/css/bootstrap.min.css">
@@ -28,14 +28,18 @@ include_once "application/includes.php";
                 <li class="nav-item"> <a class="nav-link" href="quienessomos.php">Quiénes somos</a> </li>
                 <?php if(isset($_SESSION['user'])): ?>
 										<li class="nav-item"> <a class="nav-link" href="logout.php">salir (<?= $_SESSION['user']->getNombre() ?>)</a> </li>
-								<?php if(!$_SESSION['user']->isCliente()): ?>
+
+                    <?php if(!$_SESSION['user']->isCliente()): ?>
 												<li class="nav-item"> <a class="nav-link " href="login.php"><i class="fa fa-dashboard icon-cart"></i>Dashboard</a> </li>
+										<?php else:?>
+												<li class="nav-item"> <a class="nav-link" href="areacliente.php">Area Cliente</a> </li>
 
 								<?php endif;?>
 								<?php else:?>
 										<li class="nav-item"> <a class="nav-link" href="login.php">Login</a> </li>
+										<li class="nav-item"> <a class="nav-link" href="registrar.php">Hazte Cliente</a> </li>
+
                 <?php endif;?>
-								<li class="nav-item"> <a class="nav-link" href="registrar.php">Hazte Cliente</a> </li>
 
 								<li class="nav-item">
                     <a class="nav-link " href="#"><i class="fa fa-shopping-cart icon-cart"></i> Cart(3)

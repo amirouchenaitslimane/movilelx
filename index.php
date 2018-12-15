@@ -71,60 +71,6 @@ require_once 'application/parts/frontend/header.php' ?>
 
                     </div>
                 </div>
-
-<!--                <div class="product-block">-->
-<!--                    <h3>Recent Products</h3>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-4">-->
-<!--                            <div class="card text-xs-center"> <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">-->
-<!--                                <div class="card-block">-->
-<!--                                    <h5 class="card-title">Product Name</h5>-->
-<!--                                    <p class="card-text price">$500</p>-->
-<!--                                    <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span> <a href="#" class="btn btn-success">Add to Cart</a> </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4">-->
-<!--                            <div class="card text-xs-center"> <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">-->
-<!--                                <div class="card-block">-->
-<!--                                    <h5 class="card-title">Product Name</h5>-->
-<!--                                    <p class="card-text price">$500</p>-->
-<!--                                    <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span> <a href="#" class="btn btn-success">Add to Cart</a> </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4">-->
-<!--                            <div class="card text-xs-center"> <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">-->
-<!--                                <div class="card-block">-->
-<!--                                    <h5 class="card-title">Product Name</h5>-->
-<!--                                    <p class="card-text price">$500</p>-->
-<!--                                    <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span> <a href="#" class="btn btn-success">Add to Cart</a> </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4">-->
-<!--                            <div class="card text-xs-center"> <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">-->
-<!--                                <div class="card-block">-->
-<!--                                    <h5 class="card-title">Product Name</h5>-->
-<!--                                    <p class="card-text price">$500</p>-->
-<!--                                    <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span> <a href="#" class="btn btn-success">Add to Cart</a> </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4">-->
-<!--                            <div class="card text-xs-center"> <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">-->
-<!--                                <div class="card-block">-->
-<!--                                    <h5 class="card-title">Product Name</h5>-->
-<!--                                    <p class="card-text price">$500</p>-->
-<!--                                    <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span> <a href="#" class="btn btn-success">Add to Cart</a> </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4">-->
-<!--                            <div class="card text-xs-center"> <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">-->
-<!--                                <div class="card-block">-->
-<!--                                    <h5 class="card-title">Product Name</h5>-->
-<!--                                    <p class="card-text price">$500</p>-->
-<!--                                    <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span> <a href="#" class="btn btn-success">Add to Cart</a> </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
