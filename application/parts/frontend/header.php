@@ -20,11 +20,11 @@ include_once "application/includes.php";
 
 <body>
 <nav class="navbar navbar-static-top top-nav">
-    <div class="container "> <a class="navbar-brand" href="#">MóvilElx</a>
+    <div class="container "> <a class="navbar-brand" href="index.php">MóvilElx</a>
         <button class="navbar-toggler hidden-md-up collapsed" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation"> ☰ </button>
         <div class="navbar-toggleable-sm collapse" id="exCollapsingNavbar2">
             <ul class="nav navbar-nav float-xs-right">
-                <li class="nav-item active"> <a class="nav-link" href="#myCarousel">Home <span class="sr-only">(current)</span></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" href="quienessomos.php">Quiénes somos</a> </li>
                 <?php if(isset($_SESSION['user'])): ?>
 										<li class="nav-item"> <a class="nav-link" href="logout.php">salir (<?= $_SESSION['user']->getNombre() ?>)</a> </li>
@@ -38,7 +38,7 @@ include_once "application/includes.php";
 								<li class="nav-item"> <a class="nav-link" href="registrar.php">Hazte Cliente</a> </li>
 
 								<li class="nav-item">
-                    <a class="nav-link " href="cart.html"><i class="fa fa-shopping-cart icon-cart"></i> Cart(3)
+                    <a class="nav-link " href="#"><i class="fa fa-shopping-cart icon-cart"></i> Cart(3)
                     </a>
                 </li>
             </ul>
