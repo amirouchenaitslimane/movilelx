@@ -25,7 +25,7 @@ include_once "application/includes.php";
         <div class="navbar-toggleable-sm collapse" id="exCollapsingNavbar2">
             <ul class="nav navbar-nav float-xs-right">
                 <li class="nav-item active"> <a class="nav-link" href="#myCarousel">Home <span class="sr-only">(current)</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#services">Quiénes somos</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="quienessomos.php">Quiénes somos</a> </li>
                 <?php if(isset($_SESSION['user'])): ?>
 										<li class="nav-item"> <a class="nav-link" href="logout.php">salir (<?= $_SESSION['user']->getNombre() ?>)</a> </li>
 								<?php if(!$_SESSION['user']->isCliente()): ?>

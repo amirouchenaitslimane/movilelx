@@ -5,33 +5,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <ul class="list-unstyled">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="#">Quienes Somos</a></li>
-										<li><a href="#">Women</a></li>
-                </ul>
+								<address>
+										<strong>Contactar con nosotros</strong><br>
+										Te esperamos en Carrer Illueca, 28, 03206 Elx, Alacant<br>
+										<br>
+										<abbr title="Phone">Tel: </abbr> (34) 966 91 22 60
+								</address>
             </div>
             <div class="col-md-3">
                 <ul class="list-unstyled">
                     <li><a href="#">RGPD</a></li>
-                    <li><a href="#">politica</a></li>
-										<li><a href="#">Men</a></li>
-
-
+                    <li><a href=""><i class="fa fa-facebook"></i> Nuestra Pagina de facebook</a></li>
+										<li><a href="#">IES Severo Ochoa</a></li>
                 </ul>
             </div>
 
             <div class="col-md-6">
-                <address>
-                    <strong>Contactar con nosotros</strong><br>
-                    Te esperamos en Carrer Illueca, 28, 03206 Elx, Alacant<br>
-                   <br>
-                    <abbr title="Phone">Tel: </abbr> (34) 966 91 22 60
-                </address>
+
                 <address>
                     <strong>creado por:</strong><br>
                     <a href="mailto:#">amirouchenaitslimane@gmail.com</a>
                 </address>
+								<p>Alumno En Severo Ochoa</p>
             </div>
         </div>
     </div>

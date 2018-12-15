@@ -244,6 +244,9 @@ class Usuario
      */
     public function setPassword($password)
     {
+        if(empty($password)){
+            $this->errors[] = "Contrasña obligatoria !";
+        }
         $this->password = $password;
     }
 
