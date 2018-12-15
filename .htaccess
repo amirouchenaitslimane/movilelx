@@ -1,2 +1,2 @@
 RewriteEngine On
-ErrorDocument 404 http://localhost/movilelx/404.html
+ErrorDocument 404 http://movilelx.site/404.html
