@@ -40,6 +40,7 @@ if(!$_SESSION['user']->isCliente()){
 														$cliente = $usuario_manager->findUsuario($_SESSION['user']->getId());
 
 														?>
+
 														<ul>
 																<li><?= $cliente->getNombre();?></li>
 
@@ -54,6 +55,7 @@ if(!$_SESSION['user']->isCliente()){
 
                 </div>
             </div>
+						
            </div>
     </div>
 </div>
