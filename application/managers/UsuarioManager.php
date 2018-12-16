@@ -142,4 +142,53 @@ class UsuarioManager
         $this->db->exec('DELETE FROM usuario WHERE id = '.$usuario->getId());
 
     }
+
+
+    public function getClientes($start=null,$offset=null)
+    {
+        try{
+            $users = [];
+            $sql = "SELECT * FROM usuario WHERE role = 2 ";
+            if($start !== null && $offset !== null){
+                $sql .= "LIMIT $start,$offset";
+            }
+            $q = $this->db->query($sql);
+            while ($row = $q->fetch(\PDO::FETCH_ASSOC))
+            {
+                $users[] = new Usuario($row);
+            }
+            return $users;
+        }catch (\PDOException $e){
+            echo "error ".$e->getMessage();
+        }
+    }
+
+
+    public function getAdminstradores($start=null,$offset=null)
+    {
+        try{
+            $users = [];
+            $sql = "SELECT * FROM usuario WHERE role = 1 ";
+            if($start !== null && $offset !== null){
+                $sql .= "LIMIT $start,$offset";
+            }
+            $q = $this->db->query($sql);
+            while ($row = $q->fetch(\PDO::FETCH_ASSOC))
+            {
+                $users[] = new Usuario($row);
+            }
+            return $users;
+        }catch (\PDOException $e){
+            echo "error ".$e->getMessage();
+        }
+    }
+
+    public function countClientes($role)
+    {
+        $sql = "SELECT id FROM usuario WHERE role= :role";
+        $q = $this->db->prepare($sql);
+        $q->execute([':role'=>$role]);
+        return $q->rowCount();
+    }
+
 }

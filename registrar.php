@@ -23,6 +23,10 @@ require_once 'application/parts/frontend/header.php';
                         if($usuario_manager->getByEmail($_POST['email'])){
                             $user->addError('USUARIO EXIST EN LA BASE DE DATOS');
                         }
+                        if($_POST['password'] != $_POST['rpassword']){
+                            $user->addError("la contraseña no coincede ");
+                        }
+
                         //si no hay errores añadimos el nuevo usuario a la base de datos
                         if(empty($user->getErrors())){
                             $usuario_manager->addUsuario($user);

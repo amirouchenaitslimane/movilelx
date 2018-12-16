@@ -17,7 +17,7 @@ class Usuario
     private $direccion;
     private $email;
     private $password;
-    private $rPassword;
+    private $rpassword;
     private $role;
     private $created;
     private $updated;
@@ -278,6 +278,17 @@ class Usuario
 
         $this->direccion = $direccion;
     }
+
+    public function setRpassword($rpassword)
+    {
+        if(empty($rpassword)){
+            $this->errors[] = "repite la contraseña del cliente ";
+        }
+        $this->rpassword = $rpassword;
+
+    }
+
+
 
 
 }
