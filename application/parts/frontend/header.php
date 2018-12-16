@@ -36,7 +36,7 @@ include_once "application/includes.php";
 								<li class="nav-item"> <a class="nav-link" href="logout.php">salir (<?= $_SESSION['user']->getNombre() ?>)</a> </li>
 
                 <?php if(!$_SESSION['user']->isCliente()): ?>
-										<li class="nav-item"> <a class="nav-link " href="login.php"><i class="fa fa-dashboard icon-cart"></i>Dashboard</a> </li>
+										<li class="nav-item"> <a class="nav-link " href="admin/index.php"><i class="fa fa-dashboard icon-cart"></i>Dashboard</a> </li>
                 <?php else:?>
 										<li class="nav-item"> <a class="nav-link" href="areacliente.php">Area Cliente</a> </li>
 

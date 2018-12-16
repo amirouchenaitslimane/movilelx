@@ -29,15 +29,24 @@ if(!$_SESSION['user']->isCliente()){
                     </ul>
 
 
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade" id="pedidos">
+                    <div class=" tab-content ">
+                        <div role="tabpanel" class="tab-pane fade in active " id="pedidos">
                             <h3>Mis pedidos</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad at consequuntur corporis cum cumque, deserunt dicta dolorum earum eligendi fugit incidunt itaque laudantium magni optio praesentium quos reprehenderit saepe.</p>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade in active" id="profile">
+                        <div role="tabpanel" class="tab-pane fade" id="profile">
                             <h3>Mi perfil </h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur consequatur, dolorum enim hic molestias pariatur reprehenderit? Dolor eaque et ex expedita natus odio omnis porro provident reprehenderit unde. Facere?</p>
+                            <?php
+														$cliente = $usuario_manager->findUsuario($_SESSION['user']->getId());
 
+														?>
+														<ul>
+																<li><?= $cliente->getNombre();?></li>
+
+																<li><?= $cliente->getApellido() ;?></li>
+																<li><?= $cliente->getDireccion() ?></li>
+																<li><?= $cliente->getEmail() ?></li>
+														</ul>
                         </div>
 
                         </div>
@@ -45,7 +54,6 @@ if(!$_SESSION['user']->isCliente()){
 
                 </div>
             </div>
-
            </div>
     </div>
 </div>
