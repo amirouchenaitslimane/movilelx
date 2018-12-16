@@ -1,5 +1,5 @@
 <?php
-$title = "Qiuenes Somos";
+$title = "Quiénes Somos";
 require_once 'application/parts/frontend/header.php';
 
 ?>

@@ -73,7 +73,7 @@ require_once 'application/parts/frontend/header.php';
 
 												</div>
 
-												<button type="submit" name="submit" class="btn btn-primary pull-left">Registrar</button>
+												<button type="submit" name="submit" class="btn btn-primary pull-left btn-movilex">Registrar</button>
 												<div class="clearfix"></div>
 										</form>
 								</div>

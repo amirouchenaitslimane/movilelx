@@ -61,7 +61,7 @@ if(isset($_SESSION['user'])){
 														<input type="password" name="password" class="form-control" id="password" placeholder="Contraseña">
 												</div>
 
-												<button type="submit" name="submit" class="btn btn-primary">Acceder</button>
+												<button type="submit" name="submit" class="btn  btn-movilex">Acceder</button>
 										</form>
 										</div>
 										</div>
