@@ -21,7 +21,7 @@ class Database
 
             try{
 
-                self::$instance = new PDO("mysql:host=".DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                self::$instance = new PDO("mysql:host=".DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PASSWORD,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             }catch (\Exception $error){
                 die(" Fallo de connexion ".$error->getMessage());
         }

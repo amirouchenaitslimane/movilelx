@@ -11,6 +11,11 @@
 								<i class="fa fa-fw fa-user"></i>
 								<span>Gestion Clientes</span></a>
 				</li>
+		<li class="nav-item">
+				<a class="nav-link" href="categorias.php">
+						<i class="fa fa-fw fa-user"></i>
+						<span>Gestion Categorias</span></a>
+		</li>
 
     <?php
     if($_SESSION['user']->isSuperAdmin()):?>
