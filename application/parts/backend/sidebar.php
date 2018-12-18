@@ -20,9 +20,5 @@
 								<span>Gestion Usuarios</span></a>
 				</li>
     <?php endif;?>
-    <li class="nav-item">
-        <a class="nav-link" href="http://localhost/daw/productosadmin.php">
-            <i class="fa fa-fw fa-user"></i>
-            <span>Gestion Productos</span></a>
-    </li>
+    
 </ul>
