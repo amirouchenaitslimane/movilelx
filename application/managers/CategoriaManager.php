@@ -21,21 +21,16 @@ class CategoriaManager
 
     public function getAll()
     {
-        $catgories = [];
-        $sql = "SELECT c1.nombre,c1.padre_id as padre,c1.activo, c2.nombre,c2.activo FROM categoria c1 INNER JOIN categoria c2 ON c1.id = c2.padre_id WHERE c1.activo = 1 AND c2.activo = 1 ";
+        $catgories=[];
 
 
-        $q = $this->db->query($sql);
-        while ($row = $q->fetch(\PDO::FETCH_ASSOC))
-        {
-            $ct = [];
-            if($row['padre'] == null){
-                $ct['nombre_padre'] = $row['nombre'];
-            }else{
-                $ct['children'][] =$row['nombre'];
-            }
 
-            $catgories[] = $ct;
+        $sql = "select c.*,COUNT(p.id)AS productos from categoria c LEFT JOIN producto p ON c.id = p.categoria_id where c.padre_id=0 GROUP BY c.nombre  ";
+
+        $q = $this->db->prepare($sql);
+        $q->execute();
+        while ($row = $q->fetch(\PDO::FETCH_OBJ)){
+                $catgories[] = $row;
         }
         return $catgories;
     }
@@ -151,5 +146,7 @@ class CategoriaManager
         return $q->rowCount();
 
     }
+
+
 
 }
