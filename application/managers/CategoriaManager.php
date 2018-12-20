@@ -19,25 +19,51 @@ class CategoriaManager
         $this->db = Database::Db();
     }
 
-    public function getAll()
+    public function getAll($start=null,$end=null)
     {
-        $catgories=[];
+        try{
+            $catgories = [];
+            $sql = "SELECT 
+                      c1.id ,c1.nombre    
+                AS    padre,c2.nombre 
+                AS    hijo ,COUNT(producto.id) 
+                AS total_proodctos 
+                FROM 
+                     categoria c1 
+                inner join 
+                       categoria c2 
+                         ON c1.id = c2.padre_id 
+                LEFT JOIN 
+                       producto 
+                         ON producto.categoria_id = c2.id 
+                         OR producto.categoria_id = c1.id 
+                WHERE c1.activo = 1 
+                        AND c2.activo = 1 
+                GROUP BY c2.id ";
+            if($start !== null && $end !== null){
+                $sql .= "LIMIT $start,$end";
+            }
+
+            $q = $this->db->query($sql);
 
 
+            while ($row = $q->fetch(\PDO::FETCH_OBJ))
+            {
 
-        $sql = "select c.*,COUNT(p.id)AS productos from categoria c LEFT JOIN producto p ON c.id = p.categoria_id where c.padre_id=0 GROUP BY c.nombre  ";
-
-        $q = $this->db->prepare($sql);
-        $q->execute();
-        while ($row = $q->fetch(\PDO::FETCH_OBJ)){
                 $catgories[] = $row;
+            }
+            return $catgories;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $catgories;
     }
 
 
-
-
+    /**
+     * ELIMINAR
+     * @param int $id_padre
+     * @return array
+     */
     public function getByParents($id_padre = 5)
     {
         $parents = [];
@@ -54,69 +80,87 @@ class CategoriaManager
     public function displayCategorias()
 
     {
-        $parents = [];
-        $sql = "SELECT * from categoria where padre_id = 0 and activo = 1 order by nivel asc";
+       try{
+           $parents = [];
+           $sql = "SELECT * from categoria where padre_id = 0 and activo = 1";
+           $q = $this->db->prepare($sql);
+           $q->execute();
+           while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
+               $c = new Categoria($row);
+               if(!empty($this->getByParent($c->getId()))){
 
-
-        $q = $this->db->prepare($sql);
-        $q->execute();
-
-
-
-
-        while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
-            $c = new Categoria($row);
-            if(!empty($this->getByParent($c->getId()))){
-
-                $c->setChilds($this->getByParent($c->getId()));
-            }
-            $parents[] = $c;
-        }
-        return $parents;
+                   $c->setChilds($this->getByParent($c->getId()));
+               }
+               $parents[] = $c;
+           }
+           return $parents;
+       }catch (\PDOException $e){
+           echo $e->getMessage();
+       }
     }
 
     public function getByParent($id)
     {
-        $parents = [];
-        $sql2 = "SELECT * from categoria where padre_id =:id and activo =1 order by nivel desc";
-        $q2 = $this->db->prepare($sql2);
-        $q2->execute([':id'=>$id]);
-        while ($row = $q2->fetch(\PDO::FETCH_ASSOC)){
-            $c = new Categoria($row);
+        try{
+            $parents = [];
+            $sql2 = "SELECT * from categoria where padre_id =:id and activo =1 ";
+            $q2 = $this->db->prepare($sql2);
+            $q2->execute([':id'=>$id]);
+            while ($row = $q2->fetch(\PDO::FETCH_ASSOC)){
+                $c = new Categoria($row);
 
-            $parents[] = $c;
+                $parents[] = $c;
+            }
+            return $parents;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $parents;
 
     }
 
     public function getParents()
     {
-        $categoria_padre = [];
-        $sql = "SELECT * from categoria where padre_id = 0 and activo = 1 order by nivel desc ";
-        $q = $this->db->prepare($sql);
-        $q->execute();
-        while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
-            $categoria_padre[] = new Categoria($row);
+        try{
+            $categoria_padre = [];
+            $sql = "SELECT * from categoria where padre_id = 0 and activo = 1 ";
+            $q = $this->db->prepare($sql);
+            $q->execute();
+            while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
+                $categoria_padre[] = new Categoria($row);
+            }
+            return $categoria_padre;
+        }catch (\PDOException $e){
+            echo "error en getparent ".$e->getMessage();
         }
-        return $categoria_padre;
     }
 
-    public function addCategory(Categoria $categoria)
+    public function addCategory(Categoria $category)
     {
-       try{
-           $sql = "INSERT INTO `categoria`(`id`, `padre_id`, `nombre`, `descripcion`, `activo`) VALUES (null,:padre_id,:nombre,:descripcion,:activo)";
-           $q = $this->db->prepare($sql);
 
-               $q->bindValue(':padre_id', $categoria->getPadreId());
+        try{
+            $this->db->beginTransaction();
+            $this->db->query('set FOREIGN_KEY_CHECKS=0');
 
-           $q->bindValue(':nombre',$categoria->getNombre());
-           $q->bindValue(':descripcion',$categoria->getDescripcion());
-           $q->bindValue(':activo',$categoria->getActivo());
-           $q->execute();
-       }catch (\PDOException $e){
-           die($e->getMessage());
-       }
+            $sql = "INSERT INTO `categoria`(`id`, `nombre`, `descripcion`, `padre_id`, `activo`) VALUES (null,:nombre,:descripcion,:padre_id,:activo)";
+            $q = $this->db->prepare($sql);
+            $q->bindValue(':nombre',$category->getNombre());
+            $q->bindValue(':descripcion',$category->getDescripcion());
+            $q->bindValue(':padre_id',$category->getPadreId());
+
+            $q->bindValue(':activo',$category->getActivo());
+            $q->execute();
+
+            $this->db->query('set FOREIGN_KEY_CHECKS=1');
+            $this->db->commit();
+
+
+
+        }catch (\PDOException $e){
+            die('error '.$e->getMessage());
+        }
+
+
+
 
 
     }

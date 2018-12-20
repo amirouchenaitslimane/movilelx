@@ -22,9 +22,31 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 							<a href="nuevacategoria.php" class="btn btn-primary"><i class="fa fa-plus"></i> Nueva categoria</a>
 					</div>
 					<div class="col-md-12 mt-3">
-							<?php
-							DEBUG($categoria_manager->getAll());
-							?>
+							<table class="table">
+									<thead>
+									<tr>
+											<th>Nombre padre</th>
+											<th>Hijos</th>
+
+									</tr>
+									</thead>
+									<tbody>
+									<?php foreach ($categoria_manager->displayCategorias() as $cate):?>
+										<tr>
+												<td rowspan="<?= count($cate->getChilds())?>"><?= $cate->getNombre(); ?> <a href="categoriadetail.php?id=<?= $cate->getId() ?>" class=" "><i class="fa fa-eye"></i> ver</a></td>
+												<td><?php	foreach ($cate->getChilds() as $child):?>
+														<ul>
+																<li><?= $child->getNombre() ?>- <a href="categoriadetail.php?id=<?= $child->getId() ?>"><i class="fa fa-eye"></i></a></li>
+
+														</ul>
+														<?php endforeach; ?></td>
+										</tr>
+
+									<?php endforeach; ?>
+
+
+									</tbody>
+							</table>
 					</div>
 
 					</div>
