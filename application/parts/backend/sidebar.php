@@ -17,6 +17,12 @@
 						<span>Gestion Categorias</span></a>
 		</li>
 
+		<li class="nav-item">
+				<a class="nav-link" href="productos.php">
+						<i class="fa fa-fw fa-user"></i>
+						<span>Gestion Productos</span></a>
+		</li>
+
     <?php
     if($_SESSION['user']->isSuperAdmin()):?>
 				<li class="nav-item">

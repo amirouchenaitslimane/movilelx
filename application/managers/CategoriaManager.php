@@ -167,7 +167,7 @@ class CategoriaManager
 
     public function getProductsCategory($id,$start=null,$offset=null) {
         $products = array();
-        $sql = "SELECT categoria.nombre,categoria.id ,producto.*,image.* FROM categoria INNER JOIN producto ON categoria.id = producto.categoria_id INNER join image ON image.producto_id = producto.id WHERE categoria.id = :id ";
+        $sql = "SELECT categoria.nombre,categoria.id ,producto.* FROM categoria INNER JOIN producto ON categoria.id = producto.categoria_id  WHERE categoria.id = :id ";
         if($start !== null && $offset !== null){
             $sql .= "LIMIT $start,$offset";
         }
