@@ -79,11 +79,20 @@ class ProductoManager
 
     public function getProduct($id)
     {
-        $sql = "SELECT * FROM producto WHERE id=:id";
-        $q = $this->db->prepare($sql);
-        $q->execute([':id'=>$id]);
-        $row = $q->fetch(\PDO::FETCH_ASSOC);
-        return new Producto($row);
+       try{
+           $sql = "SELECT * FROM producto WHERE id=:id";
+           $q = $this->db->prepare($sql);
+           $q->execute([':id'=>$id]);
+           $row = $q->fetch(\PDO::FETCH_ASSOC);
+           if($row){
+               return new Producto($row);
+
+           }else{
+              return null;
+           }
+       }catch (\PDOException $e){
+           echo $e->getMessage();
+       }
     }
 
     public function count($active=1)
@@ -92,5 +101,18 @@ class ProductoManager
         $q = $this->db->prepare($sql);
         $q->execute([':active'=>$active]);
         return $q->rowCount();
+    }
+
+    public function deleteProduct(Producto $p)
+    {
+        try{
+            $sql = "UPDATE producto SET active=0 where id=:id";
+            $q = $this->db->prepare($sql);
+            $q->bindValue(':id',$p->getId());
+            $q->execute();
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+
     }
 }

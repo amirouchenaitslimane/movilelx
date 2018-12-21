@@ -22,6 +22,7 @@ require_once '../application/includes.php';
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 		<!-- Page level plugin CSS-->
 		<!--		<link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">-->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
 
 		<!-- Custom styles for this template-->
 		<link href="../assets/backend/css/sb-admin.css" rel="stylesheet">

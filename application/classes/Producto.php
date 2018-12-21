@@ -12,6 +12,7 @@ namespace app;
 class Producto
 {
 
+    private $id;
     private $nombre;
     private $descripcion;
     private  $precio;
@@ -38,6 +39,23 @@ class Producto
     /**
      * @return mixed
      */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getNombre()
     {
 
@@ -50,7 +68,7 @@ class Producto
     public function setNombre($nombre)
     {
         //required;
-        if(empty($nombre)){
+        if(empty(trim($nombre))){
             $this->errors[]= "Nombre del producto es requirido";
         }
         $this->nombre = (string)$nombre;
@@ -86,7 +104,7 @@ class Producto
      */
     public function setPrecio($precio)
     {
-        if(empty($precio) || !is_numeric($precio)){
+        if(empty(trim($precio)) ){
             $this->errors[] = "Introduce el precio del producto con valores numericos";
         }
         $this->precio = $precio;

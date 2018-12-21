@@ -23,20 +23,40 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                 </div>
                 <div class="col-md-12 mt-3">
                     <?php
-                    //crear la logica
-                    $clientes_por_pagina = 5;
-                    $numero_clientes_db = $producto_manager->count();
-                    $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-                    $start = ($page  - 1)*$clientes_por_pagina;
-                    $total_pages = ceil($numero_clientes_db / $clientes_por_pagina);
-                    $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-                    $start = ($page  - 1)*$clientes_por_pagina;
-                    $total_pages = ceil($numero_clientes_db / $clientes_por_pagina);
 
-                    $clientes=$producto_manager->getAll($start,$clientes_por_pagina);
+
+                    $clientes=$producto_manager->getAll();
+
+
+
 										?>
 
-										
+										<table id="table_id" class="table display">
+												<thead>
+												<tr>
+														<th>nombre</th>
+														<th>descripción</th>
+														<th>precio</th>
+														<th>fecha creacion</th>
+														<th>Accion</th>
+												</tr>
+												</thead>
+												<tbody>
+												<?php foreach ($clientes as $p):?>
+												<tr>
+														<td><?= $p->getNombre() ?></td>
+														<td><?= $p->getDescripcion() ?></td>
+														<td><?= $p->getPrecio() ?> €</td>
+														<td><?= $p->getCreated_at() ?></td>
+														<td>
+																<a href="productoedit.php?id=<?= $p->getId()?>" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+																<a href="productoview.php?id=<?= $p->getId() ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+																<a href="productodelete.php?id=<?= $p->getId() ?>" class="btn btn-danger " onclick="return confirm('¿Seguro quires eliminar el producto ?') "><i class="fa fa-trash"></i></a>
+														</td>
+												</tr>
+												<?php endforeach;?>
+												</tbody>
+										</table>
 
                 </div>
 
@@ -52,3 +72,29 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 
 <?php include_once  '../application/parts/backend/footer.php'?>
+<script>
+    $(document).ready( function () {
+        var table = $('#table_id');
+        table.DataTable({
+            "language": {
+
+                "lengthMenu": "Mostrar  _MENU_  por página",
+                "zeroRecords": "No hay resultado ",
+                "info": "Mostrar página _PAGE_ de _PAGES_",
+                "infoEmpty": "No Registros disponibles",
+                "infoFiltered": "(filtrar de _MAX_  registros)",
+                "search": "Buscar: _INPUT_ ",
+                "paginate": {
+                    "next": "Sigiente ",
+										"previous": "Atrás"
+                },
+
+
+            },
+
+				});
+
+
+    } );
+
+</script>

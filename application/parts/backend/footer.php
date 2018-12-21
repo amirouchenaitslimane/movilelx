@@ -24,7 +24,7 @@
 
 <!-- Core plugin JavaScript-->
 <script src="../assets/backend/js/jquery.easing.min.js"></script>
-
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="../assets/backend/js/sb-admin.js"></script>
 
