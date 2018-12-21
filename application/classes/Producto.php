@@ -20,7 +20,7 @@ class Producto
     private $categoria_id;
     private $created_at;
     private $updated_at;
-    private $image;
+    private $imagen;
     //clave
     const PREFIX_IMAGE = 'comprar-movilex-';
     const DIR_UPLOADS = "../application/uploads/products/";
@@ -198,17 +198,17 @@ class Producto
     /**
      * @return mixed
      */
-    public function getImage()
+    public function getImagen()
     {
-        return $this->image;
+        return $this->imagen;
     }
 
     /**
-     * @param mixed $image
+     * @param mixed $imagen
      */
-    public function setImage($image)
+    public function setImagen($imagen)
     {
-        $this->image = self::PREFIX_IMAGE.$image;
+        $this->imagen =$imagen;
     }
 
     public function upload($file){
@@ -228,7 +228,7 @@ class Producto
         }
 
         if(empty($this->errors)){
-            move_uploaded_file($file_tmp,self::DIR_UPLOADS.$this->getImage());
+            move_uploaded_file($file_tmp,self::DIR_UPLOADS.self::PREFIX_IMAGE.$this->getImage());
         }
 
     }
