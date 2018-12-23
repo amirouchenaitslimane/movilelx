@@ -118,7 +118,7 @@ class UsuarioManager
     public function Update(Usuario $usuario)
     {
     try{
-        $sql = 'UPDATE usuario SET nombre= :nombre,apellido=:apellido,direccion=:direccion,email=:email,updated=now(),role=:role  where id=:id';
+        $sql = 'UPDATE usuario SET nombre= :nombre,apellido=:apellido,direccion=:direccion,email=:email,updated=now(),role=:role,active=:active   where id=:id';
     $q = $this->db->prepare($sql);
 
         $q->bindValue(':nombre',$usuario->getNombre());
@@ -127,6 +127,7 @@ class UsuarioManager
         $q->bindValue(':direccion',$usuario->getDireccion());
         $q->bindValue(':email',$usuario->getEmail());
         $q->bindValue(':role',$usuario->getRole());
+        $q->bindValue(':active',$usuario->isActive());
         $q->bindValue(':id',$usuario->getId());
         $q->execute();
     }catch(\PDOException $e){echo $e->getMessage();}

@@ -32,6 +32,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                      $user->setApellido($_POST['apellido']);
                      $user->setEmail($_POST['email']);
                      $user->setDireccion($_POST['direccion']);
+                     $user->setActive($_POST['active']);
 
 
                      if(empty($user->getErrors())){
@@ -60,7 +61,15 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                          <label for="email">Correo</label>
                          <input type="email" name="email" class="form-control" id="email" placeholder="Correo" value="<?= $user->getEmail();?>">
                      </div>
+										 <div class="form-group">
+												 <label for="activo">Estado</label>
+												 <select name="active" id="activo" class="form-control">
+														 <option value="1" <?= ($user->isActive() == '1' ? "selected":"") ?> >Activo</option>
+														 <option value="0" <?= ($user->isActive() == '0' ? "selected":"") ?>>Inactivo</option>
+												 </select>
+												 <small id="activo" class="form-text text-muted">si no quieres desabilitar acceso a ese cliente ponlo en 	INACTIVO </small>
 
+										 </div>
 
                      <input type="submit" name="submit" class="btn btn-primary" value="Submit">
                  </form>
