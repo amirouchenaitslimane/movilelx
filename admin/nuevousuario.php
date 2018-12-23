@@ -24,7 +24,7 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
 
                         //el email es unico en la base de datos
                         if($usuario_manager->getByEmail($_POST['email'])){
-                            $user->addError('USUARIO EXIST EN LA BASE DE DATOS');
+                            $user->addError('USUARIO CON EL MISMO EMAIL YA EXISTE EN LA BASE DE DATOS');
                         }
                         if($_POST['password'] != $_POST['rpassword']){
                             $user->addError("la contraseña no coincede ");

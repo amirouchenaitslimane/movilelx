@@ -62,7 +62,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             <td><?=$cliente->getEstadoOption()[$cliente->isActive()] ?></td>
 
 														<th scope="row">
-                                <a href="editarcliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-info"><i class="fa fa-edit"></i></a>
+																<a href="vercliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+
+																<a href="editarcliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                 <a href="deletecliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-danger" onclick=" return confirm('¿Qieres eliminar el cliente ?') "><i class="fa fa-trash"></i></a>
                             </th>
                         </tr>

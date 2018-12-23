@@ -57,7 +57,7 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
                             <th scope="col">Apellido</th>
                             <th scope="col">Email</th>
                             <th scope="col">Role</th>
-
+														<th scope="col">Estado</th>
                             <th scope="col">
                             </th>
 
@@ -71,8 +71,11 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
                                 <td><?= $adminstrador->getApellido(); ?></td>
                                 <td><?= $adminstrador->getEmail(); ?></td>
                                 <td><?= $adminstrador->getRoleOption()[$adminstrador->getRole()] ?></td>
-                                <th scope="row">
-                                    <a href="editaradministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-info"><i class="fa fa-edit"></i></a>
+                                <td><?= $adminstrador->getEstadoOption()[$adminstrador->isActive()] ?></td>
+																<th scope="row">
+																		<a href="veradministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-success"><i class="fa fa-eye"></i></a>
+
+																		<a href="editaradministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                                     <a href="deletadministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-danger" onclick=" return confirm('¿Qieres eliminar el adminstrador ?') "><i class="fa fa-trash"></i></a>
                                 </th>
                             </tr>

@@ -33,6 +33,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         $user->setEmail($_POST['email']);
                         $user->setDireccion($_POST['direccion']);
                         $user->setRole($_POST['role']);
+                        $user->setActive($_POST['active']);
 
                         if(empty($user->getErrors())){
                             $usuario_manager->Update($user);
@@ -68,7 +69,15 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                 <option value="1">ADMIN</option>
                             </select>
                         </div>
+												<div class="form-group">
+														<label for="activo">Estado</label>
+														<select name="active" id="activo" class="form-control">
+																<option value="1" <?= ($user->isActive() == '1' ? "selected":"") ?> >Activo</option>
+																<option value="0" <?= ($user->isActive() == '0' ? "selected":"") ?>>Inactivo</option>
+														</select>
+														<small id="activo" class="form-text text-muted">si no quieres desabilitar acceso a ese Admin ponlo en 	INACTIVO </small>
 
+												</div>
                         <input type="submit" name="submit" class="btn btn-primary" value="Submit">
                     </form>
                 </div>
