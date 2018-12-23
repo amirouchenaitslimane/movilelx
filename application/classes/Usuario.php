@@ -21,6 +21,7 @@ class Usuario
     private $role;
     private $created;
     private $updated;
+    private $active;
     private static $ROLE_SUPER_ADMIN = 10;
     private static $ROLE_ADMIN = 1;
     private static $ROLE_CLIENTE = 2;
@@ -286,6 +287,22 @@ class Usuario
         }
         $this->rpassword = $rpassword;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param mixed $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
 
 
