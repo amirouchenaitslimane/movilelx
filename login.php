@@ -39,6 +39,8 @@ if(isset($_SESSION['user'])){
                                 $errors[] = 'Contraseña incorrecta';
                             }
                         }
+
+
                         if(empty($errors)){
 
                             $_SESSION['user'] = $user;
