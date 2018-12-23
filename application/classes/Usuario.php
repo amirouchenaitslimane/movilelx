@@ -117,10 +117,6 @@ class Usuario
         $this->email = $email;
     }
 
-
-
-
-
     /**
      * @return mixed
      */

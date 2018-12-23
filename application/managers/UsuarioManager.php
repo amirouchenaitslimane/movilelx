@@ -91,25 +91,6 @@ class UsuarioManager
         }
     }
 
-    /**
-     * metodo para devover todos los usuario de la base de datos excepto el super admin
-     * @return array
-     */
-    public function getAll()
-    {
-        try{
-            $users = [];
-            $sql = "SELECT * FROM usuario WHERE role != 10 ";
-            $q = $this->db->query($sql);
-            while ($row = $q->fetch(\PDO::FETCH_ASSOC))
-            {
-                $users[] = new Usuario($row);
-            }
-            return $users;
-        }catch (\PDOException $e){
-            echo "error ".$e->getMessage();
-        }
-    }
 
     /**
      * metodo para actualizar usuario
