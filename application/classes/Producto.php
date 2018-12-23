@@ -21,6 +21,10 @@ class Producto
     private $created_at;
     private $updated_at;
     private $imagen;
+    private static $ESTADO_ACTIVO = 1;
+    private static $ESTADO_INACTIVO = 0;
+
+
     //clave
     const PREFIX_IMAGE = 'comprar-movilex-';
     const DIR_UPLOADS = "../application/uploads/products/";
@@ -211,27 +215,12 @@ class Producto
         $this->imagen =$imagen;
     }
 
-    public function upload($file){
-        $file_name = $file['image']['name'];
-        $file_size =$file['image']['size'];
-        $file_tmp =$file['image']['tmp_name'];
-        $file_type=$file['image']['type'];
-        $ext = explode('.',$file_name);
-        $file_ext=end($ext);
-        $expensions= array("jpeg","jpg","png");
-        if(in_array($file_ext,$expensions)=== false){
-            $errors[]="La extension de la imagen siempre es JPEG o PNG .";
-        }
-
-        if($file_size > self::MAX_IMG_SIZE){
-            $this->errors[]='la imagen supera '.self::MAX_IMG_SIZE. 'KO';
-        }
-
-        if(empty($this->errors)){
-            move_uploaded_file($file_tmp,self::DIR_UPLOADS.self::PREFIX_IMAGE.$this->getImage());
-        }
+    public function getEstadoOption()
+    {
+        return [self::$ESTADO_ACTIVO =>"Activo",self::$ESTADO_INACTIVO=>"Inactivo"];
 
     }
+
 
 
 

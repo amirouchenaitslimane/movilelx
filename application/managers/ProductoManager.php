@@ -33,7 +33,7 @@ class ProductoManager
             $q->bindValue(':nombre',$p->getNombre());
             $q->bindValue(':descripcion',$p->getDescripcion());
             $q->bindValue(':precio',$p->getPrecio());
-            $q->bindValue(':imagen',$p->getImage());
+            $q->bindValue(':imagen',$p->getImagen());
             $q->bindValue(':active',$p->getActive());
             $q->bindValue(':categoria_id',$p->getCategoriaId());
             $q->bindValue(':created_at',(new \DateTime('now'))->format('Y-m-d'));
@@ -56,7 +56,7 @@ class ProductoManager
        try{
            $products = [];
 
-           $sql ="SELECT * FROM producto where active=1 ";
+           $sql ="SELECT * FROM producto where 1=1";
 
            if($start !== null && $offset!== null){
                $sql .=" LIMIT $start,$offset";
@@ -115,4 +115,37 @@ class ProductoManager
         }
 
     }
+
+    public function updateProduct(Producto $producto)
+    {
+        try{
+            $sql = "UPDATE 
+                      `producto` 
+                SET 
+                   `nombre`=:nombre,
+                    `descripcion`=:descripcion,
+                    `precio`=:precio,
+                    `imagen`=:imagen,
+                    `active`=:active,
+                    `categoria_id`=:categoria_id,                    
+                    `updated_at`=:updated_at 
+                WHERE 
+                     id=:id";
+            $q = $this->db->prepare($sql);
+            $q->bindValue(':nombre',$producto->getNombre());
+            $q->bindValue(':descripcion',$producto->getDescripcion());
+            $q->bindValue(':precio',$producto->getPrecio());
+            $q->bindValue(':imagen',$producto->getImagen());
+            $q->bindValue(':active',$producto->getActive());
+            $q->bindValue('categoria_id',$producto->getCategoriaId());
+            $q->bindValue(':updated_at',(new \DateTime('now'))->format('Y-m-d'));
+            $q->bindValue(':id',$producto->getId());
+            $q->execute();
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+
+
+    }
+
 }

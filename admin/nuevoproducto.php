@@ -24,14 +24,15 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 
 
-                            $product->setImage($_FILES['image']['name']);
+                            $product->setImagen($_FILES['image']['name']);
 
+                            if(!upload('image','../uploads/products/')){
+                                $product->addErrors('la imagen no se ha agregado al libriría');
+                            }
                             if(empty($product->getErrors())){
                                 $producto_manager->addProducto($product);
-                                $product->upload($_FILES);
-                                redidect('productos');
 
-                                echo "is empty";
+                                redidect('productos');
                             }else{
                                 echo displayError($product->getErrors());
                             }

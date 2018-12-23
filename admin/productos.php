@@ -38,6 +38,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														<th>descripción</th>
 														<th>precio</th>
 														<th>fecha creacion</th>
+														<th>Estado</th>
 														<th>Accion</th>
 												</tr>
 												</thead>
@@ -48,6 +49,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														<td><?= $p->getDescripcion() ?></td>
 														<td><?= $p->getPrecio() ?> €</td>
 														<td><?= $p->getCreated_at() ?></td>
+														<td><?= $p->getEstadoOption()[$p->getActive()]?></td>
 														<td>
 																<a href="productoedit.php?id=<?= $p->getId()?>" class="btn btn-info"><i class="fa fa-pencil"></i></a>
 																<a href="productoview.php?id=<?= $p->getId() ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>

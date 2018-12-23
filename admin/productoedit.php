@@ -20,13 +20,53 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         <div class="card-body">
                             <?php
                                 $producto = $producto_manager->getProduct($_GET['id']);
+                                //DEBUG($producto);die();
+																if(isset($_POST['submit']))
+																{
+																		if(isset($_POST['nombre'])){
+																				$producto->setNombre(trim($_POST['nombre']));
+																		}
+																		if(isset($_POST['descripcion'])){
+																				$producto->setDescripcion(trim($_POST['descripcion']));
+																		}
+																		if(isset($_POST['precio'])){
+																				$producto->setPrecio(trim($_POST['precio']));
+																		}
+																		if(isset($_POST['active'])){
+																				$producto->setActive(trim($_POST['active']));
+																		}
+																		if($_FILES['image']['name'] !=="" ){
+																				$producto->setImagen($_FILES['image']['name']);
+                                        if(!upload('image','../uploads/products/')){
+                                            $producto->addErrors('la imagen no se ha agregado al libriría');
+                                        }
+																		}else{
+                                        $producto->setImagen($producto->getImagen());
 
+																		}
+
+																		if(isset($_POST['categoria_id'])){
+																				$producto->setCategoria_id((int)$_POST['categoria_id']);
+																		}
+                                    if (empty($producto->getErrors())){
+
+																				$producto_manager->updateProduct($producto);
+                                        flash('info','producto actualizado con exito! ','alert-info');
+
+                                      redidect('productos');
+
+
+																		}else{
+																				echo displayError($producto->getErrors());
+																		}
+
+																}
 
                                 ?>
-                            <form action="nuevoproducto.php" method="post" enctype="multipart/form-data">
+                            <form action="productoedit.php?id=<?= $producto->getId()?>" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="nombre">Nombre del producto <small>(*)</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?= $producto->getNombre(); ?>" required >
+                                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?= $producto->getNombre(); ?>"  >
                                     <small id="nombre" class="form-text text-muted">(*) En este campo hay que escribir el nombre del producto </small>
 
                                 </div>
@@ -49,7 +89,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                     <label for="activo">Es Activo</label>
                                     <select name="active" id="activo" class="form-control">
                                         <option value="1" <?= ($producto->getActive()=== '1'  ? "selected=selected" :""); ?>>Activo</option>
-                                        <option value="0" <?= ($producto->getActive()=== '0'  ? "selected=selected" :""); ?> ?>>Inactivo</option>
+                                        <option value="0" <?= ($producto->getActive()=== '0'  ? "selected=selected" :""); ?>  >Inactivo</option>
                                     </select>
                                     <small id="activo" class="form-text text-muted">si no quieres mostrar el producto selecciona INACTIVO </small>
 
@@ -57,10 +97,11 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
                                 <div class="form-group">
                                     <label for="imagen">Imagen <small>(*)</small></label>
-                                    <input type="file"  name="image" id="imagen" value=""  required>
+                                    <input type="file"  name="image" id="imagen" value=""  >
                                     <small id="imagen-s" class="form-text text-muted">(*) Imagen del product es obligatoria con (.png,jpg..) </small>
 
                                     <div class="col-md-5 mt-2">
+																				<img src="../uploads/products/<?= $producto->getImagen() ?>" class="img-thumbnail" id="img1">
                                         <img id="blah" src="" alt=""  />
                                     </div>
                                 </div>
@@ -71,14 +112,14 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                             <?php if(!empty($categoria->getChilds())):?>
                                                 <optgroup label="<?= $categoria->getNombre() ?>">
                                                     <?php foreach ($categoria->getChilds() as $child):?>
-                                                        <option value="<?= $child->getId();?>"><?= $child->getNombre();?></option>
+                                                        <option value="<?= $child->getId();?>" <?= (($producto->getCategoriaId() == $child->getId()) ? "selected":"" ) ?> > <?= $child->getNombre();?> </option>
 
                                                     <?php endforeach; ?>
 
                                                 </optgroup>
 
                                             <?php else: ?>
-                                                <option value="<?= $categoria->getId() ?>"><?= $categoria->getNombre();?></option>
+                                                <option value="<?= $categoria->getId() ?>" <?= (($producto->getCategoriaId() == $categoria->getId()) ? "selected":"") ?>><?= $categoria->getNombre();?></option>
                                             <?php endif;?>
 
 
@@ -109,28 +150,23 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 <?php include_once  '../application/parts/backend/footer.php'?>
 <script>
-    function readURL(input,edit=false) {
+    function readURL(input) {
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            if(edit===true){
-                reader.onload = function(e) {
-                    $('#blah').attr('src',"../application/uploads/products/<?= $producto->getImagen() ?>");
-                    $('#blah').addClass('img-thumbnail');
-                }
-                }else{
-                reader.onload = function(e) {
-                    $('#blah').attr('src', e.target.result);
-                    $('#blah').addClass('img-thumbnail');
-                }
-            }
+
+                    reader.onload = function(e) {
+                        $("#img1").hide('slow', function(){ this.remove(); });
+                        $('#blah').attr('src', e.target.result);
+                        $('#blah').addClass('img-thumbnail');
+                    }
 
 
             reader.readAsDataURL(input.files[0]);
         }
     }
     $("#imagen").change(function() {
-        readURL(this,true);
+        readURL(this);
     });
 
 </script>
