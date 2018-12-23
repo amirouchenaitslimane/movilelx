@@ -26,7 +26,8 @@ class Usuario
     private static $ROLE_ADMIN = 1;
     private static $ROLE_CLIENTE = 2;
 
-
+    private static $ESTADO_ACTIVO = 1;
+    private static $ESTADO_INACTIVO = 0;
 
     private $errors = [];
 
@@ -305,6 +306,14 @@ class Usuario
         $this->active = $active;
     }
 
+    public function getEstadoOption()
+    {
+        return [
+            self::$ESTADO_ACTIVO => "Activo",
+            self::$ESTADO_INACTIVO => "Inactivo"
+        ];
+
+    }
 
 
 

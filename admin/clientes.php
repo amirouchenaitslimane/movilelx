@@ -46,6 +46,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Email</th>
+												<th scope="col">Estado</th>
                         <th scope="col">
                         </th>
 
@@ -58,7 +59,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             <td><?= $cliente->getNombre(); ?></td>
                             <td><?= $cliente->getApellido(); ?></td>
                             <td><?= $cliente->getEmail(); ?></td>
-                            <th scope="row">
+                            <td><?=$cliente->getEstadoOption()[$cliente->isActive()] ?></td>
+
+														<th scope="row">
                                 <a href="editarcliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-info"><i class="fa fa-edit"></i></a>
                                 <a href="deletecliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-danger" onclick=" return confirm('¿Qieres eliminar el cliente ?') "><i class="fa fa-trash"></i></a>
                             </th>

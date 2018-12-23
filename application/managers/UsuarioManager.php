@@ -139,7 +139,7 @@ class UsuarioManager
      */
     public function delete(Usuario $usuario)
     {
-        $this->db->exec('DELETE FROM usuario WHERE id = '.$usuario->getId());
+        $this->db->exec('UPDATE  usuario SET active = 0 WHERE id = '.$usuario->getId());
 
     }
 
