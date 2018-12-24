@@ -19,9 +19,82 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                     <div class="card mb-3">
                         <div class="card-body">
                            <?php
-                           DEBUG($producto_manager->getProduct($_GET['id']));
+                           $p = $producto_manager->getProductDetail($_GET['id']);
+
+
 
                            ?>
+
+														<div class="card">
+																<div class="card-header">
+																		<h3><?= $p->getNombre() ?></h3>
+																</div>
+																<?php
+																if(isset($_POST['submit'])){
+																		if($_POST['caracteristica']){
+                                        foreach ($_POST['caracteristica'] as $id) {
+																					$cm->deleteCaracteristica($id);
+																				}
+                                        redidect("productoview.php?id=".$p->getId() );
+																		}
+																}
+
+																?>
+																<div class="card-body">
+																		<div class="row">
+																				<div class="col-md-3">
+																						<img src="../uploads/products/<?= $p->getImagen() ?> " class="img-thumbnail" alt="" width="250px" height="300px">
+
+																				</div>
+																				<div class="col-md-9">
+																						<p><?= $p->getDescripcion() ?></p>
+																						<p><strong>Precio: </strong><?= $p->getPrecio() ?> €</p>
+																						<p>Estado: <?= $p->getEstadoOption()[$p->getActive()]?></p>
+
+
+																				</div>
+																		</div>
+																		<?php if(!empty($p->getCaracteristicas())):?>
+																				<div class="row">
+																						<div class="col-md-12">
+																								<h3>Carateristicas</h3>
+																						</div>
+																						<div class="col-md-12">
+																								<form method="post" action="productoview.php?id=<?=$p->getId() ?>">
+																										<table class="table">
+																												<thead>
+																												<tr>
+																														<th scope="col">#</th>
+																														<th scope="col">nombre</th>
+																														<th scope="col">valor</th>
+																														<th></th>
+
+																												</tr>
+																												</thead>
+																												<tbody>
+
+                                                        <?php	foreach($p->getCaracteristicas() as $c):?>
+
+
+																														<tr id="<?= $c->getId() ?>">
+																																<td ><input type="checkbox" name="caracteristica[]" id="<?= $c->getId()?>" value="<?= $c->getId()?>" onchange="enableButton(<?= $c->getId() ?>)" <?= ((isset($_POST['caracteristica'])&&in_array($c->getId(),$_POST['caracteristica'])) ? "checked":"") ?>/></td>
+																																<td><?= $c->getLabel() ?></td>
+																																<td><?= $c->getValor() ?></td>
+																																<td><a href="updatecaracteristica.php?id=<?= $c->getId()?>">update</a></td>
+																														</tr>
+
+                                                        <?php endforeach;?>
+																												</tbody>
+																										</table>
+																										<button type="submit" id="delete" name="submit">Eliminar Seleccionados</button>
+																								</form>
+																						</div>
+																				</div>
+																		<?php endif;?>
+
+																</div>
+														</div>
+
                         </div>
                     </div>
                 </div>
@@ -38,3 +111,18 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 
 <?php include_once  '../application/parts/backend/footer.php'?>
+<script type="application/javascript">
+    $("#delete").hide();
+		function enableButton(id) {
+
+			 if($("#"+id).attr('checked', true)){
+           $("#delete").show();
+			 }else{
+           $("#delete").hide();
+			 }
+
+
+
+
+   }
+</script>

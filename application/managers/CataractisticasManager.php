@@ -42,4 +42,19 @@ class CataractisticasManager
         }
     }
 
+    public function findByProduct($id_product)
+    {
+        $caracteristicas = [];
+        $q = $this->db->prepare('SELECT * FROM caracteristicas WHERE producto_id=:id');
+        $q->execute(['id'=>$id_product]);
+        while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
+            $caracteristicas[] = new Caracteristicas($row);
+        }
+        return $caracteristicas;
+    }
+
+    public function deleteCaracteristica($id)
+    {
+        $q = $this->db->exec("DELETE FROM caracteristicas WHERE id = $id");
+    }
 }

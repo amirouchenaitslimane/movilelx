@@ -23,6 +23,7 @@ class Producto
     private $imagen;
     private static $ESTADO_ACTIVO = 1;
     private static $ESTADO_INACTIVO = 0;
+    private $caracteristicas = [];
 
 
     //clave
@@ -219,6 +220,22 @@ class Producto
     {
         return [self::$ESTADO_ACTIVO =>"Activo",self::$ESTADO_INACTIVO=>"Inactivo"];
 
+    }
+
+    /**
+     * @return array
+     */
+    public function getCaracteristicas()
+    {
+        return $this->caracteristicas;
+    }
+
+    /**
+     * @param array $caracteristicas
+     */
+    public function setCaracteristicas(array $caracteristicas)
+    {
+        $this->caracteristicas = $caracteristicas;
     }
 
 

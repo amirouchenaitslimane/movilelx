@@ -13,9 +13,12 @@ class ProductoManager
 {
 
     protected $db;
+    protected $cm ;
     public function __construct()
     {
         $this->db = Database::Db();
+        $this->cm = new CataractisticasManager();
+
     }
 
     /**
@@ -147,5 +150,28 @@ class ProductoManager
 
 
     }
+
+    public function getProductDetail($id)
+    {
+        try{
+            $sql = "SELECT * FROM producto WHERE id=:id";
+            $q = $this->db->prepare($sql);
+            $q->execute([':id'=>$id]);
+            $row = $q->fetch(\PDO::FETCH_ASSOC);
+            if($row){
+                $p = new Producto($row);
+                $p->setCaracteristicas($this->cm->findByProduct($p->getId()) );
+                return $p;
+
+            }else{
+                return null;
+            }
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+
+
 
 }
