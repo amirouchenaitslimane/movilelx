@@ -20,26 +20,26 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         <div class="card-body">
                             <?php
                             $producto = $producto_manager->getProduct($_GET['id']);
-
+if(isset($_POST['submit'])){
+    DEBUG($_POST);
+}
 
                             ?>
+                            <div id="form_div">
+                                <form method="post" action="productocaractiristicas.php?id=<?= $producto->getId() ?>">
+                                <div class="col-md-8">
+                                    <table id="employee_table" class="table table-borderless">
+                                        <tr id="row1">
+                                            <td><input class="form-control" type="text" name="label[]" placeholder="Nombre de la cacteristica"></td>
+                                            <td><input class="form-control" type="text" name="valor[]" placeholder="Valor de la caracteristica"></td>
+                                           </tr>
+                                    </table>
+                                    <button type="button" onclick="add_row();" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Más caracteristicas</button>
+                                    <input type="submit" name="submit" value="Crear" class="btn btn-primary pull-right">
 
-                            <form action="productocaractiristicas.php?id=<?= $producto->getId(); ?>" method="post">
-                                <div class="jumbotron" id="cara">
-                                    <button class="btn btn-danger pull-right"><i class="fa fa-trash"></i></button>
-                                    <div class="form-group">
-                                        <input type="text" name="label[]" class="form-control" id="" placeholder="Introduce nombre de la caracteristica">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="valor[]" class="form-control" id="" placeholder="Introduce el valor de la caracteristica">
-                                    </div>
                                 </div>
-
-                                <button class="btn btn-primary pull-left"> Crear</button>
-                            </form>
-                            <button class="btn btn-primary pull-right" onclick="add_row()"> Otra</button>
-
-
+                                </form>
+                            </div>
 
                         </div>
                     </div>
@@ -57,36 +57,15 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 
 <?php include_once  '../application/parts/backend/footer.php'?>
-<script>
+<script type="text/javascript">
     function add_row()
     {
-        $rowno=$("#cara").length;
-
+        $rowno=$("#employee_table tr").length;
         $rowno=$rowno+1;
-        $("#cara:last ").after(createJum($rowno));
-    return false;
+        $("#employee_table tr:last").after("<tr id='row"+$rowno+"'><td><input class='form-control' type='text' name='label[]' placeholder='Nombre de la caracteristica' value='' required></td><td><input type='text' class='form-control' name='valor[]' placeholder='Valor de la caracteristica' required></td><td><button  type='button' class='btn btn-danger'  onclick=delete_row('row"+$rowno+"')><i class='fa fa-trash'></i></button></td></tr>");
     }
-    function createJum(id) {
-        let div = " <div class='jumbotron' id='cara"+id+"' > <h1>carac "+id+"</h1>" +
-            "<button class='btn btn-danger pull-right mb-3' onclick='return delete_row("+id+")' ><i class='fa fa-trash'></i></button>" +
-            "<div class='form-group'>" +
-            "<input type='text' name='label[]' class='form-control'  placeholder='Introduce nombre de la caracteristica'>" +
-            "</div>" +
-            "<div class='form-group'>" +
-            "<input type='text' name='valor[]' class='form-control' placeholder='Introduce el valor de la caracteristica'>" +
-            "</div>" +
-            "</div>";
-        return div;
-        //<tr id='row"+$rowno+"'><td><input type='text' name='name[]' placeholder='Enter Name'></td><td><input type='text' name='age[]' placeholder='Enter Age'></td><td><input type='text' name='job[]' placeholder='Enter Job'></td><td><input type='button' value='DELETE' onclick=delete_row('row"+$rowno+"')></td></tr>"
-    }
-
     function delete_row(rowno)
     {
-
-        $('#cara'+rowno).hide('slow',function () {
-            this.remove();
-        });
-        return false;
+        $('#'+rowno).remove();
     }
-
 </script>
