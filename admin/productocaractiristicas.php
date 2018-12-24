@@ -12,7 +12,10 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
             <!-- Page Content -->
             <h1>Nuevo  Producto</h1>
             <hr>
+<?php
 
+
+?>
             <div class="row">
 
                 <div class="col-md-12 mt-3">
@@ -21,7 +24,18 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             <?php
                             $producto = $producto_manager->getProduct($_GET['id']);
 if(isset($_POST['submit'])){
-    DEBUG($_POST);
+		$caracs = arrayHelperCaracteristicas($_POST);
+    $objs_carac = [];
+
+    foreach ($caracs as $carac) {
+    		$c =  new \app\Caracteristicas($carac);
+    		$c->setProductId($producto->getId());
+				$objs_carac[] =$c;
+    }
+
+
+
+		$cm->addCaracteristicas($objs_carac);
 }
 
                             ?>
