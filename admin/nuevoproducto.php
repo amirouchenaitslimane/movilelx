@@ -48,6 +48,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 														<div class="form-group">
 																<label for="descripcion">Descripcon del producto</label>
+																<small id="descripcion" class="form-text text-primary">para definir subtitulo agregal entre &lt;strong class"color-orange" &gt; &lt;/strong&gt; </small>
 
 																<textarea name="descripcion" class="form-control"  id="descripcion" cols="30" rows="10" ><?= (isset($_POST['descripcion']) ? $_POST['descripcion'] : "") ?></textarea>
 																<small id="descripcion" class="form-text text-muted">En este campo tienes que describir el producto</small>
@@ -56,7 +57,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 														<div class="form-group">
 																<label for="precio">precio producto <small>(*)	</small></label>
-																<input type="text" class="form-control" name="precio" pattern="[-+]?[0-9]*[.,]?[0-9]+" title="se acceptan solo numeros" id="precio" required value="<?= (isset($_POST['precio']) ? $_POST['precio'] : " " )?>">
+																<input type="text" class="form-control" name="precio"  title="se acceptan solo numeros" id="precio" required value="<?= (isset($_POST['precio']) ? $_POST['precio'] : " " )?>">
 																<small id="precio" class="form-text text-muted">Escriba el precio del producto</small>
 
 														</div>

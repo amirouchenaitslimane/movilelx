@@ -35,7 +35,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 												<thead>
 												<tr>
 														<th>nombre</th>
-														<th>descripción</th>
+
 														<th>precio</th>
 														<th>fecha creacion</th>
 														<th>Estado</th>
@@ -46,7 +46,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 												<?php foreach ($clientes as $p):?>
 												<tr>
 														<td><?= $p->getNombre() ?></td>
-														<td><?= $p->getDescripcion() ?></td>
+
 														<td><?= $p->getPrecio() ?> €</td>
 														<td><?= $p->getCreated_at() ?></td>
 														<td><?= $p->getEstadoOption()[$p->getActive()]?></td>
