@@ -80,7 +80,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																																<td ><input type="checkbox" name="caracteristica[]" id="<?= $c->getId()?>" value="<?= $c->getId()?>" onchange="enableButton(<?= $c->getId() ?>)" <?= ((isset($_POST['caracteristica'])&&in_array($c->getId(),$_POST['caracteristica'])) ? "checked":"") ?>/></td>
 																																<td><?= $c->getLabel() ?></td>
 																																<td><?= $c->getValor() ?></td>
-																																<td><a href="updatecaracteristica.php?id=<?= $c->getId()?>">update</a></td>
+																																<td><a href="updatecaracteristica.php?id=<?= $c->getId()?>&producto=<?= $p->getId()?>">update</a></td>
 																														</tr>
 
                                                         <?php endforeach;?>

@@ -59,4 +59,23 @@ class CataractisticasManager
     }
 
 
+    public function getOne($id)
+    {
+        $q = $this->db->prepare("SELECT * FROM caracteristicas WHERE id = :id");
+        $q->execute([':id'=>$id]);
+        $row = $q->fetch(\PDO::FETCH_ASSOC);
+        return new Caracteristicas($row);
+
+    }
+
+    public function updateOne(Caracteristicas $c)
+    {
+        $sql = "UPDATE caracteristicas SET label = :label, valor=:valor where id = :id";
+        $q = $this->db->prepare($sql);
+        $q->bindValue(':label',$c->getLabel());
+        $q->bindValue('valor',$c->getValor());
+        $q->bindValue('id',$c->getId());
+        $q->execute();
+    }
+
 }
