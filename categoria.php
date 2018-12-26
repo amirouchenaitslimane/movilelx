@@ -14,6 +14,9 @@ require_once 'application/parts/frontend/header.php';
 						<div class="product-block">
 								<?php
 								$c = $categoria_manager->getOneCategory($_GET['id']);
+								//DEBUG($categoria_manager->getProductsParents($_GET['id']));
+
+
 								?>
 								<div class="jumbotron jumbotron-category">
 										<h3><?= $c->getNombre() ?> </h3>
@@ -23,7 +26,7 @@ require_once 'application/parts/frontend/header.php';
 
 <?php
 //crear la logica
-$clientes_por_pagina = 5;
+$clientes_por_pagina = 3;
 $numero_clientes_db = $categoria_manager->contProductsCategory($_GET['id']);
 
 

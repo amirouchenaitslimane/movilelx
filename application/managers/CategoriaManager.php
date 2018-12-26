@@ -167,7 +167,9 @@ class CategoriaManager
 
     public function getProductsCategory($id,$start=null,$offset=null) {
         $products = array();
-        $sql = "SELECT categoria.nombre,categoria.id ,producto.* FROM categoria INNER JOIN producto ON categoria.id = producto.categoria_id  WHERE categoria.id = :id ";
+       // $sql = "SELECT categoria.nombre,categoria.id ,producto.* FROM categoria INNER JOIN producto ON categoria.id = producto.categoria_id  WHERE categoria.id = :id ";
+        $sql ="SELECT *, c.nombre AS category FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE c.padre_id = :id OR c.id = :id ";
+
         if($start !== null && $offset !== null){
             $sql .= "LIMIT $start,$offset";
         }
@@ -184,7 +186,7 @@ class CategoriaManager
 
     public function contProductsCategory($id)
     {
-        $sql = "SELECT id from producto where categoria_id=:id";
+        $sql = "SELECT p.id FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE c.padre_id = :id OR c.id = :id ";
         $q = $this->db->prepare($sql);
         $q->execute([':id'=>$id]);
         return $q->rowCount();
@@ -200,6 +202,21 @@ class CategoriaManager
         }catch (\PDOException $e){
             echo $e->getMessage();
         }
+    }
+
+    public function getProductsParents($id)
+    {
+                $sql ="SELECT *, c.nombre AS category FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE c.padre_id = :id OR c.id = :id ";
+
+
+        $q= $this->db->prepare($sql);
+        $q->execute(['id'=>$id]);
+        $prods = [];
+        while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
+            $prods[] = new Producto($row);
+        }
+        return $prods;
+
     }
 
 
