@@ -57,4 +57,6 @@ class CataractisticasManager
     {
         $q = $this->db->exec("DELETE FROM caracteristicas WHERE id = $id");
     }
+
+
 }

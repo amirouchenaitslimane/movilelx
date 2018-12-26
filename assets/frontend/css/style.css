@@ -1,5 +1,5 @@
 /* Custom Style-sheet for Grafreez bootstrap wireframes */
-
+@import url('https://fonts.googleapis.com/css?family=Teko:700');
 section {
 	float: left;
 	padding: 30px 0;
@@ -83,10 +83,10 @@ i {
 .ver:hover{
 	background: #206578;
 }
-.page-link:focus, .page-link:hover{
+/*.page-link:focus, .page-link:hover{
 	background: #781d46;
 	color: #fff;
-}
+}*/
 .page-itemk .active{
 	background: red;
 	color: #fff;
@@ -99,7 +99,9 @@ i {
 .side-product .media {
 	margin-top: 15px;
 }
-.page-link {
+
+
+/*.page-link {
 	position: relative;
 	float: left;
 	padding: .5rem .75rem;
@@ -108,7 +110,7 @@ i {
 	text-decoration: none;
 	background-color: #1f5878;
 	border: 1px solid #ddd;
-}
+}*/
 .side-product h5 {
 	margin-bottom: 20px;
 }
@@ -159,8 +161,15 @@ button.navbar-toggler .fa-bars{
 	border: solid 1px #fa6c51;
 	color: #fff;
 }
-
-
+.btn-orange{
+	background: #fa6c51;
+	border: solid 1px #fa6c51;
+	color: #fff;
+}
+.btn-orange:hover{
+	background: #fa8b71;
+	border: solid 1px #fa6c51;
+}
 aside {
 	float: left;
 	width: 100%;
@@ -332,3 +341,74 @@ aside {
 		margin: 0;
 	}
 }
+
+.page-link {
+	position: relative;
+	display: block;
+	padding: 0.5rem 0.75rem;
+	margin-left: -1px;
+	line-height: 1.25;
+	color: #ff5404;
+	background-color: #ffffff;
+	border: 1px solid #ff5404;
+}
+.page-item{
+	margin: 2px;
+}
+.page-item.disabled .page-link {
+	color: #868e96;
+	pointer-events: none;
+	cursor: auto;
+	background-color: #f4f8ff;
+	border-color: #718393;
+}
+.page-item.active .page-link {
+	z-index: 1;
+	color: #fff;
+	background-color: #ff5404;
+	border-color: #fa8b71;
+}
+.page-link:focus, .page-link:hover {
+	color: #fff;
+	text-decoration: none;
+	background-color: #ff5404;
+	border-color: #fa8b71;
+}
+
+.jumbotron-category{
+	text-align: center;
+	color: #f7f7f9;
+	background-image: url("../../images/category.png");
+
+
+}
+.precio{
+	color:#fa6c51;
+
+	font-family: 'Teko', sans-serif;
+	font-size: 30px;
+	font-weight: 700;
+	margin-right: 20px;
+	margin-top: 0px;
+}
+.jumbotron-category h3{
+	font-family: 'Teko', sans-serif;
+	font-size:50px;
+
+}
+
+.color-orange{
+	margin-top: 4px;
+	color: #fa6c51;
+	font-size: 20px;
+	font-weight: bold;
+}
+.jumbotron-credit{
+	background: #fa6c51;
+	color: #f7f7f9;
+	
+
+}
+
+
+

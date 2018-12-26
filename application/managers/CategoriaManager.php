@@ -190,7 +190,17 @@ class CategoriaManager
         return $q->rowCount();
 
     }
-
+    public function getOneCategory($id)
+    {
+        try{
+            $q = $this->db->prepare("SELECT * FROM categoria WHERE id = :id");
+            $q->execute([':id'=>$id]);
+            $row = $q->fetch(\PDO::FETCH_ASSOC);
+            return new Categoria($row);
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+    }
 
 
 }

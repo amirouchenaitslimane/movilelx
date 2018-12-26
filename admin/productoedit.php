@@ -73,6 +73,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 																<div class="form-group">
 																		<label for="descripcion">Descripcon del producto</label>
+																		<small id="descripcion" class="form-text text-primary">para definir subtitulo agregal entre &lt;h4 class"color-orange" &gt; &lt;/h4&gt; </small>
 
 																		<textarea name="descripcion" class="form-control"  id="descripcion" cols="30" rows="10" ><?= $producto->getDescripcion() ?></textarea>
 																		<small id="descripcion" class="form-text text-muted">En este campo tienes que describir el producto</small>
