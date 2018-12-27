@@ -3,7 +3,7 @@
 $title = "ver producto";
 require_once 'application/parts/frontend/header.php';
 
-DEBUG($_SESSION['carrito']);
+
 ?>
 <div class="container">
     <div class="row">
