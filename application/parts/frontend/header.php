@@ -48,7 +48,7 @@ include_once "application/includes.php";
             <?php endif;?>
 
 						<li class="nav-item">
-								<a class="nav-link " href="#"><i class="fa fa-shopping-cart icon-cart"></i> Cart(3)
+								<a class="nav-link " href="vercarrito.php"><i class="fa fa-shopping-cart icon-cart"></i> Cart(<?= (($carrito !== null) ? $carrito->count() : 0 ) ?>)
 								</a>
 						</li>
 				</ul>

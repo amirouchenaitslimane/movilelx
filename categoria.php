@@ -52,7 +52,7 @@ $prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por
 																		<h5 class="card-title"><?= $products->nombre ?></h5>
 
 																		<p class="card-text price"><?= $products->precio?> €</p>
-																		<a href="#" class="btn btn-success btn-orange pull-left"><i class="fa fa-shopping-cart"></i></a>
+																		<a href="addcard.php?product_id=<?= $products->id ?>" class="btn btn-success btn-orange pull-left"><i class="fa fa-shopping-cart"></i></a>
 																<a href="verproducto.php?id=<?= $products->id ?>" class="btn btn-success btn-orange pull-right">ver</a>
 																</div>
 

@@ -1,11 +1,17 @@
 
 <?php
 $title = "ver producto";
-require_once 'application/parts/frontend/header.php' ?>
+require_once 'application/parts/frontend/header.php';
+
+DEBUG($_SESSION['carrito']);
+?>
 <div class="container">
     <div class="row">
         <?php require_once 'application/parts/frontend/categories.php'?>
         <div class="col-md-9">
+						<div class="flash-message">
+								<?php flash('info');?>
+						</div>
            <div class="row">
 							<?php $producto = $producto_manager->getProductDetail($_GET['id'])?>
                    <div class="col-md-4 item-photo">
@@ -17,7 +23,7 @@ require_once 'application/parts/frontend/header.php' ?>
 
                        <h3 class="font-italic pull-right precio"><?= $producto->getPrecio()?> €</h3>
 
-											 <form action="addcard.php" method="post">
+											 <form action="addcard.php" method="get">
 
 
 																<div class="form-group">
@@ -28,7 +34,7 @@ require_once 'application/parts/frontend/header.php' ?>
                                         <?php endfor;?>
 																		</select>
 																</div>
-																<input type="hidden" name="nombre" value="<?= $producto->getId()?>">
+																<input type="hidden" name="product_id" value="<?= $producto->getId()?>">
 
 
 
