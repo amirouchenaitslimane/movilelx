@@ -45,14 +45,14 @@ $prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por
 
 										<?php if(count($prod) > 0):?>
 										<?php foreach ($prod as $products):?>
-												<div class="col-md-4">
+												<div class="col-md-4 col-6 col-sm-6">
 														<div class="card text-xs-center">
 																<img class="card-img-top" src="uploads/products/<?= $products->imagen ?>" alt="">
 																<div class="card-block">
 																		<h5 class="card-title"><?= $products->nombre ?></h5>
 
 																		<p class="card-text price"><?= $products->precio?> €</p>
-																		<a href="addcard.php?product_id=<?= $products->id ?>" class="btn btn-success btn-orange pull-left"><i class="fa fa-shopping-cart"></i></a>
+																		<a href="addcard.php?product_id=<?= $products->id ?>&cat=<?= $_GET['id'] ?>" class="btn btn-success btn-orange pull-left"><i class="fa fa-shopping-cart"></i></a>
 																<a href="verproducto.php?id=<?= $products->id ?>" class="btn btn-success btn-orange pull-right">ver</a>
 																</div>
 

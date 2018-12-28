@@ -25,11 +25,11 @@ require_once 'application/parts/frontend/header.php';
                         <table class="table table-condensed">
                             <thead>
                             <tr class="cart_menu">
-                                <td class="image">img producto</td>
-                                <td class="description"></td>
-                                <td class="price">Price</td>
-                                <td class="quantity">Quantity</td>
-                                <td class="total">Total</td>
+                                <td class="">img producto</td>
+                                <td class=""></td>
+                                <td class="">Price</td>
+                                <td class="">Quantity</td>
+                                <td class="">Total</td>
                                 <td></td>
                             </tr>
                             </thead>
@@ -39,7 +39,7 @@ require_once 'application/parts/frontend/header.php';
                             <?php foreach ($products as $product):?>
                                 <tr>
                                     <td class="cart_product">
-                                        <img src="uploads/products/<?= $product->getImagen() ?>" alt="" class="img-thumbnail img-carrito" style="width: 100%;height: 100%;" >
+                                        <img src="uploads/products/<?= $product->getImagen() ?>" alt="" class=" img-fluid "  >
                                     </td>
                                     <td class="cart_description">
                                         <p><a href="verproducto.php?id=<?= $product->getId() ?>"><?= $product->getNombre() ?></a></p>
@@ -53,7 +53,7 @@ require_once 'application/parts/frontend/header.php';
                                            <form method="post" action="updatecrrito.php">
                                                <input type="number" name="qty" min="1" class="form-control" value="<?= $_SESSION['carrito'][$product->getId()]; ?>">
                                                <input type="hidden" name="prodict_id" class="form-control" value="<?= $product->getId(); ?>">
-                                               <button type="submit" name="submit" class="btn btn-primary mt-3">
+                                               <button type="submit" name="submit" class="btn btn-primary btn-update">
                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
                                                </button>
                                            </form>

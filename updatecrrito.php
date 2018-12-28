@@ -2,11 +2,6 @@
 $title = "Carrito de compra";
 require_once 'application/parts/frontend/header.php';
 
-
-
-DEBUG($_POST);
-DEBUG($_SESSION['carrito']);
-
 //logic
 if(isset($_POST['submit'])){
     //$carrito->updateQty()

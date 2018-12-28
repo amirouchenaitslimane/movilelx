@@ -76,7 +76,7 @@ require_once 'application/parts/frontend/header.php';
 								<div class="col-md-12">
 										<h2 class="text-center">Paga de forma segura </h2>
 								</div>
-								<img src="assets/images/credit.png"  alt="">
+								<img src="assets/images/credit.png"  alt="pago seguro" class="img-fluid">
 						</div>
         </div>
     </div>
