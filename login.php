@@ -19,6 +19,7 @@ if(isset($_SESSION['user'])){
 								<div class="card-body">
                     <?php
                     flash('info');
+										//	DEBUG($_SESSION['anony']);
                     if(isset($_POST['submit']))
                     {
                         $errors = [];
@@ -47,7 +48,16 @@ if(isset($_SESSION['user'])){
                         if(empty($errors)){
 
                             $_SESSION['user'] = $user;
-                            redidect('index');
+												if(isset($_SESSION['anony'])){
+														unset($_SESSION['anony']);
+														header('location:procesarcarrito.php');
+												}else{
+														redidect('index');
+
+												}
+
+
+
 
                         }else{
                             echo displayError($errors);

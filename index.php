@@ -1,7 +1,9 @@
 
 <?php
 $title = "index";
-require_once 'application/parts/frontend/header.php' ?>
+require_once 'application/parts/frontend/header.php' ;
+
+?>
     <div class="container">
         <div class="row">
          <?php require_once 'application/parts/frontend/categories.php'?>

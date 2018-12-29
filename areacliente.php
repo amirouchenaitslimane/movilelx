@@ -5,6 +5,12 @@ require_once 'application/parts/frontend/header.php';
 if(!$_SESSION['user']->isCliente()){
     redidect('index');
 }
+
+
+
+
+
+
 ?>
 
 <div class="container">
@@ -32,8 +38,10 @@ if(!$_SESSION['user']->isCliente()){
                     <div class=" tab-content ">
                         <div role="tabpanel" class="tab-pane fade in active " id="pedidos">
                             <h3>Mis pedidos</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad at consequuntur corporis cum cumque, deserunt dicta dolorum earum eligendi fugit incidunt itaque laudantium magni optio praesentium quos reprehenderit saepe.</p>
-                        </div>
+
+
+
+												</div>
                         <div role="tabpanel" class="tab-pane fade" id="profile">
                             <h3>Mi perfil </h3>
                             <?php

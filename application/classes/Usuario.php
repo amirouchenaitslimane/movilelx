@@ -31,6 +31,7 @@ class Usuario
 
     private $errors = [];
 
+
     use Hydrator;
     public function __construct(array $data = [])
     {
@@ -310,6 +311,8 @@ class Usuario
         ];
 
     }
+
+
 
 
 

@@ -80,12 +80,9 @@ require_once 'application/parts/frontend/header.php';
                                 <td>  </td>
                                 <td>  </td>
                                 <td>  </td>
+
                                 <td>
-                                    <a type="button" href="index.php?p=guardar_carrito" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span> Guardar Carrito
-                                    </a></td>
-                                <td>
-                                    <a type="button" href="index.php?p=micarrito&process" class="btn btn-success">
+                                    <a type="button" href="procesarcarrito.php" class="btn btn-success">
                                         Procesar Carrito <span class="glyphicon glyphicon-play"></span>
                                     </a></td>
                                 <td>

@@ -41,12 +41,6 @@ require_once 'application/parts/frontend/header.php';
 
 													 <button type="submit" class="btn btn-success btn-orange btn-lg btn-block">Comprar</button>
 											 </form>
-
-
-
-
-
-
                    </div>
            </div>
 
