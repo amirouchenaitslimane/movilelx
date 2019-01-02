@@ -20,10 +20,10 @@ class LineaPedidoManager
     public function getLinaPedidoPedido($id)
     {
         $lineas = [];
-        $q = $this->db->prepare("SELECT * FROM linea_pedido WHERE pedido_id=:pedido_id");
-        $q->execute([':pedido_id'=>$id]);
-        while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
-            $lineas = new LineaPedido($row);
+        $q = $this->db->prepare("SELECT linea_pedido.* ,producto.* FROM linea_pedido INNER JOIN producto ON linea_pedido.producto_id = producto.id WHERE pedido_id = :id ");
+        $q->execute([':id'=>$id]);
+        while ($row = $q->fetch(\PDO::FETCH_OBJ)){
+            $lineas[] = $row;
         }
         return $lineas;
 
