@@ -14,10 +14,7 @@ require_once 'application/parts/frontend/header.php';
 						<div class="product-block">
 								<?php
 								$c = $categoria_manager->getOneCategory($_GET['id']);
-								//DEBUG($categoria_manager->getProductsParents($_GET['id']));
-
-
-								?>
+								if($c->getActivo() !=='0'):?>
 								<div class="jumbotron jumbotron-category">
 										<h3><?= $c->getNombre() ?> </h3>
 										<p><?= $c->getDescripcion() ?></p>
@@ -37,7 +34,8 @@ $total_pages = ceil($numero_clientes_db / $clientes_por_pagina);
 
 
 
-$prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por_pagina)
+$prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por_pagina);
+
 
 
 
@@ -109,8 +107,10 @@ $prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por
                 <?php else: echo "<h1>NO HAY RESULTADOS</h1>";endif;?>
 
 						</div>
-
-
+            <?php else:
+								echo '<h1 class="display-1">categoria no existe</h1>'
+								?>
+<?php endif;?>
 
 
         </div>

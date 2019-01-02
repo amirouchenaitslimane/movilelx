@@ -146,7 +146,7 @@ class Categoria
      */
     public function setErrors($errors)
     {
-        $this->errors = $errors;
+        $this->errors[] = $errors;
     }
 
 

@@ -28,18 +28,26 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
                 ?>
 
-										<table class="table ">
-												<thead>
-												<tr>
-														<th>nombre</th>
-												</tr>
-												</thead>
-												<tbody>
-												<tr>
-														<td><?= $category->getNombre() ?></td>
-												</tr>
-												</tbody>
-										</table>
+									<div class="row">
+											<div class="col-md-5">
+													<table class="table ">
+															<thead>
+															<tr>
+																	<th>nombre</th>
+																	<th></th>
+															</tr>
+															</thead>
+															<tbody>
+															<tr>
+																	<td><?= $category->getNombre() ?></td>
+																	<td><a href="deletecategoria.php?id=<?= $category->getId() ?>" onclick="return confirm('¿Quieres eliminar la categoria ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+																	<td><a href="editcategoria.php?id=<?= $category->getId() ?>"  class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+
+															</tr>
+															</tbody>
+													</table>
+											</div>
+									</div>
 
 
 										<h3>Productos Relacionados</h3>

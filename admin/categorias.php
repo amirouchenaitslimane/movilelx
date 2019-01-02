@@ -1,11 +1,11 @@
 <?php
-$title ="Categorias";
+$title = "Categorias";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     header('location:/movilelx.site/index.php');
 }
-
-?><div id="wrapper">
+?>
+<div id="wrapper">
     <?php require_once '../application/parts/backend/sidebar.php'?>
 		<div id="content-wrapper">
 				<div class="container-fluid">
@@ -17,47 +17,34 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
             flash('success');
             flash('error');
             ?>
-					<div class="row">
-					<div class="col-md-12">
-							<a href="nuevacategoria.php" class="btn btn-primary"><i class="fa fa-plus"></i> Nueva categoria</a>
-					</div>
-					<div class="col-md-12 mt-3">
-							<table class="table">
-									<thead>
-									<tr>
-											<th>Nombre padre</th>
-											<th>Hijos</th>
+						<div class="row">
+								<div class="col-md-12">
+										<a href="nuevacategoria.php" class="btn btn-primary"><i class="fa fa-plus"></i> Nueva categoria</a>
+								</div>
 
-									</tr>
-									</thead>
-									<tbody>
-									<?php foreach ($categoria_manager->displayCategorias() as $cate):?>
-										<tr>
-												<td rowspan="<?= count($cate->getChilds())?>"><?= $cate->getNombre(); ?> <a href="categoriadetail.php?id=<?= $cate->getId() ?>" class=" "><i class="fa fa-eye"></i> ver</a></td>
-												<td><?php	foreach ($cate->getChilds() as $child):?>
-														<ul>
-																<li><?= $child->getNombre() ?>- <a href="categoriadetail.php?id=<?= $child->getId() ?>"><i class="fa fa-eye"></i></a></li>
+								<div class="col-md-12 mt-3">
+										<table class="table" border="1">
+												<thead>
+												<tr>
+														<th>Nombre padre</th>
+														<th>Hijos</th>
 
-														</ul>
-														<?php endforeach; ?></td>
-										</tr>
+												</tr>
+												</thead>
+												<tbody>
+                        <?php foreach ($categoria_manager->displayCategorias() as $cate):?>
+														<tr>
+																<td rowspan="<?= count($cate->getChilds())?>"><?= $cate->getNombre(); ?>  <a href="categoriadetail.php?id=<?= $cate->getId() ?>" class=" btn btn-success"><i class="fa fa-eye"></i> ver</a></td>
+																<td><?php	foreach ($cate->getChilds() as $child):?>
+																				<ul>
+																						<li><?= $child->getNombre() ?>- <a href="categoriadetail.php?id=<?= $child->getId() ?>" class="btn btn-success"><i class="fa fa-eye"></i></a></li>
 
-									<?php endforeach; ?>
+																				</ul>
+                                    <?php endforeach; ?></td>
+														</tr>
 
-
-									</tbody>
-							</table>
-					</div>
-
-					</div>
+                        <?php endforeach; ?>
 
 
-
-
-				</div>
-				<!-- /.container-fluid -->
-		</div>
-</div>
-
-
-<?php include_once  '../application/parts/backend/footer.php'?>
+												</tbody>
+										</table>

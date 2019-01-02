@@ -64,7 +64,7 @@ class CategoriaManager
      * @param int $id_padre
      * @return array
      */
-    public function getByParents($id_padre = 5)
+    public function getByParents($id_padre)
     {
         $parents = [];
         $q =$this->db->prepare("SELECT * FROM categoria WHERE padre_id = :padre AND activo = 1");
@@ -166,30 +166,39 @@ class CategoriaManager
     }
 
     public function getProductsCategory($id,$start=null,$offset=null) {
-        $products = array();
-       // $sql = "SELECT categoria.nombre,categoria.id ,producto.* FROM categoria INNER JOIN producto ON categoria.id = producto.categoria_id  WHERE categoria.id = :id ";
-        $sql ="SELECT *, c.nombre AS category FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE c.padre_id = :id OR c.id = :id ";
+        try{
+            $products = array();
+            // $sql = "SELECT categoria.nombre,categoria.id ,producto.* FROM categoria INNER JOIN producto ON categoria.id = producto.categoria_id  WHERE categoria.id = :id ";
+            $sql ="SELECT p.*, c.nombre AS category FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE (p.active=1) AND (c.padre_id = :id OR c.id = :id) ";
 
-        if($start !== null && $offset !== null){
-            $sql .= "LIMIT $start,$offset";
-        }
-        $q = $this->db->prepare($sql);
-        $q->execute([':id'=>$id]);
+            if($start !== null && $offset !== null){
+                $sql .= "LIMIT $start,$offset";
+            }
+            $q = $this->db->prepare($sql);
+            $q->execute([':id'=>$id]);
 
-        while ($row = $q->fetch(\PDO::FETCH_OBJ))
-        {
-            $products[] = $row;
+            while ($row = $q->fetch(\PDO::FETCH_OBJ))
+            {
+                $products[] = $row;
+            }
+            return $products;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $products;
+
 
     }
 
     public function contProductsCategory($id)
     {
-        $sql = "SELECT p.id FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE c.padre_id = :id OR c.id = :id ";
-        $q = $this->db->prepare($sql);
-        $q->execute([':id'=>$id]);
-        return $q->rowCount();
+       try{
+           $sql = "SELECT p.id,p.active FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE (p.active=1) AND (c.padre_id = :id OR c.id = :id) ";
+           $q = $this->db->prepare($sql);
+           $q->execute([':id'=>$id]);
+           return $q->rowCount();
+       }catch (\PDOException $e){
+           $e->getMessage();
+       }
 
     }
     public function getOneCategory($id)
@@ -198,7 +207,11 @@ class CategoriaManager
             $q = $this->db->prepare("SELECT * FROM categoria WHERE id = :id");
             $q->execute([':id'=>$id]);
             $row = $q->fetch(\PDO::FETCH_ASSOC);
-            return new Categoria($row);
+            if(is_array($row)){
+                return new Categoria($row);
+
+            }
+            return null;
         }catch (\PDOException $e){
             echo $e->getMessage();
         }
@@ -206,7 +219,7 @@ class CategoriaManager
 
     public function getProductsParents($id)
     {
-                $sql ="SELECT *, c.nombre AS category FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE c.padre_id = :id OR c.id = :id ";
+                $sql ="SELECT *, c.nombre AS category FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE (p.active=1)AND (c.padre_id = :id OR c.id = :id) ";
 
 
         $q= $this->db->prepare($sql);
@@ -219,5 +232,77 @@ class CategoriaManager
 
     }
 
+    public function deleteCategoria($id)
+    {
+        try {
+            $this->db->beginTransaction();
+            $sql = "UPDATE categoria set activo=0 where id=:id";
+            $q = $this->db->prepare($sql);
+            $q->execute([':id' => $id]);
+
+            $sql2 = "UPDATE producto SET active=0 where categoria_id=:id";
+            $q2 = $this->db->prepare($sql2);
+            $q2->execute([':id' => $id]);
+            $this->db->commit();
+        }catch (\PDOException $e){
+            $this->db->rollBack();
+            echo $e->getMessage();
+        }
+
+    }
+
+    public function updateCatgory(Categoria $c)
+    {
+      try{
+          $this->db->beginTransaction();
+          $sql = "UPDATE `categoria` 
+                SET `nombre`=:nombre,
+                    `descripcion`=:descripcion,
+                    `padre_id`=:padre_id,
+                    `activo`=:active 
+                 WHERE id=:id ";
+          $q= $this->db->prepare($sql);
+          $q->bindValue(':nombre',$c->getNombre());
+          $q->bindValue(':descripcion',$c->getDescripcion());
+          $q->bindValue(':padre_id',$c->getPadreId());
+          $q->bindValue(':active',$c->getActivo());
+          $q->bindValue(':id',$c->getId());
+          $q->execute();
+
+          if($c->getActivo() === '0'){
+              $sql2= "UPDATE producto SET active = 0 WHERE categoria_id = :c_id";
+              $q2 = $this->db->prepare($sql2);
+              $q2->execute([':c_id'=>$c->getId()]);
+
+          }
+            $this->db->commit();
+      }catch (\PDOException $e){
+          $this->db->rollBack();
+          echo $e->getMessage();
+      }
+    }
+
+    public function getByName($name)
+    {
+        try{
+            $sql = "SELECT * FROM categoria WHERE nombre=:nombre ";
+            $q = $this->db->prepare($sql);
+            $q->execute([':nombre'=>$name]);
+           return ($q->fetchColumn() > 0 ? true :false);
+
+
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function getParentsCategory($id)
+    {
+        $sql = "SELECT * FROM categoria WHERE padre_id = 0 and id = :id";
+        $q = $this->db->prepare($sql);
+        $q->execute(['id'=>$id]);
+        return ($q->fetchColumn() > 0 ? true :false);
+
+    }
 
 }
