@@ -92,8 +92,7 @@ require_once 'application/parts/frontend/header.php';
 
                             </tr>
 
-                            <?php else: echo "<h3>Carrito vacio</h3>"?>
-                            <?php endif; ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -102,8 +101,11 @@ require_once 'application/parts/frontend/header.php';
 
             </div>
         </div>
+
     </div>
 </div>
 <?php
 require_once 'application/parts/frontend/footer.php';
 ?>
+<?php else: echo "<h3>Carrito vacio</h3>"?>
+<?php endif; ?>

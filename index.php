@@ -7,7 +7,7 @@ require_once 'application/parts/frontend/header.php' ;
     <div class="container">
         <div class="row">
          <?php require_once 'application/parts/frontend/categories.php'?>
-            <div class="col-md-9">
+            <div class="col-md-9 ">
                <div class="row">
 									 <aside class="cta-bg oferta-bg col-12">
 											 <div class="container">

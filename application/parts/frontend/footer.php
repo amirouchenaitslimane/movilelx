@@ -1,7 +1,8 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
+<div class="footer ">
+<footer class="sticky-footer mt-4">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -41,7 +42,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

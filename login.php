@@ -10,7 +10,7 @@ if(isset($_SESSION['user'])){
         <?php
         include_once 'application/parts/frontend/categories.php';
         ?>
-        <div class="col-md-9">
+        <div class="col-md-9 mt-5">
 						<div class="card card-form  ">
 								<div class="card-header card-header-primary">
 										<h4 class="card-title"><?= $title ?></h4>

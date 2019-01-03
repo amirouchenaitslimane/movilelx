@@ -22,7 +22,7 @@ include_once "application/includes.php";
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg  ">
+<nav class="navbar navbar-expand-lg  navig">
 		<div class="container">
 		<a class="navbar-brand" href="index.php">Movilelx</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

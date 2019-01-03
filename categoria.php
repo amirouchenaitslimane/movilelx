@@ -107,9 +107,10 @@ $prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por
                 <?php else: echo "<h1>NO HAY RESULTADOS</h1>";endif;?>
 
 						</div>
-            <?php else:
-								echo '<h1 class="display-1">categoria no existe</h1>'
-								?>
+            <?php else:?>
+						<div class="h-100  align-items-center not-found">
+								<h1 class="display-1 ">categoria no existe</h1>
+						</div>
 <?php endif;?>
 
 
@@ -117,5 +118,6 @@ $prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por
 
 </div>
 <?php
+ if(count($prod) > 0)
 require_once 'application/parts/frontend/footer.php';
 ?>
