@@ -1,5 +1,5 @@
 <?php
-$title ="Categorias";
+$title ="Productos";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     header('location:/movilelx.site/index.php');
@@ -51,11 +51,11 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														<td><?= $p->getCreated_at() ?></td>
 														<td><?= $p->getEstadoOption()[$p->getActive()]?></td>
 														<td>
-																<a href="productocaractiristicas.php?id=<?= $p->getId()?>" class="btn btn-dark"><i class="fa fa-pencil"></i></a>
+																<a href="productocaractiristicas.php?id=<?= $p->getId()?>" title="Caracteristicas" class="btn btn-success"><i class="fa fa-cog"></i></a>
 
-																<a href="productoedit.php?id=<?= $p->getId()?>" class="btn btn-info"><i class="fa fa-pencil"></i></a>
-																<a href="productoview.php?id=<?= $p->getId() ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-																<a href="productodelete.php?id=<?= $p->getId() ?>" class="btn btn-danger " onclick="return confirm('¿Seguro quires eliminar el producto ?') "><i class="fa fa-trash"></i></a>
+																<a href="productoedit.php?id=<?= $p->getId()?>" title="Editar" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+																<a href="productoview.php?id=<?= $p->getId() ?>" title="Ver" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+																<a href="productodelete.php?id=<?= $p->getId() ?>" title="Eliminar" class="btn btn-danger " onclick="return confirm('¿Seguro quires eliminar el producto ?') "><i class="fa fa-trash"></i></a>
 														</td>
 												</tr>
 												<?php endforeach;?>

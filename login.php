@@ -10,11 +10,11 @@ if(isset($_SESSION['user'])){
         <?php
         include_once 'application/parts/frontend/categories.php';
         ?>
-        <div class="col-md-9 mt-5">
+        <div class="col-md-9">
 						<div class="card card-form  ">
 								<div class="card-header card-header-primary">
-										<h4 class="card-title"><?= $title ?></h4>
-										<p class="card-sub-title"><strong>¿Quieres unirte a movilelx ?</strong> registrate  <a href="registrar.php">aqui</a>	</p>
+										<h4 class="card-title lead"><?= $title ?></h4>
+										<p class="card-sub-title lead"><strong>¿Quieres unirte a movilelx ?</strong> registrate  <a href="registrar.php">aqui</a>	</p>
 								</div>
 								<div class="card-body">
                     <?php
@@ -50,7 +50,8 @@ if(isset($_SESSION['user'])){
                             $_SESSION['user'] = $user;
 												if(isset($_SESSION['anony'])){
 														unset($_SESSION['anony']);
-														header('location:procesarcarrito.php');
+														redidect('procesarcarrito');
+
 												}else{
 														redidect('index');
 
@@ -64,19 +65,19 @@ if(isset($_SESSION['user'])){
                         }
                     }
                     ?>
-										<div class="col-md-6">
+										<div class="col-md-12 col-12 col-sm-12 mt-4">
 										<form class="form-register" method="post" action="login.php">
-												<div class="form-group">
-														<label for="email">Email</label>
+												<div class="form-group mt-2">
+														<label for="email" class="lead">Email: </label>
 														<input type="email" class="form-control" id="email" name="email" placeholder="Correo ..." value="<?= (isset($_POST['email']) ? $_POST['email']:'')?>">
 
 												</div>
-												<div class="form-group">
-														<label for="password">Password</label>
+												<div class="form-group mt-2">
+														<label for="password" class="lead">Password: </label>
 														<input type="password" name="password" class="form-control" id="password" placeholder="Contraseña">
 												</div>
 
-												<button type="submit" name="submit" class="btn  btn-movilex">Acceder</button>
+												<button type="submit" name="submit" class="btn pull-right btn-lg btn-movilex">Acceder</button>
 										</form>
 										</div>
 										</div>

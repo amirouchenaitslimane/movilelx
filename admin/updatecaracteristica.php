@@ -33,7 +33,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         $c->setLabel($label);
                         $c->setValor($valor);
                         $cm->updateOne($c);
-                        redidect('productview');
+                        header('location:productoview.php?id='.$_GET['producto']);
                     }else{
                         echo displayError($errors);
                     }
@@ -52,6 +52,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
                         <input type="submit" name="submit" class="btn btn-primary" value="Submit">
                     </form>
+
                 </div>
 
             </div>

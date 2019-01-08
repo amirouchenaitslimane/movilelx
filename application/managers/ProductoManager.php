@@ -172,6 +172,14 @@ class ProductoManager
     }
 
 
+    public function getUltimosProductos()
+    {
+        $sql = "SELECT * from producto where active=1  order by created_at  LIMIT 0,3";
+        $q = $this->db->prepare($sql);
+        $q->execute();
+        $res = $q->fetchAll(\PDO::FETCH_OBJ);
+        return $res;
+    }
 
 
 }

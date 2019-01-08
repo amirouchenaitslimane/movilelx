@@ -10,7 +10,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     <div id="content-wrapper">
         <div class="container-fluid">
             <!-- Page Content -->
-            <h1>Gestión de tienda</h1>
+            <h1>Gestión de clientes</h1>
             <hr>
             <?php
             flash('info');

@@ -96,7 +96,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
                 </div>
 
-                <button class="btn btn-group-lg btn-success" name="submit" type="submit">Crear</button>
+                <button class="btn btn-group-lg btn-success" name="submit" type="submit">Actualizar</button>
             </form>
 
         </div>

@@ -18,9 +18,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														<div class="card-body-icon">
 																<i class="fas fa-fw fa-comments"></i>
 														</div>
-														<div class="mr-5">Total Productos en tienda (150)</div>
+														<div class="mr-5">Total Productos en tienda <?= $producto_manager->count(1)?></div>
 												</div>
-												<a class="card-footer text-white clearfix small z-1" href="#">
+												<a class="card-footer text-white clearfix small z-1" href="productos.php">
 														<span class="float-left">View Details</span>
 														<span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -34,7 +34,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														<div class="card-body-icon">
 																<i class="fa fa-fw fa-list"></i>
 														</div>
-														<div class="mr-5">Total Pedidos (10)</div>
+														<div class="mr-5">Total Pedidos ( <?= $pedido_manager->count() ?> )</div>
 												</div>
 												<a class="card-footer text-white clearfix small z-1" href="#">
 														<span class="float-left">View Details</span>
@@ -77,10 +77,41 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 										</div>
 								</div>
 						</div>
-						<div class="row">
-								<h1>Ultimos productos Añadidos Hoy</h1>
+						<div class="col-md-12">
+								<div class="row">
+										<div class="col-md-6">
+												<h1 class="display-4">Ultimos productos Añadido</h1>
 
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda, commodi consectetur cum deserunt ea eaque eius expedita inventore itaque maxime, neque nostrum possimus quas ratione reiciendis rem repellendus sunt?
+												<table class="table">
+														<thead>
+														<th>id</th>
+														<th>nombre</th>
+														<th>fecha</th>
+														</thead>
+														<tbody>
+														<?php foreach ($producto_manager->getUltimosProductos() as $p):?>
+														<tr>
+																<td><?= $p->id ?></td>
+																<td><?= $p->nombre;?></td>
+																<td><?= $p->created_at ?></td>
+														</tr>
+														<?php endforeach;?>
+														</tbody>
+
+												</table>
+										</div>
+										<div class="col-md-6">
+												<canvas id="speedChart" width="600" height="400"></canvas>
+
+
+										</div>
+
+
+
+
+
+
+								</div>
 						</div>
 
 
@@ -92,3 +123,36 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 
 <?php include_once  '../application/parts/backend/footer.php'?>
+<script>
+    var speedCanvas = document.getElementById("speedChart");
+
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 18;
+
+    var speedData = {
+        labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
+        datasets: [{
+            label: "Car Speed (mph)",
+            data: [0, 59, 75, 20, 20, 55, 40],
+        }]
+    };
+
+    var chartOptions = {
+        legend: {
+            display: true,
+            position: 'top',
+            labels: {
+                boxWidth: 80,
+                fontColor: 'black'
+            }
+        }
+    };
+
+    var lineChart = new Chart(speedCanvas, {
+        type: 'line',
+        data: speedData,
+        options: chartOptions
+    });
+
+
+</script>

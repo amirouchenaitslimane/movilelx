@@ -22,6 +22,11 @@
 						<i class="fa fa-fw fa-user"></i>
 						<span>Gestion Productos</span></a>
 		</li>
+		<li class="nav-item">
+				<a class="nav-link" href="pedidos.php">
+						<i class="fa fa-fw fa-user"></i>
+						<span>Pedidos</span></a>
+		</li>
 
     <?php
     if($_SESSION['user']->isSuperAdmin()):?>

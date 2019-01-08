@@ -4,74 +4,143 @@ $title = "index";
 require_once 'application/parts/frontend/header.php' ;
 
 ?>
-    <div class="container">
-        <div class="row">
-         <?php require_once 'application/parts/frontend/categories.php'?>
-            <div class="col-md-9 ">
-               <div class="row">
-									 <aside class="cta-bg oferta-bg col-12">
-											 <div class="container">
-															 <div class="col-12 col-sm-12 col-md-8">
-																	 <h2>Descubre las mejores ofertas de Navidad! </h2>
+<div class="container">
+		<div class="row">
+        <?php require_once 'application/parts/frontend/categories.php'?>
+				<div class="col-md-9 col-sm-12 col-12 wrapper">
+						<div class="row">
+								<div class="jumbotron oferta_banner">
+										<p class="lead text-center">Descubre las mejores ofertas de Navidad!</p>
+										<div class="row no-gutters">
 
-															 </div>
-															 <div class="row">
-																	 <div class="col-md-6">
+												<hr class="my-4">
+												<div class="col-md-4 col-12 col-sm-4">
+														<img src="assets/frontend/img/oferta.png" alt="" class="img-fluid">
+												</div>
+												<div class="col-md-8 col-12 col-sm-8 mt-4">
 
-																			 <img src="assets/images/oferta.png" alt="" class="" width="100%">
-																	 </div>
-																	 <div class="col-md-6">
+														<p class="lead">No piedes las mejores ofertas de nustra tienda descubre las últimas tecnologias en nustra tienda movilelx</p>
+														<p class="lead mt-5 ">
+																<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+														</p>
+												</div>
+										</div>
+								</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-12">
+								<div class="row">
+										<div class="col-sm-4 col-md-4 col-6">
+												<div class="product-image-wrapper">
+														<div class="single-products">
+																<div class="productinfo text-center">
+																		<span class="indicator rebaja">promoción</span>
+																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
+																		<h6 class="lead title">Samsung galaxy not 9 </h6>
+																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
 
-																			 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																</div>
 
-																			 <a  class="btn btn-primary" href="">Ver ofertas</a>
-
-																	 </div>
-
-
-													 </div>
-											 </div>
-									 </aside>
-							 </div>
-                <div class="product-block">
-                    <h3>Productos nuevos</h3>
-                    <div class="row">
-                        <div class="col-md-4 col-6 col-sm-6">
-                            <div class="card text-xs-center">
-																<span class="oferta">Oferta</span>
-																<img class="card-img-top img-fluid" src="assets/images/samsung_galaxy_s9_oro.jpg" alt="Card image cap" >
-                                <div class="card-block">
-                                    <h5 class="card-title">Samsung Galaxy s9 plus</h5>
-																		<p>Pantalla "infinita" Super AMOLED táctil capacitiva de 6.2" </p>
-
-																		<p class="card-text price">600€ </p>
-                                    <a href="#" class="btn btn-success">Add to Cart</a> </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-6 col-sm-6">
-                            <div class="card text-xs-center"> <img class="img-fluid card-img-top" src="assets/images/nokia-7-1-gris.jpg" alt="Card image cap">
-                                <div class="card-block">
-                                    <h5 class="card-title">Product Name</h5>
-																		<p>Pantalla "infinita" Super AMOLED táctil capacitiva de 6.2" </p>
-
-																		<p class="card-text price">$500</p>
-                                    <a href="#" class="btn btn-success">Add to Cart</a> </div>
-                            </div>
-                        </div>
-												<div class="col-md-4 col-6 col-sm-6">
-														<div class="card text-xs-center"> <img class="img-fluid card-img-top" src="assets/images/samsung_galaxy_note_9_azul.jpg" alt="Card image cap">
-																<div class="card-block">
-																		<h5 class="card-title">Product Name</h5>
-																		<p>Pantalla "infinita" Super AMOLED táctil capacitiva de 6.2" </p>
-
-																		<p class="card-text price">$500</p>
-																		<a href="#" class="btn btn-success">Add to Cart</a> </div>
 														</div>
 												</div>
+										</div>
+										<div class="col-sm-4 col-md-4 col-6">
+												<div class="product-image-wrapper">
+														<div class="single-products">
+																<div class="productinfo text-center">
+																		<span class="indicator rebaja">promoción</span>
+																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
+																		<h6 class="lead title">Samsung galaxy not 9 </h6>
+																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																</div>
+
+														</div>
+												</div>
+										</div>
+										<div class="col-sm-4 col-md-4 col-6">
+												<div class="product-image-wrapper">
+														<div class="single-products">
+																<div class="productinfo text-center">
+																		<span class="indicator rebaja">promoción</span>
+																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
+																		<h6 class="lead title">Samsung galaxy not 9 </h6>
+																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+
+																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																</div>
+
+														</div>
+												</div>
+										</div>
+										<div class="col-sm-4 col-md-4 col-6">
+												<div class="product-image-wrapper">
+														<div class="single-products">
+																<div class="productinfo text-center">
+																		<span class="indicator rebaja">promoción</span>
+																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
+																		<h6 class="lead title">Samsung galaxy not 9 </h6>
+																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+
+																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																</div>
+
+														</div>
+												</div>
+										</div>
+										<div class="col-sm-4 col-md-4 col-6">
+												<div class="product-image-wrapper">
+														<div class="single-products">
+																<div class="productinfo text-center">
+																		<span class="indicator rebaja">promoción</span>
+																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
+																		<h6 class="lead title">Samsung galaxy not 9 </h6>
+																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+
+																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																</div>
+
+														</div>
+												</div>
+										</div>
+										<div class="col-sm-4 col-md-4 col-6">
+												<div class="product-image-wrapper">
+														<div class="single-products">
+																<div class="productinfo text-center">
+																		<span class="indicator rebaja">promoción</span>
+																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
+																		<h6 class="lead title">Samsung galaxy not 9 </h6>
+																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+
+																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																</div>
+
+														</div>
+												</div>
+										</div>
+										<div class="col-sm-4 col-md-4 col-6">
+												<div class="product-image-wrapper">
+														<div class="single-products">
+																<div class="productinfo text-center">
+																		<span class="indicator rebaja">promoción</span>
+																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
+																		<h6 class="lead title">Samsung galaxy not 9 </h6>
+																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+
+																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																</div>
+
+														</div>
+												</div>
+										</div>
+
+
+								</div>
+						</div>
+
+
+				</div>
+		</div>
+</div>
 <?php require_once 'application/parts/frontend/footer.php' ?>

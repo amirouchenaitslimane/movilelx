@@ -79,7 +79,7 @@ class Pedido
      */
     public function getFecha()
     {
-        return $this->fecha;
+        return (new \DateTime($this->fecha))->format('d-m-Y');
     }
 
     /**

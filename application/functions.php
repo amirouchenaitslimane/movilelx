@@ -42,7 +42,9 @@ function DEBUG($mixed){
     echo "</pre>";
 }
 
-
+function dateFormatter($date){
+    return (new DateTime($date))->format('d-m-Y');
+}
 function displayError(array  $errors){
     $string = "";
     if(count($errors) > 0){
@@ -87,4 +89,10 @@ function flash( $name = '', $message = '', $class = 'alert alert-danger' )
             unset($_SESSION[$name.'_class']);
         }
     }
+}
+
+function redirectWithParam($page,$params){
+
+    echo "<script>location.href='".$page.".php?".$params."'</script>";
+
 }

@@ -27,6 +27,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="../assets/backend/js/sb-admin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </body>
 

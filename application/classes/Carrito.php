@@ -25,12 +25,12 @@ class Carrito
 
     public function add(Producto $p,$qty=1)
     {
-        if (isset($_SESSION['carrito'][$p->getId()])) {
-            $_SESSION['carrito'][$p->getId()] += $qty;
-        } else {
+        if ($qty){
+            $_SESSION['carrito'][$p->getId()] = $qty;
+        }else{
             $_SESSION['carrito'][$p->getId()] = 1;
-
         }
+
     }
 
 

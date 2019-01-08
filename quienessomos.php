@@ -15,7 +15,7 @@ require_once 'application/parts/frontend/header.php';
                     <h4 class="card-title"><?= $title ?></h4>
                     </div>
                 <div class="card-body">
-										<p><strong>Movilelx</strong> es una empresa que pone al servicio de sus clientes los mejores productos</p>
+										<p><strong  class="text-primary">Movilelx</strong> es una empresa que pone al servicio de sus clientes los mejores productos</p>
 
 										<p> de telefonía y electrónica a los mejores precios del mercado.
 
@@ -23,7 +23,7 @@ require_once 'application/parts/frontend/header.php';
 
 										<p> al mercado, hasta los mejores productos de informática para cubrir todas vuestras</p>
 
-										<p> necesidades a los mejores precios, <strong>Movilelx</strong> no es solo una tienda de electrónica.</p>
+										<p> necesidades a los mejores precios, <strong class="text-primary">Movilelx</strong> no es solo una tienda de electrónica.</p>
 
 										<p>Somos los mejores proveedores de todo lo que necesitas para estar al día en informática, telefonía y te </p>
 
@@ -31,7 +31,7 @@ require_once 'application/parts/frontend/header.php';
 
 										<p>Todo lo relacionado con electrónica está al alcance de tu mano en </p>
 
-										<p><strong>Movilelx </strong> con precio sin competencia y con la fiabilidad</p>
+										<p><strong class="text-primary">Movilelx </strong> con precio sin competencia y con la fiabilidad</p>
 
 										<p> de una empresa líder en el sector que os acerca a casa todo lo que deseáis de las últimas</p>
 

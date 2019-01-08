@@ -2,19 +2,13 @@
 <?php
 $title = "Area cliente";
 require_once 'application/parts/frontend/header.php';
-if(!$_SESSION['user']->isCliente()){
+if(!$_SESSION['user']){
     redidect('index');
 }else{
 		$user = $_SESSION['user'];
 }
-
 $precio_total = 0;
-
-
-
-
 ?>
-
 <div class="container">
     <div class="row">
         <?php require_once 'application/parts/frontend/categories.php'?>
@@ -24,10 +18,12 @@ $precio_total = 0;
                     <h4 class="card-title"><?= $title ?></h4>
                 </div>
                 <div class="card-body">
-
+									<?php
+									flash('info');
+									?>
                     <ul class="nav nav-tabs mt-3" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" href="#pedidos" role="tab" data-toggle="tab">pedidos</a>
+                            <a class="nav-link" id="ped" href="#pedidos" role="tab" data-toggle="tab">pedidos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="#profile" role="tab" data-toggle="tab">Mi perfil</a>
@@ -68,7 +64,7 @@ $precio_total = 0;
 																		<div class="card-header" id="<?= $pedido->getId() ?>">
 																				<h5 class="mb-0">
 																						<button class="btn btn-link" data-toggle="collapse" data-target="#col<?= $pedido->getId() ?>" aria-expanded="true" aria-controls="collapseOne">
-																								<h3>Pedido n=º <?= $pedido->getId() ?> </h3><p>creado el dìa <?= $pedido->getFecha() ?></p>
+																								<h5 class="lead">Pedido n=º <?= $pedido->getId() ?> </h5><p>creado el dìa <?= $pedido->getFecha() ?></p>
 																						</button>
 																				</h5>
 																		</div>
@@ -111,7 +107,7 @@ $precio_total = 0;
 																										<td></td>
 																										<td></td>
 																										<td></td>
-																										<td><strong><?= $precio_total?> €</strong></td>
+																										<td>total:  <strong><?= $precio_total?> €</strong></td>
 																								</tr>
 																								</tbody>
 																						</table>
@@ -126,6 +122,7 @@ $precio_total = 0;
 
 														</div>
                             <?php endforeach;?>
+													<?php else: echo '<h3 class="text-danger lead">No tienes pedidos todavía</h3>'?>
 														<?php endif;?>
 
 
@@ -156,3 +153,9 @@ $precio_total = 0;
     </div>
 </div>
 <?php require_once 'application/parts/frontend/footer.php' ?>
+<script>
+    $(document).ready(()=>{
+        $('#ped').tab('show')
+    })
+
+</script>

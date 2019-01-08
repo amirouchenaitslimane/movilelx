@@ -70,7 +70,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																<td><?= $p->created_at ?></td>
 
 																<td>
-																		<a href="productocaractiristicas.php?id=<?= $p->id?>" class="btn btn-dark"><i class="fa fa-pencil"></i></a>
+																		<a href="productocaractiristicas.php?id=<?= $p->id?>" class="btn btn-success"><i class="fa fa-cog"></i></a>
 
 																		<a href="productoedit.php?id=<?= $p->id?>" class="btn btn-info"><i class="fa fa-pencil"></i></a>
 																		</td>

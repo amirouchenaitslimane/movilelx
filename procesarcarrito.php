@@ -3,7 +3,7 @@ $title = "generar Pedido";
 require_once 'application/parts/frontend/header.php';
 if(!isset($_SESSION['user']) ){
     $_SESSION['anony'] = 'anonymous';
-   header('location:login.php');
+ redidect('login');
 }else{
 		$user = $_SESSION['user'];
 }
@@ -32,8 +32,10 @@ foreach ($p as $product) {//recorrer productos para crear lineas de pedido
 
 
 $pedido_manager->process($pedido);
-flash('info','Pedido procesado con exito ! Gracias por confiar en movilelx','alert-sucess');
-header('location:areacliente.php?id='.$user->getId());
+unset($_SESSION['carrito']);
+flash('info','Pedido procesado con exito ! Gracias por confiar en movilelx','alert-success');
+
+redirectWithParam('areacliente','id='.$user->getId())
 
 ?>
 

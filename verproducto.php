@@ -1,33 +1,33 @@
-
 <?php
 $title = "ver producto";
-require_once 'application/parts/frontend/header.php';
-
-
-?>
+require_once 'application/parts/frontend/header.php';?>
 <div class="container">
     <div class="row">
         <?php require_once 'application/parts/frontend/categories.php'?>
-        <div class="col-md-9">
+				<div class="col-md-9 col-sm-12 col-12 wrapper">
 						<div class="flash-message">
 								<?php flash('info');?>
 						</div>
            <div class="row">
-							<?php $producto = $producto_manager->getProductDetail($_GET['id'])?>
-                   <div class="col-md-4 item-photo">
-                       <img  class="img-thumbnail" src="uploads/products/<?= $producto->getImagen(); ?>" />
+							<?php
+							$producto = $producto_manager->getProductDetail($_GET['id']);
+							if($producto==null){
+									flash('error','Producto solicitado no existe','alert-danger');
+								redirectWithParam('categoria','id='.$_GET['cat']);
+							}
+
+							?>
+                   <div class="col-md-4 col-sm-4 col-12">
+                       <img  class=" img-fluid" src="uploads/products/<?= $producto->getImagen(); ?>" />
                    </div>
-                   <div class="col-md-8" >
-                      <h1 class="mb-3" ><?= $producto->getNombre()?></h1>
-											 <hr>
+                   <div class="col-md-8 col-sm-8 col-12" >
+                      <h1 class="mb-3 lead product_name " ><?= $producto->getNombre()?></h1>
+											 <hr class="lead">
 
                        <h3 class="font-italic pull-right precio"><?= $producto->getPrecio()?> €</h3>
-
 											 <form action="addcard.php" method="get">
-
-
 																<div class="form-group">
-																		<label for="cantidad">Cantidad: </label>
+																		<label for="cantidad" class="lead ">Cantidad: </label>
 																		<select name="cantidad" id="cantidad" class="form-control">
                                         <?php for($i=1;$i<=10;$i++):		 ?>
 																						<option value="<?= $i ?>"><?= $i ?></option>
@@ -39,13 +39,13 @@ require_once 'application/parts/frontend/header.php';
 
 
 
-													 <button type="submit" class="btn btn-success btn-orange btn-lg btn-block">Comprar</button>
+													 <button type="submit" class="btn btn-success btn-movilex btn-lg btn-block">Comprar</button>
 											 </form>
                    </div>
            </div>
 
 						<div class="col-md-12 mt-4">
-							<h3 class=>Descripción:</h3>
+							<h3 class="prod-title">Descripción:</h3>
 								<div class="">
 										<?= $producto->getDescripcion() ?>
 								</div>
@@ -53,25 +53,20 @@ require_once 'application/parts/frontend/header.php';
 
 						<div class="col-md-12">
 
-		<h3>Caracteristicas:</h3>
+		<h3 class="prod-title">Caracteristicas:</h3>
 
 
 				<ul class="list-group">
 
             <?php foreach ($producto->getCaracteristicas() as $caracteristica):?>
-								<li class="list-group-item"><i class="fa fa-angle-right"></i><?= $caracteristica->getLabel()." : ".$caracteristica->getValor() ?></li>
+								<li class="list-group-item"><i class="fa fa-angle-right"></i> <?= $caracteristica->getLabel()." : ".$caracteristica->getValor() ?></li>
             <?php endforeach;?>
 				</ul>
 
 </div>
 
 
-						<div class="jumbotron mt-3 jumbotron-credit">
-								<div class="col-md-12">
-										<h2 class="text-center">Paga de forma segura </h2>
-								</div>
-								<img src="assets/images/credit.png"  alt="pago seguro" class="img-fluid">
-						</div>
+
         </div>
     </div>
 </div>

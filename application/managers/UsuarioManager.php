@@ -173,4 +173,5 @@ class UsuarioManager
         return $q->rowCount();
     }
 
+
 }
