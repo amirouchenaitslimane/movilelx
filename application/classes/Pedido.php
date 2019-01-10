@@ -17,6 +17,11 @@ class Pedido
     private $fecha;
     private $lineas = [];
 
+    const ESTADO_EN_PROCESO = 0;
+    const ESTADO_ENTREGADO = 1;
+    const ESTADO_CANCELADO = 2;
+    const ESTADO_ELIMINADO = 3;
+    const ESTADO_EN_CAMINO = 4;
 
     use Hydrator;
     public function __construct(array $data=[])
@@ -108,5 +113,15 @@ class Pedido
     }
 
 
+    public static function getEstadoOption()
+    {
+        return [
+            self::ESTADO_EN_PROCESO => "En proceso",
+            self::ESTADO_ENTREGADO =>"Entregado",
+            self::ESTADO_CANCELADO =>"Cancelado",
+            self::ESTADO_ELIMINADO =>"Eliminado",
+            self::ESTADO_EN_CAMINO =>"En camino"
+        ];
+    }
 
 }

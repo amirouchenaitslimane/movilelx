@@ -41,10 +41,22 @@ require_once 'application/parts/frontend/header.php' ;
                       //crear la logica
                       $clientes_por_pagina = 3;
                       $numero_clientes_db = $categoria_manager->contProductsCategory($_GET['id']);
+											$url = 'categoria.php?id='.$_GET['id'];
+
+
+
+
                       $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
+
+                      $pagination = new \App\Pagination($page,$numero_clientes_db,2);
+
+
+
                       $start = ($page  - 1)*$clientes_por_pagina;
                       $total_pages = ceil($numero_clientes_db / $clientes_por_pagina);
-                      $prod = $categoria_manager->getProductsCategory($_GET['id'],$start,$clientes_por_pagina);
+                      $prod = $categoria_manager->getProductsCategory($_GET['id'],$pagination->offset(),$pagination->getRecordsPerPage());
+
+
                       ?>
                       <?php if(count($prod) > 0):?>
 											<?php foreach ($prod as $products):?>
@@ -75,51 +87,14 @@ require_once 'application/parts/frontend/header.php' ;
 
 									</div>
 									<div class="col-md-12">
-											<div class="pagination-area">
-											<ul class="pagination">
+
                           <?php
-                          if($numero_clientes_db > $clientes_por_pagina) {
 
-                              if ($page > 1) {
-                                  ?>
-																	<li class="page-item"><a class="page-link"
-																													 href="categoria.php?id=<?= $_GET['id'] ?>&page=<?= $page - 1 ?>">Atrás</a>
-																	</li>
-
-                                  <?php
-                              }else{
-                                  $page = 1;
-                              }
-                              ?>
-
-                              <?php for ($i = 1; $i < $total_pages; $i++): ?>
-
-                                  <?php if ($i === $page): ?>
-																			<li class="page-item active"><a class="page-link "><?= $i; ?></a></li>
-
-                                  <?php else: ?>
-																			<li class="page-item"><a class="page-link"
-																															 href="categoria.php?id=<?= $_GET['id'] ?>&page=<?= $i ?>"><?= $i; ?></a>
-																			</li>
-
-                                  <?php endif; ?>
-
-                              <?php endfor; ?>
-                              <?php
-                              if ($page < $total_pages) {
-                                  ?>
-																	<li class="page-item"><a class="page-link"
-																													 href="categoria.php?id=<?= $_GET['id'] ?>&page=<?= $page + 1 ?>">Seguiente</a>
-																	</li>
-
-                                  <?php
-                              }
-                          }
+                          echo $pagination->nav($url);
 
                           ?>
 
-											</ul>
-											</div>
+
 									</div>
 									</div>
 					</div>

@@ -18,6 +18,8 @@ require_once 'managers/CataractisticasManager.php';
 require_once 'managers/CarritoManager.php';
 require_once 'managers/PedidoManager.php';
 require_once 'managers/LineaPedidoManager.php';
+require_once 'Pagination.php';
+
 session_start();
 $carrito = new \app\Carrito();
 $usuario_manager = new \app\UsuarioManager();
