@@ -39,22 +39,13 @@ require_once 'application/parts/frontend/header.php' ;
 											<div class="row">
                       <?php
                       //crear la logica
-                      $clientes_por_pagina = 3;
-                      $numero_clientes_db = $categoria_manager->contProductsCategory($_GET['id']);
-											$url = 'categoria.php?id='.$_GET['id'];
-
-
-
-
+                      $clientes_por_pagina = 100;
+                      $num_product_database = $categoria_manager->contProductsCategory($_GET['id']);
+											$url = 'categoria.php?id='.htmlspecialchars($_GET['id']);
                       $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
+											$pagination = new \App\Pagination($page,$num_product_database,3);
+											$prod = $categoria_manager->getProductsCategory($_GET['id'],$pagination->offset(),$pagination->getRecordsPerPage());
 
-                      $pagination = new \App\Pagination($page,$numero_clientes_db,2);
-
-
-
-                      $start = ($page  - 1)*$clientes_por_pagina;
-                      $total_pages = ceil($numero_clientes_db / $clientes_por_pagina);
-                      $prod = $categoria_manager->getProductsCategory($_GET['id'],$pagination->offset(),$pagination->getRecordsPerPage());
 
 
                       ?>
@@ -83,14 +74,15 @@ require_once 'application/parts/frontend/header.php' ;
 															</div>
 
 											<?php endforeach;?>
+
 											<?php endif;?>
 
 									</div>
 									<div class="col-md-12">
 
                           <?php
-
                           echo $pagination->nav($url);
+
 
                           ?>
 

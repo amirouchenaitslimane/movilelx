@@ -173,5 +173,65 @@ class UsuarioManager
         return $q->rowCount();
     }
 
+    public function getByPedido($id_pedido)
+    {
+      try{
+          $sql = "SELECT 
+                  u.id as cliente_id ,u.nombre,u.apellido,u.direccion,u.email,u.active,u.created, 
+                  ped.id,ped.usuario_id,ped.estado,ped.fecha , 
+                  lp.id,lp.pedido_id,lp.producto_id,lp.cantidad,lp.precio_compra , 
+                  prod.id as producto ,prod.nombre as nombre_producto,prod.precio,prod.imagen 
+                  from usuario u 
+                    INNER JOIN pedido ped 
+                      ON u.id = ped.usuario_id 
+                    INNER JOIN linea_pedido lp 
+                      ON ped.id = lp.pedido_id 
+                    INNER JOIN producto prod 
+                      ON lp.producto_id = prod.id
+                  WHERE ped.id = :id";
+          $q = $this->db->prepare($sql);
+          $q->execute([':id'=>$id_pedido]);
+          $cliente = new Usuario();
+          $pedido = new Pedido();
+          $lineas = [];
+          while ( $data =  $q->fetch(PDO::FETCH_OBJ)){
+              $cliente->setId($data->cliente_id);
+              $cliente->setNombre($data->nombre);
+              $cliente->setApellido($data->apellido);
+              $cliente->setEmail($data->email);
+              $cliente->setDireccion($data->direccion);
+              $cliente->setActive($data->active);
+              $cliente->setCreated($data->created);
+              $pedido->setId($data->pedido_id);
+              $pedido->setUsuarioId($data->cliente_id);
+              $pedido->setEstado($data->estado);
+              $pedido->setFecha($data->fecha);
+              $linea = new LineaPedido();
+
+              $linea->setId($data->id);
+              $linea->setPedidoId($data->pedido_id);
+              $linea->setProductoId($data->producto_id);
+              $linea->setPrecioCompra($data->precio_compra);
+              $linea->setCantidad($data->cantidad);
+              $producto = new Producto();
+              $producto->setId($data->producto);
+
+              $producto->setNombre($data->nombre_producto);
+              $producto->setPrecio($data->precio);
+              $producto->setImagen($data->imagen);
+              $linea->setProductos($producto);
+              $lineas[] = $linea;
+          }
+          foreach ($lineas as $l) {
+              $pedido->setLineas($l);
+          }
+          $cliente->setPedidos($pedido);
+          return $cliente;
+
+      }catch (\PDOException $e){
+          echo  $e->getMessage();
+      }
+    }
+
 
 }

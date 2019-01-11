@@ -101,6 +101,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 												</table>
 										</div>
 										<div class="col-md-6">
+
 												<canvas id="speedChart" width="600" height="400"></canvas>
 
 
@@ -120,20 +121,41 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 				<!-- /.container-fluid -->
 		</div>
 </div>
+<div id="dom-target" style="display: none;">
+    <?php
+    $estad = json_encode($pedido_manager->pedidosEstadisicas());
+    echo htmlspecialchars($estad); /* You have to escape because the result
+                                           will not be valid HTML otherwise. */
+    ?>
+</div>
+<?php
 
-
+?>
 <?php include_once  '../application/parts/backend/footer.php'?>
 <script>
     var speedCanvas = document.getElementById("speedChart");
+
+    var div = document.getElementById("dom-target");
+    var est = div.textContent;
+    var estadisticas = JSON.parse(est);
+
+    var labels = [];
+    var data = [];
+    $.each(estadisticas, function(index, value) {
+       labels.push(value.nombre);
+       data.push(value.precio)
+    });
+console.log(data)
 
     Chart.defaults.global.defaultFontFamily = "Lato";
     Chart.defaults.global.defaultFontSize = 18;
 
     var speedData = {
-        labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
+        labels: labels,
         datasets: [{
-            label: "Car Speed (mph)",
-            data: [0, 59, 75, 20, 20, 55, 40],
+            label: "COMPRAS EN €",
+            data: data,
+
         }]
     };
 
@@ -143,7 +165,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
             position: 'top',
             labels: {
                 boxWidth: 80,
-                fontColor: 'black'
+                fontColor: 'green'
             }
         }
     };

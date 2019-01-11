@@ -555,6 +555,9 @@ footer{
     color:#fff;
 }
 
+.pagination ul .disabled:hover{
+    background: #000;
+}
 
 
 

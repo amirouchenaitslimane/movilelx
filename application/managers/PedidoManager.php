@@ -105,7 +105,58 @@ public function __construct()
 
     }
 
+    public function getOne($id)
+    {$li = [];
+        $sql = "SELECT 
+                  p.id,p.usuario_id,p.fecha,p.estado,l.id as linea_id, 
+                  l.* FROM pedido p INNER  JOIN  linea_pedido l  ON p.id = l.pedido_id  WHERE  p.id = :id";
+        $q = $this->db->prepare($sql);
+        $q->execute([':id'=>$id]);
+        while($data = $q->fetch(\PDO::FETCH_ASSOC)){
+            $l = new LineaPedido();
+            $l->setId($data['linea_id']);
+            $l->setCantidad($data['cantidad']);
+            $l->setPrecioCompra($data['precio_compra']);
+            $l->setPedidoId($data['pedido_id']);
+            $l->setProductoId($data['producto_id']);
+            $pedido = new Pedido($data);
+
+            $li[] = $l;
+            foreach ($li as $item){
+                $pedido->setLineas($item);
+            }
+        }
+        return $pedido;
+    }
+
+    public function gastosCliente($cliente_id)
+    {
+        try{
+            $sql="SELECT SUM(precio_compra) AS gasto_total ,pedido_id,pedido.id FROM linea_pedido INNER JOIN pedido ON pedido.id = linea_pedido.pedido_id WHERE pedido.usuario_id = :cliente_id";
+            $q = $this->db->prepare($sql);
+            $q->execute([':cliente_id'=>$cliente_id]);
+            $result = $q->fetch(\PDO::FETCH_ASSOC);
+            return $result['gasto_total'];
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+
+         }
 
 
+    public function pedidosEstadisicas()
+    {
+        $estadisticas = [];
+        $sql = "SELECT u.id ,u.nombre,p.id,p.fecha,sum(lp.precio_compra) as precio  FROM usuario u INNER JOIN pedido p ON u.id = p.usuario_id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP by u.id;";
+        $q = $this->db->prepare($sql);
+        $q->execute();
+        while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
+            $estadistica = [];
+            $estadistica['nombre'] = $row['nombre'];
+            $estadistica['precio'] = $row['precio'];
+            $estadisticas[] = $estadistica;
+        }
+        return $estadisticas;
+    }
 
 }

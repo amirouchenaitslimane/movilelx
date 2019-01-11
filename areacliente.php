@@ -1,4 +1,3 @@
-
 <?php
 $title = "Area cliente";
 require_once 'application/parts/frontend/header.php';
@@ -35,7 +34,7 @@ $precio_total = 0;
 
                     <div class=" tab-content ">
                         <div role="tabpanel" class="tab-pane fade in  " id="pedidos">
-                            <h3>Mis pedidos</h3>
+                            <h3 class="mt-2">Mis pedidos</h3>
 
 														<div class="panel">
 																<div class="panel-header">
@@ -64,13 +63,16 @@ $precio_total = 0;
 																		<div class="card-header" id="<?= $pedido->getId() ?>">
 																				<h5 class="mb-0">
 																						<button class="btn btn-link" data-toggle="collapse" data-target="#col<?= $pedido->getId() ?>" aria-expanded="true" aria-controls="collapseOne">
-																								<h5 class="lead">Pedido n=º <?= $pedido->getId() ?> </h5><p>creado el dìa <?= $pedido->getFecha() ?></p>
+																								<h5 class="lead">Pedido n=º <?= $pedido->getId() ?> </h5>
+																								<p>creado el dìa <?= $pedido->getFecha() ?> </p>
 																						</button>
 																				</h5>
 																		</div>
 
 																		<div id="col<?= $pedido->getId() ?>" class="collapse show" aria-labelledby="<?= $pedido->getId() ?>" data-parent="#accordion">
 																				<div class="card-body">
+																						<h3><strong class="text-info bg-<?= $pedido->getEstado() ?>">Estado del pedido  </strong> <?=\app\Pedido::getEstadoOption()[$pedido->getEstado()]?></h3>
+
 																						<table class="table">
 																								<thead>
 																								<tr>

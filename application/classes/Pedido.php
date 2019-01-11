@@ -124,4 +124,13 @@ class Pedido
         ];
     }
 
+    public static function getEstadoOptionList($estado)
+    {
+
+        $html = '<option class="form-control" value="'.self::ESTADO_EN_PROCESO.'" '.(($estado == self::ESTADO_EN_PROCESO) ? 'selected': '' ).' >En proceso</option>';
+        $html .= '<option class="form-control" value="'.self::ESTADO_ENTREGADO.'" '.(($estado == self::ESTADO_ENTREGADO) ? 'selected': '' ).'>Entrgado</option>';
+        $html .= '<option class="form-control" value="'.self::ESTADO_ELIMINADO.'" '.(($estado == self::ESTADO_ELIMINADO) ? 'selected': '' ).'>Eliminado</option>';
+        return $html;
+    }
+
 }

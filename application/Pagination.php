@@ -92,23 +92,16 @@ class Pagination
         return ($this->_nextPage() <= $this->_totalPages()) ? true : false;
     }
 
-    public function nav($url,$maxLinks = 4, $otherParams = '')
+    public function nav($url,$maxLinks = 4)
     {
         if ($this->_totalPages() > 1) {
-            $filename = htmlspecialchars(pathinfo($_SERVER["SCRIPT_FILENAME"], PATHINFO_BASENAME), ENT_QUOTES, "utf-8");
-//			@TODO: Add $otherParams
-//			if (empty($otherParams)) {
-//				$append = '?';
-//			} else {
-//				$append = '&amp;';
-//			}
-            $links = "<nav aria-label='Page navigation'>";
+             $links = "<nav aria-label='Page navigation'>";
 
             $links.= '<ul class="pagination">';
             if ($this->_hasPreviousPage()) {
                 $links.= '<li class="page-item"><a href="'.$url.'&page=1" title="">&laquo;</a></li>';
                 } else {
-                $links.= '<li class="disabled"><a  title="">&laquo;</a></li>';
+                $links.= '<li class=" page-item disabled"><a  title="">&laquo;</a></li>';
 
             }
             // Create links in the middle
@@ -124,7 +117,8 @@ class Pagination
                 if (($this->_currentPage + $middleLink) <= $this->_totalPages()) {
                     $lastLink = $this->_currentPage + $middleLink;
                 } else {
-                    $lastLink = $this->_totalPages();
+                  $lastLink = $this->_totalPages();
+
                 }
                 $firstLink = $lastLink - $totalLinks + 1;
             }
@@ -140,7 +134,7 @@ class Pagination
                 $links.= '<li class="page-item"><a href="'.$url.'&page=' . $this->_totalPages() . '" title="">&raquo;</a></li>';
             } else {
 
-                $links.= '<li class="disabled"><a  title="">&raquo;</a></li>';
+                $links.= '<li class=" page-item disabled"><a  title="">&raquo;</a></li>';
             }
             $links.='</ul>';
             $links.='</nav>';

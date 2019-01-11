@@ -15,7 +15,7 @@ class LineaPedido
     private $precio_compra;
     private $cantidad;
     private $fecha_recp;
-
+    private $productos = [];
     use Hydrator;
     public function __construct(array $data = [])
     {
@@ -119,6 +119,23 @@ class LineaPedido
     {
         $this->fecha_recp = $fecha_recp;
     }
+
+    /**
+     * @return array
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param array $productos
+     */
+    public function setProductos(Producto $producto)
+    {
+        $this->productos[] = $producto;
+    }
+
 
 
 

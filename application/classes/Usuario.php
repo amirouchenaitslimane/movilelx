@@ -28,9 +28,9 @@ class Usuario
 
     private static $ESTADO_ACTIVO = 1;
     private static $ESTADO_INACTIVO = 0;
+    private $pedidos ;
 
     private $errors = [];
-
 
     use Hydrator;
     public function __construct(array $data = [])
@@ -310,6 +310,22 @@ class Usuario
             self::$ESTADO_INACTIVO => "Inactivo"
         ];
 
+    }
+
+    /**
+     * @return array
+     */
+    public function getPedidos()
+    {
+        return $this->pedidos;
+    }
+
+    /**
+     * @param array $pedidos
+     */
+    public function setPedidos(Pedido $pedidos)
+    {
+        $this->pedidos = $pedidos;
     }
 
 
