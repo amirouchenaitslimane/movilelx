@@ -30,10 +30,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                        if(!empty($descripcion)){
                            $category->setDescripcion($descripcion);
                        }
-                       if(!$categoria_manager->getParentsCategory($padre)){
-                           $category->setErrors('No existe la categoria  padre ');
-                       }
-
+                       
 
                        if(($estado != '1') and ($estado != '0')){
                            $category->setErrors('El estado de la catgoria no es valido');

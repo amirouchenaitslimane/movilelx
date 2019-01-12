@@ -19,6 +19,9 @@ class Categoria
     private $childs =[];
 
     private $errors = [];
+
+    const ESTADO_ACTIVO = 1;
+    const  ESTADO_INACTIVO = 0;
     use Hydrator;
 
 
@@ -149,5 +152,12 @@ class Categoria
         $this->errors[] = $errors;
     }
 
+    public static function getEstadoOption()
+    {
+        return [
+            self::ESTADO_ACTIVO =>"Activa",
+            self::ESTADO_INACTIVO =>"Iactiva",
+        ];
+    }
 
 }
