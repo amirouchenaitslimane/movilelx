@@ -744,7 +744,7 @@ form #cantidad{
 
 
 
-@media (min-width: 220px) and (max-width: 780px) {
+@media (min-width: 220px) and (max-width: 991px) {
     .shop-menu ul .menu{
         display:block;
     }
