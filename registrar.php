@@ -2,7 +2,7 @@
 $title = "Registrar";
 require_once 'application/parts/frontend/header.php';
 if(isset($_SESSION['user'])){
-    redidect('index');
+    redirect('index');
 }
 ?>
 <div class="container">
@@ -34,7 +34,7 @@ if(isset($_SESSION['user'])){
                             $usuario_manager->addUsuario($user);
                             flash( 'info', 'Felicidades Ya eres Nuestro Cliente ','alert-success' );
 
-                            redidect('login');
+                            redirect('login');
                         }else{
                             //mostrar errores del formulario
                             echo displayError($user->getErrors());

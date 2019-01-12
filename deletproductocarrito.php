@@ -7,7 +7,7 @@ if(isset($_GET['id'])){
 
 $carrito->remove($producto);
 flash('info','!!! Vaya has quitado el product de la cesta !!! ','alert-info');
-redidect('vercarrito');
+redirect('vercarrito');
 
 }
 

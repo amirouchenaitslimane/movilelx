@@ -28,7 +28,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                              $cliente = $usuario_manager->getByPedido($_GET['id']);
 
                            if($cliente->getId() === null){
-                           		redidect('pedidos');
+                           		redirect('pedidos');
 													 }
 
                              ?>

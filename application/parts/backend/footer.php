@@ -28,7 +28,7 @@
 <!-- Custom scripts for all pages-->
 <script src="../assets/backend/js/sb-admin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
+<script src="../assets/backend/js/app.js"></script>
 </body>
 
 </html>

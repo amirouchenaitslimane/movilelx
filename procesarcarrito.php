@@ -3,7 +3,7 @@ $title = "generar Pedido";
 require_once 'application/parts/frontend/header.php';
 if(!isset($_SESSION['user']) ){
     $_SESSION['anony'] = 'anonymous';
- redidect('login');
+ redirect('login');
 }else{
 		$user = $_SESSION['user'];
 }

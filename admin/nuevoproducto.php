@@ -21,9 +21,6 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         <?php
                         if(isset($_POST['submit'])){
                             $product = new \app\Producto($_POST);
-
-
-
                             $product->setImagen($_FILES['image']['name']);
 
                             if(!upload('image','../uploads/products/')){
@@ -32,7 +29,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             if(empty($product->getErrors())){
                                 $producto_manager->addProducto($product);
 
-                                redidect('productos');
+                                redirect('productos');
                             }else{
                                 echo displayError($product->getErrors());
                             }
@@ -77,7 +74,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																<small id="imagen-s" class="form-text text-muted">(*) Imagen del product es obligatoria con (.png,jpg..) </small>
 
 																<div class="col-md-5 mt-2">
-																		<img id="blah" src="#" alt=""  />
+																		<img id="img" src="#" alt=""  />
 																</div>
 														</div>
 														<div class="form-group">
@@ -125,19 +122,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 <?php include_once  '../application/parts/backend/footer.php'?>
 <script>
-    function readURL(input) {
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
-                $('#blah').addClass('img-thumbnail');
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
     $("#imagen").change(function() {
         readURL(this);
     });

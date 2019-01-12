@@ -19,8 +19,12 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                     <div class="card mb-3">
                         <div class="card-body">
                            <?php
+													 $id = (int)$_GET['id'];
                            $p = $producto_manager->getProductDetail($_GET['id']);
-
+														if($p === null){
+																flash('error','Producto solicitado no existe ','alert-danger');
+																redirect('productos');
+														}
 
 
                            ?>
@@ -30,13 +34,13 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																		<h3><?= $p->getNombre() ?></h3>
 																</div>
 																<?php
-																if(isset($_POST['submit'])){
-																		if($_POST['caracteristica']){
+																if(isset($_POST['submit']) && isset($_POST['caracteristica'])){
+
                                         foreach ($_POST['caracteristica'] as $id) {
 																					$cm->deleteCaracteristica($id);
 																				}
-                                        redidect("productoview.php?id=".$p->getId() );
-																		}
+                                        redirect("productoview.php?id=".$p->getId() );
+
 																}
 
 																?>

@@ -21,15 +21,15 @@ if(isset($_POST['submit'])){
     if(($_POST['activo'] != '1') and ($_POST['activo']  != '0')){
         $category->setErrors('El estado de la catgoria no es valido');
     }
-    if(!$categoria_manager->getParentsCategory($_POST['padre_id'])){
-        $category->setErrors('No existe la categoria  padre ');
-    }
+//    if(!$categoria_manager->getParentsCategory($_POST['padre_id'])){
+//        $category->setErrors('No existe la categoria  padre ');
+//    }
 
 
     if(empty($category->getErrors())){
         flash('success','Has añadido nueva categoria en la tienda !','alert-success');
         $categoria_manager->addCategory($category);
-        redidect('categorias');
+        redirect('categorias');
     }else{
         echo displayError($category->getErrors());
     }

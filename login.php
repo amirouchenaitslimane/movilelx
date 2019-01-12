@@ -2,7 +2,7 @@
 $title = "Login";
 require_once 'application/parts/frontend/header.php';
 if(isset($_SESSION['user'])){
-    redidect('index');
+    redirect('index');
 }
 ?>
 <div class="container">
@@ -32,42 +32,37 @@ if(isset($_SESSION['user'])){
                             $errors[] = "contraseña obligatoria para acceder";
                         }
                         $user = $usuario_manager->getByEmail($email);
-                       if($user === null){
+
+                        if($user === null){
                             $errors[] = 'usuario no existe en la base de datos';
 
                         }else {
                             if (!$user->isPasswordValid($password)) {
                                 $errors[] = 'Contraseña incorrecta';
                             }
+                            if($user->isActive() !== '1'){
+                                $errors[] = "Acceso denegado contacte con el administrador";
+                            }
                         }
 
 
-                      if($user->isActive() !== '1'){
-                      		$errors[] = "Acceso denegado contacte con el administrador";
-											}
 
                         if(empty($errors)){
-
                             $_SESSION['user'] = $user;
 												if(isset($_SESSION['anony'])){
 														unset($_SESSION['anony']);
-														redidect('procesarcarrito');
+														redirect('procesarcarrito');
 
 												}else{
-														redidect('index');
-
+														redirect('index');
 												}
-
-
-
-
                         }else{
                             echo displayError($errors);
                         }
                     }
                     ?>
 										<div class="col-md-12 col-12 col-sm-12 mt-4">
-										<form class="form-register" method="post" action="login.php">
+										<form class="form-register" method="post" action="<?= $_SERVER['PHP_SELF']?>">
 												<div class="form-group mt-2">
 														<label for="email" class="lead">Email: </label>
 														<input type="email" class="form-control" id="email" name="email" placeholder="Correo ..." value="<?= (isset($_POST['email']) ? $_POST['email']:'')?>">

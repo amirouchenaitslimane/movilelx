@@ -1,5 +1,5 @@
 <?php
-function redidect($page)
+function redirect($page)
 {
     echo "<script>location.href='".$page.".php'</script>";
 }
@@ -25,9 +25,8 @@ function arrayHelperCaracteristicas($array)
     for ($i = 0; $i < count($label); $i++) {
         if (!empty($label[$i])  && $valor !== "") {
             $tmp_array = [];
-            $tmp_array['label'] = $label[$i];
-
-            $tmp_array['valor'] = $valor[$i];
+            $tmp_array['label'] =  htmlspecialchars(trim($label[$i]));
+            $tmp_array['valor'] =  htmlspecialchars(trim($valor[$i]));
             $fields[] = $tmp_array;
 
         }

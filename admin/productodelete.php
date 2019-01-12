@@ -9,11 +9,11 @@ if(isset($_GET['id'])){
      if($p !== null){
          $producto_manager->deleteProduct($p);
          flash('info','Producto ha sido  eliminado ','alert-info');
-         redidect('productos');
+         redirect('productos');
      }
 
 }else{
-    redidect('productos');
+    redirect('productos');
 }
 ?>
 

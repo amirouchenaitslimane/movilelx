@@ -57,7 +57,7 @@
 																				</a></li>
                                     <?php if(isset($_SESSION['user'])): ?>
 
-																		<li class="nav-item"><a href="logout.php"> <i class="fa fa-lock"></i> Logout</a></li>
+																		<li class="nav-item"><a href="logout.php"> <i class="fa fa-lock"></i> Logout (<?= $_SESSION['user']->getNombre() ?>)</a></li>
 																		<?php else:?>
 																				<li class="nav-item"><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>
 

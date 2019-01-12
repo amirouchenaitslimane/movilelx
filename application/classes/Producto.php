@@ -131,7 +131,13 @@ class Producto
         if(empty($active)){
             $this->active = 1;
         }
-        $this->active = $active;
+        if(!empty($active) && $active == 0 || $active == 1){
+             $this->active = $active;
+        }else{
+            $this->errors[] = "elige el estado del producto activo (publico) o inctivo(oculto)";
+
+        }
+
     }
 
     /**

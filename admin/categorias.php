@@ -35,12 +35,14 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         <?php foreach ($categoria_manager->displayCategorias() as $cate):?>
 														<tr>
 																<td rowspan="<?= count($cate->getChilds())?>"><?= $cate->getNombre(); ?>  <a href="categoriadetail.php?id=<?= $cate->getId() ?>" class=" btn btn-success"><i class="fa fa-eye"></i> ver</a></td>
-																<td><?php	foreach ($cate->getChilds() as $child):?>
-																				<ul>
+																<?php	foreach ($cate->getChilds() as $child):?>
+																		<td>
+																		<ul>
 																						<li><?= $child->getNombre() ?>- <a href="categoriadetail.php?id=<?= $child->getId() ?>" class="btn btn-success"><i class="fa fa-eye"></i></a></li>
 
 																				</ul>
-                                    <?php endforeach; ?></td>
+																</td>
+                                    <?php endforeach; ?>
 														</tr>
 
                         <?php endforeach; ?>

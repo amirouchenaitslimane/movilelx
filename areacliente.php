@@ -2,11 +2,11 @@
 $title = "Area cliente";
 require_once 'application/parts/frontend/header.php';
 if(!$_SESSION['user']){
-    redidect('index');
+    redirect('index');
 }else{
 		$user = $_SESSION['user'];
 }
-$precio_total = 0;
+
 ?>
 <div class="container">
     <div class="row">
@@ -85,7 +85,7 @@ $precio_total = 0;
 																								</tr>
 																								</thead>
 																								<tbody>
-                                                <?php foreach ($linped_manager->getLinaPedidoPedido($pedido->getId()) as $linea): $precio_total += $linea->precio_compra ?>
+                                                <?php foreach ($linped_manager->getLinaPedidoPedido($pedido->getId()) as $linea): ?>
 																										<tr>
 																												<td>
                                                             <?= $linea->nombre ?>
@@ -109,7 +109,7 @@ $precio_total = 0;
 																										<td></td>
 																										<td></td>
 																										<td></td>
-																										<td>total:  <strong><?= $precio_total?> €</strong></td>
+																										<td>total:  <strong><?= $linped_manager->TotalPrecioCompra($pedido->getId())->total ?> €</strong></td>
 																								</tr>
 																								</tbody>
 																						</table>

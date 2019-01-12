@@ -20,7 +20,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                          <?php
                          $cliente = $usuario_manager->findUsuario($_GET['id']);
                        if ($cliente == null){
-                          redidect('clientes');
+                          redirect('clientes');
                        }
                          ?>
 

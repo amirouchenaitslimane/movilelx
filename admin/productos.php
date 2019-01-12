@@ -2,7 +2,7 @@
 $title ="Productos";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
-    header('location:/movilelx.site/index.php');
+    header('location:'._SERVER.'admin/index.php');
 }
 
 ?><div id="wrapper">
@@ -13,6 +13,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
             <h1>Gestión de Productos</h1>
             <hr>
             <?php
+
             flash('info');
             flash('success');
             flash('error');
@@ -73,32 +74,4 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
         <!-- /.container-fluid -->
     </div>
 </div>
-
-
 <?php include_once  '../application/parts/backend/footer.php'?>
-<script>
-    $(document).ready( function () {
-        var table = $('#table_id');
-        table.DataTable({
-            "language": {
-
-                "lengthMenu": "Mostrar  _MENU_  por página",
-                "zeroRecords": "No hay resultado ",
-                "info": "Mostrar página _PAGE_ de _PAGES_",
-                "infoEmpty": "No Registros disponibles",
-                "infoFiltered": "(filtrar de _MAX_  registros)",
-                "search": "Buscar: _INPUT_ ",
-                "paginate": {
-                    "next": "Sigiente ",
-										"previous": "Atrás"
-                },
-
-
-            },
-
-				});
-
-
-    } );
-
-</script>

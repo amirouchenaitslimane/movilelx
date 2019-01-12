@@ -13,6 +13,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 						<h1>Gestión de Categorías</h1>
 						<hr>
             <?php
+
             flash('info');
             flash('success');
             flash('error');

@@ -16,7 +16,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 $p= $producto_manager->getProductDetail($_GET['id']);
 if($p == null){
 		flash('info','El productos solicitado ya no existe','alert-info');
-		redidect('productos');
+		redirect('productos');
 }
 
 
@@ -99,27 +99,8 @@ if(isset($_POST['submit'])){
 										</div>
 								</div>
 						</div>
-
-
-
-
-
         </div>
         <!-- /.container-fluid -->
     </div>
 </div>
-
-
 <?php include_once  '../application/parts/backend/footer.php'?>
-<script type="text/javascript">
-    function add_row()
-    {
-        $rowno=$("#employee_table tr").length;
-        $rowno=$rowno+1;
-        $("#employee_table tr:last").after("<tr id='row"+$rowno+"'><td><input class='form-control' type='text' name='label[]' placeholder='Nombre de la caracteristica' value='' required></td><td><input type='text' class='form-control' name='valor[]' placeholder='Valor de la caracteristica' required></td><td><button  type='button' class='btn btn-danger'  onclick=delete_row('row"+$rowno+"')><i class='fa fa-trash'></i></button></td></tr>");
-    }
-    function delete_row(rowno)
-    {
-        $('#'+rowno).remove();
-    }
-</script>

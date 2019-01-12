@@ -147,7 +147,7 @@ public function __construct()
     public function pedidosEstadisicas()
     {
         $estadisticas = [];
-        $sql = "SELECT u.id ,u.nombre,p.id,p.fecha,sum(lp.precio_compra) as precio  FROM usuario u INNER JOIN pedido p ON u.id = p.usuario_id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP by u.id;";
+        $sql = "SELECT u.id ,u.nombre,p.id,p.fecha,sum(lp.precio_compra) as precio  FROM usuario u INNER JOIN pedido p ON u.id = p.usuario_id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP by u.id";
         $q = $this->db->prepare($sql);
         $q->execute();
         while ($row = $q->fetch(\PDO::FETCH_ASSOC)){

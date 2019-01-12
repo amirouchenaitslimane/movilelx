@@ -20,11 +20,11 @@ if(isset($_POST['qty'])){
 if($qty <= 10 || (int)($qty + $_SESSION['carrito'][$product->getId()]) <= 10 ) {
     $carrito->updateQty($product, $qty);
     flash('info', 'Has actualizado la cantidad del producto', 'alert-success');
-    redidect('vercarrito');
+    redirect('vercarrito');
 }else{
     flash( 'info', 'No se puede comprar mas de 10 unidades  ','alert-danger' );
 
-    redidect('vercarrito');
+    redirect('vercarrito');
 }
 }
 

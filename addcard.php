@@ -28,7 +28,7 @@ if(isset($_GET['product_id'])) {
     }
 
 }else{
-		redidect('index');
+		redirect('index');
 }
     ?>
 

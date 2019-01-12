@@ -31,5 +31,13 @@ class LineaPedidoManager
 
     }
 
+    public function TotalPrecioCompra($pedido_id)
+    {
+        $q = $this->db->prepare("SELECT SUM(linea_pedido.precio_compra) as total ,pedido.id FROM linea_pedido INNER join pedido ON linea_pedido.pedido_id = pedido.id WHERE pedido.id = :id");
+        $q->execute([':id'=>$pedido_id]);
+        return $q->fetch(\PDO::FETCH_OBJ);
+
+    }
+
 
 }

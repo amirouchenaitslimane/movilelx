@@ -8,17 +8,17 @@ if(isset($_GET['id'])){
     if($user === null){
         //flash usuario  not exist
         flash('error','Usuario solictado no existe en la base de datos','alert-danger');
-        redidect('usuarios');
+        redirect('usuarios');
     }
 
     $usuario_manager->delete($user);
     //flash success
     flash('success','Usuario Ha Sido eliminado de la base de datos','alert-success');
 
-    redidect('usuarios');
+    redirect('usuarios');
 }else{
     //flash error id not exist
     flash('error','Id del usuario solicitado no existe','alert-danger');
 
-    redidect('usuarios');
+    redirect('usuarios');
 }

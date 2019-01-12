@@ -34,7 +34,7 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
                             $usuario_manager->addUsuario($user);
                             flash( 'success', 'Has Creado un nuevo usuario','alert-success' );
 
-                           redidect('usuarios');
+                           redirect('usuarios');
                         }else{
                             //mostrar errores del formulario
                             echo displayError($user->getErrors());

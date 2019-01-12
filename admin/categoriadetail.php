@@ -96,29 +96,3 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 
 <?php include_once  '../application/parts/backend/footer.php'?>
-<script>
-    $(document).ready( function () {
-        var table = $('#table_id');
-        table.DataTable({
-            "language": {
-
-                "lengthMenu": "Mostrar  _MENU_  por página",
-                "zeroRecords": "No hay resultado ",
-                "info": "Mostrar página _PAGE_ de _PAGES_",
-                "infoEmpty": "No Registros disponibles",
-                "infoFiltered": "(filtrar de _MAX_  registros)",
-                "search": "Buscar: _INPUT_ ",
-                "paginate": {
-                    "next": "Sigiente ",
-                    "previous": "Atrás"
-                },
-
-
-            },
-
-        });
-
-
-    } );
-
-</script>

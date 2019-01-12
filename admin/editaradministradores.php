@@ -17,11 +17,11 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                 $user = $usuario_manager->findUsuario($_GET['id']);
 
                 if($user === null){
-                    redidect('usuarios');
+                    redirect('usuarios');
                 }
 
             }else{
-                redidect('usuarios');
+                redirect('usuarios');
             }
             ?>
             <div class="row">
@@ -38,7 +38,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         if(empty($user->getErrors())){
                             $usuario_manager->Update($user);
                             flash('info','Has cambiado el usuario ','alert-info');
-                            redidect('usuarios');
+                            redirect('usuarios');
                         }else{
                             echo displayError($user->getErrors());
                         }

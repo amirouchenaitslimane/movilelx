@@ -1,5 +1,5 @@
 <?php
-$title ="Categorias";
+$title ="Editar producto";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     header('location:/movilelx.site/index.php');
@@ -10,7 +10,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 		<div id="content-wrapper">
 				<div class="container-fluid">
 						<!-- Page Content -->
-						<h1>Nuevo  Producto</h1>
+						<h1>Editar Producto</h1>
 						<hr>
 
 						<div class="row">
@@ -24,16 +24,22 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             if(isset($_POST['submit']))
                             {
                                 if(isset($_POST['nombre'])){
-                                    $producto->setNombre(trim($_POST['nombre']));
+                                    $producto->setNombre(trim(htmlspecialchars($_POST['nombre'])));
                                 }
                                 if(isset($_POST['descripcion'])){
-                                    $producto->setDescripcion(trim($_POST['descripcion']));
+                                    $producto->setDescripcion(trim(htmlspecialchars($_POST['descripcion'])));
                                 }
                                 if(isset($_POST['precio'])){
-                                    $producto->setPrecio(trim($_POST['precio']));
+                                    if (!preg_match("/^\d+(\.\d{2})?$/",trim($_POST['precio']))) {
+                                        $producto->addErrors('precio del producto  incorrecto ');
+
+                                    }
+                                    $producto->setPrecio(trim(htmlspecialchars($_POST['precio'])));
+
+
                                 }
                                 if(isset($_POST['active'])){
-                                    $producto->setActive(trim($_POST['active']));
+                                    $producto->setActive(trim(htmlspecialchars($_POST['active'])));
                                 }
                                 if($_FILES['image']['name'] !=="" ){
                                     $producto->setImagen($_FILES['image']['name']);
@@ -46,14 +52,23 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                 }
 
                                 if(isset($_POST['categoria_id'])){
-                                    $producto->setCategoria_id((int)$_POST['categoria_id']);
+                                		$c = $categoria_manager->getOneCategory($_POST['categoria_id']);
+
+                                		if($c == null){
+                                        $producto->addErrors('La categoria seleccionada no es adecuada ');
+
+                                    }else{
+                                        $producto->setCategoria_id((int)$_POST['categoria_id']);
+
+																		}
                                 }
+
                                 if (empty($producto->getErrors())){
 
                                     $producto_manager->updateProduct($producto);
                                     flash('info','producto actualizado con exito! ','alert-info');
 
-                                    redidect('productos');
+                                    redirect('productos');
 
 
                                 }else{
@@ -82,7 +97,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 																<div class="form-group">
 																		<label for="precio">precio producto <small>(*)	</small></label>
-																		<input type="text" class="form-control" name="precio" pattern="[-+]?[0-9]*[.,]?[0-9]+" title="se acceptan solo numeros" id="precio" required value="<?= $producto->getPrecio() ?>">
+																		<input type="text" class="form-control" name="precio"  title="se acceptan solo numeros" id="precio" required value="<?= $producto->getPrecio() ?>">
 																		<small id="precio" class="form-text text-muted">Escriba el precio del producto</small>
 
 																</div>
@@ -151,23 +166,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 <?php include_once  '../application/parts/backend/footer.php'?>
 <script>
-    function readURL(input) {
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $("#img1").hide('slow', function(){ this.remove(); });
-                $('#blah').attr('src', e.target.result);
-                $('#blah').addClass('img-thumbnail');
-            }
-
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
     $("#imagen").change(function() {
-        readURL(this);
+        readImg(this);
     });
 
 </script>
