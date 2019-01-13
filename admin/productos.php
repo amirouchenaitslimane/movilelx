@@ -28,7 +28,6 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 										<table id="table_id" class="table table-bordered display">
 												<thead>
 												<tr>
-
 														<th>image</th>
 														<th>nombre</th>
 														<th>precio</th>
