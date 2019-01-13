@@ -52,9 +52,10 @@
 												<div class="col-sm-8 col-6 col-md-8">
 														<div class="shop-menu pull-right">
 																<ul class="nav">
-																		<li class="nav-item menu"><a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-																						<i class="fa fa-bars"></i> Menú
-																				</a></li>
+																		<li class="nav-item menu">
+																				<button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+																						<i class="fa fa-bars text-info"></i> Menú
+																				</button></li>
                                     <?php if(isset($_SESSION['user'])): ?>
 
 																		<li class="nav-item"><a href="logout.php"> <i class="fa fa-lock"></i> Logout (<?= $_SESSION['user']->getNombre() ?>)</a></li>

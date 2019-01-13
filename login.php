@@ -18,7 +18,7 @@ if(isset($_SESSION['user'])){
 								</div>
 								<div class="card-body">
                     <?php
-										DEBUG(_SERVER);
+
                     flash('info');
 										//	DEBUG($_SESSION['anony']);
                     if(isset($_POST['submit']))

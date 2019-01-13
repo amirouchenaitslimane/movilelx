@@ -21,6 +21,10 @@ if(isset($_GET['product_id'])) {
 
             $carrito->add($product, $cty);
             (isset($_GET['cantidad']) ? redirectWithParam('verproducto', 'id=' . $_GET['product_id']) : redirectWithParam('categoria', 'id=' . $_GET['cat']));
+
+
+
+
         } else {
             redirectWithParam('categoria', 'id=' . $_GET['cat']);
         }
