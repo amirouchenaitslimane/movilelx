@@ -59,18 +59,18 @@ class ProductoManager
        try{
            $products = [];
 
-           $sql ="SELECT * FROM producto where 1=1";
+           $sql ="SELECT p.id,p.nombre,p.precio,p.imagen,p.active,p.created_at, c.nombre as category FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id WHERE 1=1";
 
            if($start !== null && $offset!== null){
                $sql .=" LIMIT $start,$offset";
 
            }
-
+$sql .=" ORDER BY created_at DESC;";
            $q = $this->db->query($sql);
 
-           while ($row = $q->fetch(\PDO::FETCH_ASSOC))
+           while ($row = $q->fetch(\PDO::FETCH_OBJ))
            {
-               $products[] = new Producto($row);
+               $products[] = $row;
            }
            return $products;
        }catch (\PDOException $e)

@@ -22,41 +22,40 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                 <div class="col-md-12">
                     <a href="nuevoproducto.php" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo producto</a>
                 </div>
-                <div class="col-md-12 mt-3">
-                    <?php
+                <div class="col-md-12 mt-3 mb-3">
+                    <?php  $productos=$producto_manager->getAll(); ?>
 
-
-                    $clientes=$producto_manager->getAll();
-
-
-
-										?>
-
-										<table id="table_id" class="table display">
+										<table id="table_id" class="table table-bordered display">
 												<thead>
 												<tr>
-														<th>nombre</th>
 
+														<th>image</th>
+														<th>nombre</th>
 														<th>precio</th>
 														<th>fecha creacion</th>
 														<th>Estado</th>
+														<th>categoría</th>
+														<th>fecha creacion</th>
 														<th>Accion</th>
 												</tr>
 												</thead>
 												<tbody>
-												<?php foreach ($clientes as $p):?>
+												<?php foreach ($productos as $p):?>
 												<tr>
-														<td><?= $p->getNombre() ?></td>
+														<td><img src="../uploads/products/<?= $p->imagen ?>" class="img-fluid " width="100px" height="100px">	</td>
+														<td><?= $p->nombre ?></td>
 
-														<td><?= $p->getPrecio() ?> €</td>
-														<td><?= $p->getCreated_at() ?></td>
-														<td><?= $p->getEstadoOption()[$p->getActive()]?></td>
+														<td><?= $p->precio ?> €</td>
+														<td><?= $p->created_at ?></td>
+														<td><?= ((new \app\Producto())->getEstadoOption()[$p->active]) ?></td>
+														<td><?= $p->category ?></td>
+														<td><?= $p->created_at?></td>
 														<td>
-																<a href="productocaractiristicas.php?id=<?= $p->getId()?>" title="Caracteristicas" class="btn btn-success"><i class="fa fa-cog"></i></a>
+																<a href="productocaractiristicas.php?id=<?= $p->id?>" title="Caracteristicas" class="btn btn-success"><i class="fa fa-cog"></i></a>
 
-																<a href="productoedit.php?id=<?= $p->getId()?>" title="Editar" class="btn btn-info"><i class="fa fa-pencil"></i></a>
-																<a href="productoview.php?id=<?= $p->getId() ?>" title="Ver" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-																<a href="productodelete.php?id=<?= $p->getId() ?>" title="Eliminar" class="btn btn-danger " onclick="return confirm('¿Seguro quires eliminar el producto ?') "><i class="fa fa-trash"></i></a>
+																<a href="productoedit.php?id=<?= $p->id?>" title="Editar" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+																<a href="productoview.php?id=<?= $p->id ?>" title="Ver" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+																<a href="productodelete.php?id=<?= $p->id ?>" title="Eliminar" class="btn btn-danger " onclick="return confirm('¿Seguro quires eliminar el producto ?') "><i class="fa fa-trash"></i></a>
 														</td>
 												</tr>
 												<?php endforeach;?>
