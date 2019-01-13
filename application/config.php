@@ -12,6 +12,6 @@ if($_SERVER['SERVER_NAME'] === 'localhost') {
     define('DB_USER','u364358217_ami');
     define('DB_PASSWORD','675495309amirouche');
     define('DB_NAME','u364358217_movil');
-    define('_SERVER',$_SERVER['SERVER_NAME'].'/');
+    define('_SERVER',$_SERVER['SERVER_NAME']);
 }
 ?>
