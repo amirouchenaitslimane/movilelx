@@ -1,5 +1,5 @@
 <?php
-$title ="Categorias";
+$title ="producto";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     header('location:/movilelx.site/index.php');
@@ -10,7 +10,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     <div id="content-wrapper">
         <div class="container-fluid">
             <!-- Page Content -->
-            <h1>Nuevo  Producto</h1>
+            <h1>ver Producto</h1>
             <hr>
 
             <div class="row">
@@ -90,7 +90,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                                         <?php endforeach;?>
 																												</tbody>
 																										</table>
-																										<button type="submit" id="delete" name="submit">Eliminar Seleccionados</button>
+																										<button type="submit" id="delete" class="btn btn-danger " name="submit" >Eliminar Seleccionados</button>
 																								</form>
 																						</div>
 																				</div>

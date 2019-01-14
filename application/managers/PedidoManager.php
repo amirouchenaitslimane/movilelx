@@ -98,10 +98,14 @@ public function __construct()
 
     public function count($estado=1)
     {
-        $sql = "SELECT id FROM pedido WHERE estado= :active";
-        $q = $this->db->prepare($sql);
-        $q->execute([':active'=>$estado]);
-        return $q->rowCount();
+        try{
+            $sql = "SELECT id FROM pedido WHERE estado = :active";
+            $q = $this->db->prepare($sql);
+            $q->execute([':active'=>$estado]);
+            return $q->rowCount();
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
     }
 

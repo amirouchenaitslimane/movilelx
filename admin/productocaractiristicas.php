@@ -1,5 +1,5 @@
 <?php
-$title ="Categorias";
+$title ="Caracteristicas";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     header('location:/movilelx.site/index.php');
@@ -10,7 +10,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     <div id="content-wrapper">
         <div class="container-fluid">
             <!-- Page Content -->
-            <h1>Nuevo  Producto</h1>
+            <h1>Caracteristicas Del Producto</h1>
             <hr>
 <?php
 $p= $producto_manager->getProductDetail($_GET['id']);

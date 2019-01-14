@@ -174,7 +174,7 @@ $sql .=" ORDER BY created_at DESC;";
 
     public function getUltimosProductos()
     {
-        $sql = "SELECT * from producto where active=1  order by created_at  LIMIT 0,3";
+        $sql = "SELECT p.id,p.nombre,p.precio,p.imagen,p.active,p.created_at, c.nombre as category FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id   order by created_at DESC LIMIT 0,3";
         $q = $this->db->prepare($sql);
         $q->execute();
         $res = $q->fetchAll(\PDO::FETCH_OBJ);

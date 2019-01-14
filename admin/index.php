@@ -1,4 +1,6 @@
-<?php require_once '../application/parts/backend/header.php';
+<?php
+$title = "Index";
+require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
    header('location:movilelx.site/index.php');
 }
@@ -9,6 +11,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 				<div class="container-fluid">
 						<!-- Page Content -->
 						<h1>Gestión de tienda</h1>
+
 						<hr>
 
 						<div class="row">
@@ -18,7 +21,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														<div class="card-body-icon">
 																<i class="fas fa-fw fa-comments"></i>
 														</div>
-														<div class="mr-5">Total Productos en tienda <?= $producto_manager->count(1)?></div>
+														<div class="mr-5">Total Productos en tienda <?= $producto_manager->count()?></div>
 												</div>
 												<a class="card-footer text-white clearfix small z-1" href="productos.php">
 														<span class="float-left">View Details</span>
@@ -34,9 +37,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														<div class="card-body-icon">
 																<i class="fa fa-fw fa-list"></i>
 														</div>
-														<div class="mr-5">Total Pedidos ( <?= $pedido_manager->count() ?> )</div>
+														<div class="mr-5">Total Pedidos (<?= $pedido_manager->count(0) ?>)</div>
 												</div>
-												<a class="card-footer text-white clearfix small z-1" href="#">
+												<a class="card-footer text-white clearfix small z-1" href="pedidos.php">
 														<span class="float-left">View Details</span>
 														<span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -54,7 +57,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														</div>
 														<div class="mr-5"> Total administradores de tienda (<?= $usuario_manager->countClientes(1)?>)</div>
 												</div>
-												<a class="card-footer text-white clearfix small z-1" href="#">
+												<a class="card-footer text-white clearfix small z-1" href="usuarios.php">
 														<span class="float-left">View Details</span>
 														<span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -73,7 +76,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														</div>
 														<div class="mr-5">Numero total Clientes (<?= $usuario_manager->countClientes(2) ?>)</div>
 												</div>
-												<a class="card-footer text-white clearfix small z-1" href="#">
+												<a class="card-footer text-white clearfix small z-1" href="clientes.php">
 														<span class="float-left">View Details</span>
 														<span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -83,21 +86,25 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 								</div>
 						</div>
 						<div class="col-md-12 mt-4">
-								<div class="row">
-										<div class="col-md-6">
+
+										<div class="col-md-12">
 												<h1 class="h1">Ultimos productos Añadido</h1>
 
-												<table class="table">
+												<table class="table table-bordered">
 														<thead>
 														<th>id</th>
+														<th>imagen</th>
 														<th>nombre</th>
+														<th>categoria</th>
 														<th>fecha</th>
 														</thead>
 														<tbody>
 														<?php foreach ($producto_manager->getUltimosProductos() as $p):?>
 														<tr>
 																<td><?= $p->id ?></td>
+																<td><img class="img-fluid " width="100px" height="100px" src="../uploads/products/<?= htmlspecialchars($p->imagen) ?>" alt=""></td>
 																<td><?= $p->nombre;?></td>
+																<td><?= $p->category ?></td>
 																<td><?= $p->created_at ?></td>
 														</tr>
 														<?php endforeach;?>
@@ -105,7 +112,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 												</table>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-12">
 
 												<canvas id="speedChart" width="600" height="400"></canvas>
 
@@ -117,7 +124,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 
 
-								</div>
+
 						</div>
 
 
