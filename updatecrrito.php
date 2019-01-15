@@ -1,6 +1,6 @@
 <?php
-$title = "Carrito de compra";
-require_once 'application/parts/frontend/header.php';
+
+require_once 'application/includes.php';
 
 //logic
 if(isset($_POST['submit'])){
@@ -18,7 +18,7 @@ if(isset($_POST['qty'])){
 }
 
 if($qty <= 10 || (int)($qty + $_SESSION['carrito'][$product->getId()]) <= 10 ) {
-    $carrito->updateQty($product, $qty);
+    $cart->updateQty($product, $qty);
     flash('info', 'Has actualizado la cantidad del producto', 'alert-success');
     redirect('vercarrito');
 }else{

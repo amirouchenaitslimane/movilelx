@@ -18,7 +18,7 @@ class CarritoManager
     }
     function getCrrito() {
         $manager = new ProductoManager();
-        $ids = array_keys($_SESSION['carrito']);
+        $ids = array_keys($_COOKIE['carrito']);
         $arry_products = [];
 
         foreach ($ids as $value) {

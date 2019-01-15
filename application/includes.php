@@ -7,6 +7,8 @@ require_once 'classes/Usuario.php';
 require_once 'classes/Categoria.php';
 require_once 'classes/Caracteristicas.php';
 require_once 'classes/Carrito.php';
+require_once 'classes/Cart.php';
+
 require_once 'classes/Producto.php';
 require_once 'classes/Pedido.php';
 require_once 'classes/LineaPedido.php';
@@ -21,6 +23,7 @@ require_once 'managers/LineaPedidoManager.php';
 require_once 'Pagination.php';
 
 session_start();
+$cart = new \app\Cart();
 $carrito = new \app\Carrito();
 $usuario_manager = new \app\UsuarioManager();
 $categoria_manager = new \app\CategoriaManager();

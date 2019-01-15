@@ -16,7 +16,8 @@ require_once 'application/parts/frontend/header.php' ;
 								<div class="card-body">
                     <?php
                     flash('info');
-                    $products = $carrito_manager->getCrrito();
+                    $products = $cart->getCrrito();
+                    $c = unserialize($_COOKIE['carrito']);
 
                     ?>
 										<div class="table-responsive cart_info">
@@ -51,7 +52,7 @@ require_once 'application/parts/frontend/header.php' ;
 																				<td class="cart_quantity">
 																						<div class="col-md-9">
 																								<form method="post" action="updatecrrito.php">
-																										<input type="number" name="qty" min="1" class="form-control" value="<?= $_SESSION['carrito'][$product->getId()]; ?>">
+																										<input type="number" name="qty" min="1" class="form-control" value="<?= $c[$product->getId()]; ?>">
 																										<input type="hidden" name="prodict_id" class="form-control" value="<?= $product->getId(); ?>">
 																										<button type="submit" name="submit" class="btn btn-primary btn-update mt-2">
 																												<i class="fa fa-refresh" aria-hidden="true"></i>
@@ -60,7 +61,7 @@ require_once 'application/parts/frontend/header.php' ;
 																						</div>
 																				</td>
 																				<td class="cart_total">
-																						<p class="cart_total_price"><?= ($product->getPrecio() * $_SESSION['carrito'][$product->getId() ]) ?> €</p>
+																						<p class="cart_total_price"><?= ($product->getPrecio() * $c[$product->getId() ]) ?> €</p>
 																				</td>
 																				<td class="cart_delete">
 																						<a class="cart_quantity_delete btn btn-danger" href="deletproductocarrito.php?id=<?= $product->getId() ?>" ><i class="fa fa-times"></i></a>
@@ -74,7 +75,7 @@ require_once 'application/parts/frontend/header.php' ;
 
 																		<td><h3>Total</h3></td>
 																		<td>  </td>
-																		<td class="text-right"><h5><strong><?= $carrito->total(); ?> €</strong></h5></td>
+																		<td class="text-right"><h5><strong><?= $cart->total(); ?> €</strong></h5></td>
 																</tr>
 																<tr>
 																		<td>

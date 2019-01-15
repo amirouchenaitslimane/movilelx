@@ -1,11 +1,10 @@
 <?php
-$title = "Carrito de compra";
-require_once 'application/parts/frontend/header.php';
+require_once 'application/includes.php';
 if(isset($_GET['id'])){
    $producto = $producto_manager->getProduct($_GET['id']);
 
 
-$carrito->remove($producto);
+$cart->remove($producto);
 flash('info','!!! Vaya has quitado el product de la cesta !!! ','alert-info');
 redirect('vercarrito');
 

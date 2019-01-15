@@ -1,4 +1,4 @@
-<?php require_once 'application/parts/frontend/header.php';
+<?php require_once 'application/includes.php';
 if(isset($_GET['product_id'])) {
     if (isset($_GET['cantidad'])) {
         $cty = (int)$_GET['cantidad'];
@@ -19,7 +19,8 @@ if(isset($_GET['product_id'])) {
         if ($product !== null) {
             flash('info', 'Producto añadido a la cesta  ', 'alert-success');
 
-            $carrito->add($product, $cty);
+//            $carrito->add($product, $cty);
+            $cart->add($product,$cty);
             (isset($_GET['cantidad']) ? redirectWithParam('verproducto', 'id=' . $_GET['product_id']) : redirectWithParam('categoria', 'id=' . $_GET['cat']));
 
 
