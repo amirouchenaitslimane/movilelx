@@ -24,8 +24,10 @@ class Database
                 self::$instance = new PDO("mysql:host=".DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PASSWORD,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             }catch (\Exception $error){
                 //die(" Fallo de connexion ".$error->getMessage());
-                echo "<p class='msg'>Un erreur est survenu lors de la connexion</p>";
+                //echo "<p class='msg'>Un erreur est survenu lors de la connexion</p>";
 
+                //aqui crear fichero log
+                header('location:404.html');
         }
 
             return self::$instance;

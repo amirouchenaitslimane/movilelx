@@ -29,6 +29,7 @@ if(!$_SESSION['user']){
                         </li>
 
 
+
                     </ul>
 
 
@@ -136,6 +137,8 @@ if(!$_SESSION['user']){
 
 														?>
 
+
+
 														<ul>
 																<li><?= $cliente->getNombre();?></li>
 
@@ -143,6 +146,7 @@ if(!$_SESSION['user']){
 																<li><?= $cliente->getDireccion() ?></li>
 																<li><?= $cliente->getEmail() ?></li>
 														</ul>
+														<a href="actualizarperfile.php" class="btn btn-orange btn-success">Cambiar mis datos</a>
                         </div>
 
                         </div>
