@@ -39,6 +39,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                         foreach ($_POST['caracteristica'] as $id) {
 																					$cm->deleteCaracteristica($id);
 																				}
+
                                         redirect("productoview.php?id=".$p->getId() );
 
 																}

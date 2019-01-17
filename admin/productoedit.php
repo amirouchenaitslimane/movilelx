@@ -104,8 +104,8 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																<div class="form-group">
 																		<label for="activo">Es Activo</label>
 																		<select name="active" id="activo" class="form-control">
-																				<option value="1" <?= ($producto->getActive()=== '1'  ? "selected=selected" :""); ?>>Activo</option>
-																				<option value="0" <?= ($producto->getActive()=== '0'  ? "selected=selected" :""); ?>  >Inactivo</option>
+																				<option value="1" <?= ($producto->getActive()=== 1  ? "selected=selected" :""); ?>>Activo</option>
+																				<option value="0" <?= ($producto->getActive()=== 0  ? "selected=selected" :""); ?>  >Inactivo</option>
 																		</select>
 																		<small id="activo" class="form-text text-muted">si no quieres mostrar el producto selecciona INACTIVO </small>
 

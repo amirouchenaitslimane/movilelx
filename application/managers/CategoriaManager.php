@@ -83,6 +83,8 @@ class CategoriaManager
        try{
            $parents = [];
            $sql = "SELECT * from categoria where padre_id = 0 and activo = 1";
+
+
            $q = $this->db->prepare($sql);
            $q->execute();
            while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
@@ -304,5 +306,7 @@ class CategoriaManager
         return ($q->fetchColumn() > 0 ? true :false);
 
     }
+
+    
 
 }
