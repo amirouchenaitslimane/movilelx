@@ -60,7 +60,7 @@ function readImg(input) {
 }
 var pontsData = [];
 $.each(estadisticas, function(index, value) {
-    var subObject = { label: value.nombre,  y: parseFloat(value.precio)  };
+    var subObject = { label: value.nombre,  y: parseInt(value.precio)  };
 
     pontsData.push(subObject);
 });
@@ -69,18 +69,17 @@ window.onload = function () {
 
     var chart = new CanvasJS.Chart("chartContainer", {
         theme: "light1", // "light2", "dark1", "dark2"
-        animationEnabled: false, // change to true
+        animationEnabled: true, // change to true
         title:{
             text: "Gastos de cliente en € "
         },
         data: [
             {
-                // Change type to "bar", "area", "spline", "pie",etc.
-                type: "column",
+                type: "line",
                 dataPoints: pontsData
             }
         ]
     });
     chart.render();
 
-}
+};

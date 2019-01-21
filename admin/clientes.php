@@ -29,7 +29,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
                         ?>
                         <?php if(!empty($clientes)):?>
-												<table class="table table-hover table-striped">
+												<table class="table table-hover table-striped table-responsive">
 														<thead>
 														<tr>
 																<th scope="col">Nombre</th>
