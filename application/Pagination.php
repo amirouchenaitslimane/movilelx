@@ -97,11 +97,11 @@ class Pagination
         if ($this->_totalPages() > 1) {
              $links = "<nav aria-label='Page navigation'>";
 
-            $links.= '<ul class="pagination">';
+            $links.= '<ul class="pagination pagination-blue">';
             if ($this->_hasPreviousPage()) {
-                $links.= '<li class="page-item"><a href="'.$url.'&page=1" title="">&laquo;</a></li>';
+                $links.= '<li class="page-item"><a class="page-link" href="'.$url.'&page=1" title="">&laquo;</a></li>';
                 } else {
-                $links.= '<li class=" page-item disabled"><a  title="">&laquo;</a></li>';
+                $links.= '<li class=" page-item disabled"><a class="page-link"  title="">&laquo;</a></li>';
 
             }
             // Create links in the middle
@@ -124,17 +124,17 @@ class Pagination
             }
             for ($i = $firstLink; $i <= $lastLink; $i++) {
                 if ($this->_currentPage == $i) {
-                    $links .= '<li class="page-item active"><a >' . $i . '</a></li>';
+                    $links .= '<li class="page-item active"><a class="page-link" >' . $i . '</a></li>';
                 } else {
-                    $links .= '<li class="page-item"><a href="' .$url. '&page=' . $i . '">' . $i . '</a></li>';
+                    $links .= '<li class="page-item"><a class="page-link" href="' .$url. '&page=' . $i . '">' . $i . '</a></li>';
                 }
             }
             if ($this->_hasNextPage()) {
 
-                $links.= '<li class="page-item"><a href="'.$url.'&page=' . $this->_totalPages() . '" title="">&raquo;</a></li>';
+                $links.= '<li class="page-item"><a class="page-link" href="'.$url.'&page=' . $this->_totalPages() . '" title="">&raquo;</a></li>';
             } else {
 
-                $links.= '<li class=" page-item disabled"><a  title="">&raquo;</a></li>';
+                $links.= '<li class=" page-item disabled"><a class="page-link" title="">&raquo;</a></li>';
             }
             $links.='</ul>';
             $links.='</nav>';

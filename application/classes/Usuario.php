@@ -300,7 +300,16 @@ class Usuario
      */
     public function setActive($active)
     {
-        $this->active = $active;
+        $active = (int)$active;
+        if(empty($active)){
+            $this->active = 1;
+        }
+        if($active == 0 || $active == 1){
+            $this->active = $active;
+        }else{
+            $this->errors[] = "elige el estado del Empleado activo (puede acceder) o inctivo(no tendra acceso)";
+
+        }
     }
 
     public function getEstadoOption()

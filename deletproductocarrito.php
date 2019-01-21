@@ -5,7 +5,7 @@ if(isset($_GET['id'])){
 
 
 $cart->remove($producto);
-flash('info','!!! Vaya has quitado el product de la cesta !!! ','alert-info');
+flash('info','!!! Vaya has quitado el product de la cesta !!! ','info');
 redirect('vercarrito');
 
 }

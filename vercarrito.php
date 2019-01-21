@@ -52,7 +52,7 @@ require_once 'application/parts/frontend/header.php' ;
 																				<td class="cart_quantity">
 																						<div class="col-md-9">
 																								<form method="post" action="updatecrrito.php">
-																										<input type="number" name="qty" min="1" class="form-control" value="<?= $c[$product->getId()]; ?>">
+																										<input type="number" name="qty" min="1" max="10" class="form-control" value="<?= $c[$product->getId()]; ?>">
 																										<input type="hidden" name="prodict_id" class="form-control" value="<?= $product->getId(); ?>">
 																										<button type="submit" name="submit" class="btn btn-primary btn-update mt-2">
 																												<i class="fa fa-refresh" aria-hidden="true"></i>

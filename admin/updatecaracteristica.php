@@ -33,7 +33,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         $c->setLabel($label);
                         $c->setValor($valor);
                         $cm->updateOne($c);
-                        header('location:productoview.php?id='.$_GET['producto']);
+                        flash('info','caracteristica actualizada co exito ','success');
+                        redirectWithParam('productoview','id='.$_GET['producto']);
+                       // header('location:productoview.php?id='.$_GET['producto']);
                     }else{
                         echo displayError($errors);
                     }

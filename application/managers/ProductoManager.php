@@ -182,4 +182,14 @@ $sql .=" ORDER BY created_at DESC;";
     }
 
 
+    public function getProductInfo($id)
+    {
+        $sql = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.imagen, p.active, p.created_at, p.categoria_id, c.nombre as category, SUM(lp.producto_id) as en_venta FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id INNER JOIN linea_pedido lp ON p.id = lp.producto_id WHERE P.id=:id";
+        $q = $this->db->prepare($sql);
+        $q->execute([':id'=>$id]);
+        $result = $q->fetch(\PDO::FETCH_OBJ);
+        return $result;
+
+    }
+
 }

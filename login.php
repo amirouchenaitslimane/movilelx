@@ -41,7 +41,7 @@ if(isset($_SESSION['user'])){
                             if (!$user->isPasswordValid($password)) {
                                 $errors[] = 'Contraseña incorrecta';
                             }
-                            if($user->isActive() !== '1'){
+                            if($user->isActive() !== 1){
                                 $errors[] = "Acceso denegado contacte con el administrador";
                             }
                         }

@@ -42,7 +42,7 @@ function DEBUG($mixed){
 }
 
 function dateFormatter($date){
-    return (new DateTime($date))->format('d-m-Y');
+    return (new \DateTime($date))->format('d-m-Y');
 }
 function displayError(array  $errors){
     $string = "";
@@ -83,7 +83,7 @@ function flash( $name = '', $message = '', $class = 'alert alert-danger' )
         elseif( !empty( $_SESSION[$name] )&& empty( $message ) )
         {
             $class = !empty( $_SESSION[$name.'_class'] ) ? $_SESSION[$name.'_class'] : 'success';
-            echo '<div class="'.$class.'" id="msg-flash"><p class="p-3">'.$_SESSION[$name].'</p></div>';
+            echo '<div class="alert alert-'.$class.'" id="msg-flash"><p class="p-3">'.$_SESSION[$name].'</p></div>';
             unset($_SESSION[$name]);
             unset($_SESSION[$name.'_class']);
         }
@@ -94,4 +94,9 @@ function redirectWithParam($page,$params){
 
     echo "<script>location.href='".$page.".php?".$params."'</script>";
 
+}
+
+function precioES($str){
+  $price = str_replace('.',',',$str);
+  return $price;
 }

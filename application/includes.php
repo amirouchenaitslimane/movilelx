@@ -22,6 +22,7 @@ require_once 'managers/PedidoManager.php';
 require_once 'managers/LineaPedidoManager.php';
 require_once 'Pagination.php';
 
+
 session_start();
 $cart = new \app\Cart();
 $carrito = new \app\Carrito();

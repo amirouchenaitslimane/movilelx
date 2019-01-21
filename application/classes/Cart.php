@@ -27,7 +27,7 @@ class Cart
     {
         if($p->getId() !== null ){//comprobo si manda la referencia y la cantidad por la query string
             if(array_key_exists($p->getId(),$this->products)){ //como es un array asociativo de tipo array('ref'=>cantidad ) comprobo si el la referencia existe en el indice de array_articles
-                $this->products[$p->getId()] = $this->products[$p->getId()]+1; //si existe le añado +1
+                $this->products[$p->getId()] = $this->products[$p->getId()]+=$qty; //si existe le añado +1
             }else{//si no existe pongo el indice y la cantidad
 
                 $this->products[$p->getId()] = $qty;
@@ -93,6 +93,11 @@ class Cart
         unset($this->products[$p->getId()]);
         setcookie('carrito',serialize($this->products),time() + 3600);
 
+    }
+
+    public function countProductSingle(Producto $p)
+    {
+        return $this->products[$p->getId()];
     }
 
 }
