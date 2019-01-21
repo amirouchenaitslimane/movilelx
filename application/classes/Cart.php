@@ -97,7 +97,7 @@ class Cart
 
     public function countProductSingle(Producto $p)
     {
-        return $this->products[$p->getId()];
+        return (isset($this->products[$p->getId()])?$this->products[$p->getId()]:0);
     }
 
 }
