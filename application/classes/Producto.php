@@ -128,10 +128,11 @@ class Producto
      */
     public function setActive($active)
     {
+        $active = (int)$active;
         if(empty($active)){
             $this->active = 1;
         }
-        if(!empty($active) && $active == 0 || $active == 1){
+        if($active == 0 || $active == 1){
              $this->active = $active;
         }else{
             $this->errors[] = "elige el estado del producto activo (publico) o inctivo(oculto)";
@@ -244,7 +245,48 @@ class Producto
         $this->caracteristicas = $caracteristicas;
     }
 
+    public static function estado()
+    {
+        return [self::$ESTADO_ACTIVO =>"Activo",self::$ESTADO_INACTIVO=>"Inactivo"];
 
 
+    }
+
+
+    public function upload($index,$destination,$maxsize=FALSE,$extensions= array( 'jpg' , 'jpeg' , 'gif' , 'png' ))
+    {
+
+        if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0){
+          $this->errors[] = 'Error en la imagen ';
+        }
+
+        if ($maxsize !== FALSE AND $_FILES[$index]['size'] > $maxsize){
+            $this->errors[] = 'Tamaño de la imagen es demasiado grande ';
+        }
+
+        $ext = substr(strrchr($_FILES[$index]['name'],'.'),1);
+        if (!in_array($ext,$extensions)){
+            $this->errors[] = 'La imagen requiere extensiones : jpg, png, jpeg ';
+        }
+        if(empty($this->errors)) {
+           return move_uploaded_file($_FILES[$index]['tmp_name'], $destination . $_FILES[$index]['name']);
+
+        }
+
+
+    }
+
+    public function delete($file) {
+
+        if(file_exists('../uploads/products/'.$file)){
+            unlink('../uploads/products/'.$file) ;
+        }else{
+            $this->errors[] = "Imagen no existe";
+        }
+
+
+
+
+    }
 
 }

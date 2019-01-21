@@ -232,24 +232,24 @@ class CategoriaManager
 
     }
 
-    public function deleteCategoria($id)
-    {
-        try {
-            $this->db->beginTransaction();
-            $sql = "UPDATE categoria set activo=0 where id=:id";
-            $q = $this->db->prepare($sql);
-            $q->execute([':id' => $id]);
-
-            $sql2 = "UPDATE producto SET active=0 where categoria_id=:id";
-            $q2 = $this->db->prepare($sql2);
-            $q2->execute([':id' => $id]);
-            $this->db->commit();
-        }catch (\PDOException $e){
-            $this->db->rollBack();
-            echo $e->getMessage();
-        }
-
-    }
+//    public function deleteCategoria($id)
+//    {
+//        try {
+//            $this->db->beginTransaction();
+//            $sql = "UPDATE categoria set activo=0 where id=:id";
+//            $q = $this->db->prepare($sql);
+//            $q->execute([':id' => $id]);
+//
+//            $sql2 = "UPDATE producto SET active=0 where categoria_id=:id";
+//            $q2 = $this->db->prepare($sql2);
+//            $q2->execute([':id' => $id]);
+//            $this->db->commit();
+//        }catch (\PDOException $e){
+//            $this->db->rollBack();
+//            echo $e->getMessage();
+//        }
+//
+//    }
 
     public function updateCatgory(Categoria $c)
     {
@@ -305,4 +305,98 @@ class CategoriaManager
 
     }
 
+
+    public function adminCategrias()
+    {
+        try{
+            $parents = [];
+            $sql = "SELECT * from categoria where padre_id = 0 ";
+            $q = $this->db->prepare($sql);
+            $q->execute();
+            while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
+                $c = new Categoria($row);
+                if(!empty($this->getAllChilds($c->getId()))){
+
+                    $c->setChilds($this->getAllChilds($c->getId()));
+                }
+                $parents[] = $c;
+            }
+            return $parents;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+
+
+
+
+    }
+
+
+    public function deleteCategoria($id)
+    {
+        try {
+            $this->db->beginTransaction();
+            $sql = "UPDATE categoria set activo = 0 where id=:id";
+            $q = $this->db->prepare($sql);
+            $q->execute([':id' => $id]);
+
+            $s = "UPDATE categoria set activo = 0 where padre_id=:id";
+            $req = $this->db->prepare($s);
+            $req->execute([':id' => $id]);
+
+
+
+
+            $sql2 = "UPDATE producto SET active=0 where categoria_id=:id";
+            $q2 = $this->db->prepare($sql2);
+            $q2->execute([':id' => $id]);
+            $this->db->commit();
+        }catch (\PDOException $e){
+            $this->db->rollBack();
+            echo $e->getMessage();
+        }
+
+    }
+
+
+    public function getProductsCategoryAdmin($id,$start=null,$offset=null) {
+        try{
+            $products = array();
+            // $sql = "SELECT categoria.nombre,categoria.id ,producto.* FROM categoria INNER JOIN producto ON categoria.id = producto.categoria_id  WHERE categoria.id = :id ";
+            $sql ="SELECT p.*, c.nombre AS category FROM categoria c INNER JOIN producto p ON p.categoria_id = c.id WHERE  c.padre_id = :id OR c.id = :id ";
+
+            if($start !== null && $offset !== null){
+                $sql .= "LIMIT $start,$offset";
+            }
+            $q = $this->db->prepare($sql);
+            $q->execute([':id'=>$id]);
+
+            while ($row = $q->fetch(\PDO::FETCH_OBJ))
+            {
+                $products[] = $row;
+            }
+            return $products;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+
+
+    }
+
+    private function getAllChilds($id){
+        try{
+            $parents = [];
+            $sql2 = "SELECT * from categoria where padre_id =:id  ";
+            $q2 = $this->db->prepare($sql2);
+            $q2->execute([':id'=>$id]);
+            while ($row = $q2->fetch(\PDO::FETCH_ASSOC)){
+                $c = new Categoria($row);
+
+                $parents[] = $c;
+            }
+            return $parents;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+    }
 }

@@ -5,123 +5,80 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     header('location:/movilelx.site/index.php');
 }
 
-?><div id="wrapper">
-    <?php require_once '../application/parts/backend/sidebar.php'?>
-    <div id="content-wrapper">
-        <div class="container-fluid">
-            <!-- Page Content -->
-            <h1>Gestión de clientes</h1>
-            <hr>
-            <?php
-            flash('info');
-            flash('success');
-            flash('error');
-            ?>
-            <div class="row">
-                <?php
-                //crear la logica
-                $clientes_por_pagina = 10;
-                $numero_clientes_db = $usuario_manager->countClientes(2);
-
-
-                $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-
-                $start = ($page  - 1)*$clientes_por_pagina;
-                $total_pages = ceil($numero_clientes_db / $clientes_por_pagina);
-                $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-                $start = ($page  - 1)*$clientes_por_pagina;
-                $total_pages = ceil($numero_clientes_db / $clientes_por_pagina);
-
-                $clientes=$usuario_manager->getClientes($start,$clientes_por_pagina);
+?>
+<div class="content">
+		<div class="container-fluid">
+				<div class="row">
+						<div class="col-md-12">
+								<?= flash('info');?>
+								<div class="card">
+										<div class="card-header">
+												<h4 class="card-title">
+													Gestion Clientes
+												</h4>
+										</div>
+										<div class="card-body">
+												<?php
+                        $num_product_database = $usuario_manager->countClientes(2);
+                        $url = 'clientes.php?a=a';
+                        $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
+                        $pagination = new \App\Pagination($page,$num_product_database,10);
+                        $clientes = $usuario_manager->getClientes($pagination->offset(),$pagination->getRecordsPerPage());
 
 
 
-
-                ?>
-                <?php if(!empty($clientes)):?>
-                <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Email</th>
-												<th scope="col">Estado</th>
-                        <th scope="col">
-                        </th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($clientes as $cliente):?>
-                        <tr>
-
-                            <td><?= $cliente->getNombre(); ?></td>
-                            <td><?= $cliente->getApellido(); ?></td>
-                            <td><?= $cliente->getEmail(); ?></td>
-                            <td><?=$cliente->getEstadoOption()[$cliente->isActive()] ?></td>
-
-														<th scope="row">
-																<a href="vercliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-
-																<a href="editarcliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                <a href="deletecliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-danger" onclick=" return confirm('¿Qieres eliminar el cliente ?') "><i class="fa fa-trash"></i></a>
-                            </th>
-                        </tr>
-                    <?php endforeach;?>
-
-
-                    </tbody>
-                </table>
-                <?php else: echo "<h1> No hay clientes </h1>"?>
-                <?php endif;?>
-
-                <ul class="pagination">
-                    <?php
-                    if($numero_clientes_db > $clientes_por_pagina) {
-                        if ($page > 1) {
-                            ?>
-                            <li class="page-item"><a class="page-link" href="clientes.php?page=<?= $page - 1 ?>">Previous</a>
-                            </li>
-
-                            <?php
-                        }
                         ?>
+                        <?php if(!empty($clientes)):?>
+												<table class="table table-hover table-striped">
+														<thead>
+														<tr>
+																<th scope="col">Nombre</th>
+																<th scope="col">Apellido</th>
+																<th scope="col">Email</th>
+																<th scope="col">Estado</th>
+																<th scope="col">
+																</th>
 
-                        <?php for ($i = 1; $i < $total_pages; $i++): ?>
+														</tr>
+														</thead>
+														<tbody>
+                            <?php foreach ($clientes as $cliente):?>
+																<tr>
 
-                            <?php if ($i === $page): ?>
-                                <li class="page-item active"><a class="page-link "><?= $i; ?></a></li>
+																		<td><?= $cliente->getNombre(); ?></td>
+																		<td><?= $cliente->getApellido(); ?></td>
+																		<td><a href="mailto:<?= htmlspecialchars($cliente->getEmail())?>"><?= $cliente->getEmail(); ?></a></td>
+																		<td><span class="text-white p-1 <?= (($cliente->isActive() == '1')?'bg-success':'bg-danger') ?>"><?=$cliente->getEstadoOption()[$cliente->isActive()] ?></span></td>
 
-                            <?php else: ?>
-                                <li class="page-item"><a class="page-link"
-                                                         href="clientes.php?page=<?= $i ?>"><?= $i; ?></a></li>
+																		<th scope="row">
+																				<a href="vercliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-primary btn-fill"><i class="fa fa-eye"></i></a>
 
-                            <?php endif; ?>
+																				<a href="editarcliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-success btn-fill"><i class="fa fa-edit"></i></a>
+																				<a href="deletecliente.php?id=<?= $cliente->getId(); ?>" class="btn btn-danger btn-fill" onclick=" return confirm('¿Qieres eliminar el cliente ?') "><i class="fa fa-trash"></i></a>
+																		</th>
+																</tr>
+                            <?php endforeach;?>
 
-                        <?php endfor; ?>
-                        <?php
-                        if ($page < $total_pages) {
-                            ?>
-                            <li class="page-item"><a class="page-link"
-                                                     href="clientes.php?page=<?= $page + 1 ?>">Next</a></li>
 
+														</tbody>
+												</table>
+
+												<div class="col-md-12">
                             <?php
-                        }
-                    }
-                    ?>
-
-                </ul>
-                </div>
-            </div>
+                            echo $pagination->nav($url);
 
 
+                            ?>
+
+												</div>
 
 
-        </div>
-        <!-- /.container-fluid -->
-    </div>
+                        <?php else: echo "<h1> No hay clientes </h1>"?>
+                        <?php endif;?>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
 </div>
-
-
 <?php include_once  '../application/parts/backend/footer.php'?>

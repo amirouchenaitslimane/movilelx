@@ -6,7 +6,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 if(isset($_GET['id'])){
      $categoria_manager->deleteCategoria($_GET['id']);
-     flash('info','Has eliminado la categoía','alert-danger');
+     flash('info','Has eliminado la categoía','danger');
      redirect('categorias');
 
 }

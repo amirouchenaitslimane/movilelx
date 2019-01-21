@@ -4,11 +4,7 @@ require_once 'application/parts/frontend/header.php';
 
 ?>
 
-<?php
-$title = "index";
-require_once 'application/parts/frontend/header.php' ;
 
-?>
 <div class="container">
 		<div class="row">
         <?php require_once 'application/parts/frontend/categories.php'?>
@@ -43,7 +39,7 @@ require_once 'application/parts/frontend/header.php' ;
                       $num_product_database = $categoria_manager->contProductsCategory($_GET['id']);
 											$url = 'categoria.php?id='.htmlspecialchars($_GET['id']);
                       $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-											$pagination = new \App\Pagination($page,$num_product_database,6);
+											$pagination = new \App\Pagination($page,$num_product_database,2);
 											$prod = $categoria_manager->getProductsCategory($_GET['id'],$pagination->offset(),$pagination->getRecordsPerPage());
 
 

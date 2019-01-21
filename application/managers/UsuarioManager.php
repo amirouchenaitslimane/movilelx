@@ -150,10 +150,11 @@ class UsuarioManager
     {
         try{
             $users = [];
-            $sql = "SELECT * FROM usuario WHERE role = 1 ";
+            $sql = "SELECT * FROM usuario WHERE role = 1 ORDER BY created DESC ";
             if($start !== null && $offset !== null){
                 $sql .= "LIMIT $start,$offset";
             }
+
             $q = $this->db->query($sql);
             while ($row = $q->fetch(\PDO::FETCH_ASSOC))
             {

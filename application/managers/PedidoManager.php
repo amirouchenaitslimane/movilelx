@@ -48,31 +48,7 @@ public function __construct()
     public function getPedido($usuario_id)
     {
         $a = [];
-//        $sql = "SELECT
-//                p.id,
-//                p.usuario_id,
-//                p.estado,
-//                p.fecha,
-//                l.id,
-//                l.pedido_id,
-//                l.producto_id,
-//                l.precio_compra,
-//                l.cantidad,
-//                l.fecha_recep
-//            FROM
-//                pedido p
-//            INNER JOIN linea_pedido l ON
-//                p.id = l.pedido_id
-//            WHERE
-//                p.usuario_id = :id ";
-//        $q = $this->db->prepare($sql);
-//        $q->execute([':id'=>$usuario_id]);
-//        while ($row = $q->fetch(\PDO::FETCH_OBJ)){
-//
-//
-//            $a[] = $row;
-//        }
-//        return $a;
+
         $sql="SELECT * FROM pedido WHERE usuario_id = :usuario_id";
         $q = $this->db->prepare($sql);
         $q->execute([':usuario_id'=>$usuario_id]);
@@ -161,6 +137,20 @@ public function __construct()
             $estadisticas[] = $estadistica;
         }
         return $estadisticas;
+    }
+
+    public function updateStatus(Pedido $p)
+    {
+       try{
+           $sql = "UPDATE pedido SET estado = :estado WHERE id=:id";
+           $q = $this->db->prepare($sql);
+           $q->bindValue(':estado',$p->getEstado());
+           $q->bindValue(':id',$p->getId());
+           $q->execute();
+       }catch (\PDOException $e){
+           echo $e->getMessage();
+       }
+
     }
 
 }

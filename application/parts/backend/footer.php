@@ -1,35 +1,42 @@
-<!-- Sticky Footer -->
-<footer class="sticky-footer">
-		<div class="container my-auto">
-				<div class="copyright text-center my-auto">
-						<span>Copyright © Movilelx - Amirouche Naitslimane  </span>
-				</div>
+<footer class="footer">
+		<div class="container">
+
+
+
+				<p class="copyright text-center">
+
+						<a href="">Amirouche Naitslimane </a>Práctica entorno servidor
+				</p>
+
 		</div>
 </footer>
-
 </div>
-<!-- /.content-wrapper -->
-
 </div>
-<!-- /#wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-		<i class="fa fa-angle-up"></i>
-</a>
-
-<!-- Bootstrap core JavaScript-->
-<script src="../assets/backend/js/jquery.min.js"></script>
-<script src="../assets/backend/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="../assets/backend/js/jquery.easing.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
-<!-- Custom scripts for all pages-->
-<script src="../assets/backend/js/sb-admin.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script src="../assets/backend/js/app.js"></script>
 </body>
+<!--   Core JS Files   -->
+<script src="../assets/backend/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="../assets/backend/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../assets/backend/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+
+<!--  Google Maps Plugin    -->
+
+<!--  Chartist Plugin  -->
+
+<!--  Notifications Plugin    -->
+<script src="../assets/backend/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="../assets/backend/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/backend/js/demo.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+
+
+<script src="../assets/backend/js/app.js"></script>
 
 </html>
 

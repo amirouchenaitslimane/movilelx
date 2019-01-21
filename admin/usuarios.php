@@ -5,134 +5,66 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
     header('location:/movilelx/index.php');
 }
 
-?><div id="wrapper">
-    <?php require_once '../application/parts/backend/sidebar.php'?>
-    <div id="content-wrapper">
-        <div class="container-fluid">
-            <!-- Page Content -->
-            <h1>Gestión de Usuario</h1>
-            <hr>
-            <?php
-            flash('info');
-            flash('success');
-            flash('error');
-            ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="nuevousuario.php" class="btn btn-primary">Nuevo usuario</a>
-                </div>
-            </div>
-            <?php
-            flash('info');
-            flash('success');
-            flash('error');
-            ?>
-            <div class="row">
+?>
+
+<div class="content">
+		<div class="container-fluid">
+				<div class="row">
+						<div class="col-md-12">
                 <?php
-                //crear la logica
-                $administradores_por_pagina = 10;
-                $numero_administradores_db = $usuario_manager->countClientes(1);
-
-
-                $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-
-                $start = ($page  - 1)*$administradores_por_pagina;
-                $total_pages = ceil($numero_administradores_db / $administradores_por_pagina);
-                $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-                $start = ($page  - 1)*$administradores_por_pagina;
-                $total_pages = ceil($numero_administradores_db / $administradores_por_pagina);
-
-                $adminstradores=$usuario_manager->getAdminstradores($start,$administradores_por_pagina);
-
-
-
+                flash('info');
 
                 ?>
-                <?php if(!empty($adminstradores)):?>
-                <div class="col-md-12">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-														<th scope="col">Estado</th>
-                            <th scope="col">
-                            </th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($adminstradores as $adminstrador):?>
-                            <tr>
-
-                                <td><?= $adminstrador->getNombre(); ?></td>
-                                <td><?= $adminstrador->getApellido(); ?></td>
-                                <td><?= $adminstrador->getEmail(); ?></td>
-                                <td><?= $adminstrador->getRoleOption()[$adminstrador->getRole()] ?></td>
-                                <td><?= $adminstrador->getEstadoOption()[$adminstrador->isActive()] ?></td>
-																<th scope="row">
-																		<a href="veradministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-success"><i class="fa fa-eye"></i></a>
-
-																		<a href="editaradministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="deletadministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-danger" onclick=" return confirm('¿Qieres eliminar el adminstrador ?') "><i class="fa fa-trash"></i></a>
-                                </th>
-                            </tr>
-                        <?php endforeach;?>
-
-
-                        </tbody>
-                    </table>
-                    <?php else: echo "<h1> No hay adminstradores </h1>"?>
-                    <?php endif;?>
-
-                    <ul class="pagination">
+								<div class="card">
+										<div class="card-header">
+												<h4 class="card-title">Gestión de Usuario <a href="nuevousuario.php" class="btn btn-warning btn-fill pull-right"><i class="fa fa-plus "></i> Nuevo Empleado</a></h4>
+										</div>
+										<div class="card-body">
                         <?php
-                        if($numero_administradores_db > $administradores_por_pagina) {
-                            if ($page > 1) {
-                                ?>
-                                <li class="page-item"><a class="page-link" href="usuarios.php?page=<?= $page - 1 ?>">Previous</a>
-                                </li>
 
-                                <?php
-                            }
-                            ?>
+                        $numero_administradores_db = $usuario_manager->countClientes(1);
+                        $url = 'usuarios.php?a=a';
+                        $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
+                        $pagination = new \App\Pagination($page,$numero_administradores_db,10);
+                        $adminstradores = $usuario_manager->getAdminstradores($pagination->offset(),$pagination->getRecordsPerPage());
+                       	if(!empty($adminstradores)):?>
+														<table class="table">
+																<thead>
+																<tr>
+																		<th scope="col">Nombre</th>
+																		<th scope="col">Apellido</th>
+																		<th scope="col">Email</th>
+																		<th scope="col">Role</th>
+																		<th scope="col">Estado</th>
+																		<th scope="col">
+																		</th>
+																</tr>
+																</thead>
+																<tbody>
+                                <?php foreach ($adminstradores as $adminstrador):?>
+																		<tr>
+																				<td><?= $adminstrador->getNombre(); ?></td>
+																				<td><?= $adminstrador->getApellido(); ?></td>
+																				<td><?= $adminstrador->getEmail(); ?></td>
+																				<td><?= $adminstrador->getRoleOption()[$adminstrador->getRole()] ?></td>
+																				<td><strong class="p-1 text-white lead <?= (($adminstrador->isActive() == 1 )? 'bg-success':'bg-danger')?>"><?= $adminstrador->getEstadoOption()[$adminstrador->isActive()] ?></strong></td>
+																				<th scope="row">
+																						<a href="veradministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-success btn-fill"><i class="fa fa-eye"></i></a>
 
-                            <?php for ($i = 1; $i < $total_pages; $i++): ?>
+																						<a href="editaradministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-primary btn-fill"><i class="fa fa-edit"></i></a>
+																						<a href="deletadministradores.php?id=<?= $adminstrador->getId(); ?>" class="btn btn-danger btn-fill" onclick=" return confirm('¿Qieres eliminar el adminstrador ?') "><i class="fa fa-trash"></i></a>
+																				</th>
+																		</tr>
+                                <?php endforeach;?>
+																</tbody>
+														</table>
+														<div class="col-md-12"><?php echo $pagination->nav($url);?></div>
+                        		<?php else: echo "<h1> No hay adminstradores </h1>" ; endif;?>
 
-                                <?php if ($i === $page): ?>
-                                    <li class="page-item active"><a class="page-link "><?= $i; ?></a></li>
-
-                                <?php else: ?>
-                                    <li class="page-item"><a class="page-link"
-                                                             href="usuarios.php?page=<?= $i ?>"><?= $i; ?></a></li>
-
-                                <?php endif; ?>
-
-                            <?php endfor; ?>
-                            <?php
-                            if ($page < $total_pages) {
-                                ?>
-                                <li class="page-item"><a class="page-link"
-                                                         href="usuarios.php?page=<?= $page + 1 ?>">Next</a></li>
-
-                                <?php
-                            }
-                        }
-                        ?>
-
-                    </ul>
-                </div>
-            </div>
-
-
-
-
-        </div>
-        <!-- /.container-fluid -->
-    </div>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
 </div>
-
-
 <?php include_once  '../application/parts/backend/footer.php'?>
