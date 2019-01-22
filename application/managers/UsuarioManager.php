@@ -100,7 +100,7 @@ class UsuarioManager
     {
     try{
         $sql = 'UPDATE usuario SET nombre= :nombre,apellido=:apellido,direccion=:direccion,email=:email,updated=now(),role=:role,active=:active   where id=:id';
-    $q = $this->db->prepare($sql);
+         $q = $this->db->prepare($sql);
 
         $q->bindValue(':nombre',$usuario->getNombre());
 
@@ -168,10 +168,14 @@ class UsuarioManager
 
     public function countClientes($role)
     {
-        $sql = "SELECT id FROM usuario WHERE role= :role";
-        $q = $this->db->prepare($sql);
-        $q->execute([':role'=>$role]);
-        return $q->rowCount();
+       try{
+           $sql = "SELECT id FROM usuario WHERE role= :role";
+           $q = $this->db->prepare($sql);
+           $q->execute([':role'=>$role]);
+           return $q->rowCount();
+       }catch (\PDOException $e){
+           echo $e->getMessage();
+       }
     }
 
     public function getByPedido($id_pedido)

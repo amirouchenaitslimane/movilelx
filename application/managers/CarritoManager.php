@@ -17,14 +17,19 @@ class CarritoManager
         $this->db = Database::Db();
     }
     function getCrrito() {
-        $manager = new ProductoManager();
-        $ids = array_keys($_COOKIE['carrito']);
-        $arry_products = [];
+        try{
+            $manager = new ProductoManager();
+            $ids = array_keys($_COOKIE['carrito']);
+            $arry_products = [];
 
-        foreach ($ids as $value) {
-            $arry_products[] = $manager->getProduct($value);
+            foreach ($ids as $value) {
+                $arry_products[] = $manager->getProduct($value);
+            }
+            return $arry_products;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $arry_products;
+
 
     }
 

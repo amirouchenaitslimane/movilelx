@@ -17,11 +17,12 @@ require_once 'application/parts/frontend/header.php' ;
                     <?php
                     flash('info');
                     $products = $cart->getCrrito();
-                    $c = unserialize($_COOKIE['carrito']);
-
+                    if(isset($_COOKIE['carrito'])){
+                        $c = unserialize($_COOKIE['carrito']);
+										}
                     ?>
 										<div class="table-responsive cart_info">
-                        <?php if(count($products) > 0):?>
+                        <?php if(count($products) > 0 && count($c) > 0 ):?>
 
 														<table class="table table-condensed">
 																<thead>

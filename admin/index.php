@@ -30,7 +30,7 @@ require_once '../application/parts/backend/header.php';?>
 																<div class="card-body-icon">
 																		<i class="fa fa-fw fa-list"></i>
 																</div>
-																<div class="mr-5">Total Pedidos (<?= $pedido_manager->count(0) ?>)</div>
+																<div class="mr-5">Total Pedidos (<?= $pedido_manager->count() ?>)</div>
 														</div>
 														<a class="card-footer text-white clearfix small z-1" href="pedidos.php">
 																<span class="float-left">View Details</span>

@@ -11,9 +11,9 @@ namespace app;
 
 class PedidoManager
 {
-protected $db;
+    protected $db;
 
-public function __construct()
+    public function __construct()
 {
     $this->db = Database::Db();
 
@@ -47,37 +47,44 @@ public function __construct()
 
     public function getPedido($usuario_id)
     {
-        $a = [];
-
-        $sql="SELECT * FROM pedido WHERE usuario_id = :usuario_id";
-        $q = $this->db->prepare($sql);
-        $q->execute([':usuario_id'=>$usuario_id]);
-        while ($row = $q->fetch(\PDO::FETCH_ASSOC))
-        {
-            $a[] =new Pedido($row);
+        try{
+            $pedidos = [];
+            $sql="SELECT * FROM pedido WHERE usuario_id = :usuario_id";
+            $q = $this->db->prepare($sql);
+            $q->execute([':usuario_id'=>$usuario_id]);
+            while ($row = $q->fetch(\PDO::FETCH_ASSOC))
+            {
+                $pedidos[] =new Pedido($row);
+            }
+            return $pedidos;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $a;
     }
 
 
     public function getpedidos()
     {
-        $pedidos = [];
-        $sql = "SELECT p.id,p.usuario_id,p.fecha,p.estado,u.nombre,u.direccion, COUNT(lp.pedido_id) as num_lineas FROM pedido p INNER JOIN usuario u ON p.usuario_id = u.id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP BY p.id";
-        $q = $this->db->prepare($sql);
-        $q->execute();
-        while ($row = $q->fetch(\PDO::FETCH_OBJ )){
-            $pedidos[]= $row;
+        try{
+            $pedidos = [];
+            $sql = "SELECT p.id,p.usuario_id,p.fecha,p.estado,u.nombre,u.direccion, COUNT(lp.pedido_id) as num_lineas FROM pedido p INNER JOIN usuario u ON p.usuario_id = u.id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP BY p.id";
+            $q = $this->db->prepare($sql);
+            $q->execute();
+            while ($row = $q->fetch(\PDO::FETCH_OBJ )){
+                $pedidos[]= $row;
+            }
+            return $pedidos;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $pedidos;
     }
 
-    public function count($estado=1)
+    public function count()
     {
         try{
-            $sql = "SELECT id FROM pedido WHERE estado = :active";
+            $sql = "SELECT id FROM pedido";
             $q = $this->db->prepare($sql);
-            $q->execute([':active'=>$estado]);
+            $q->execute();
             return $q->rowCount();
         }catch (\PDOException $e){
             echo $e->getMessage();
@@ -86,27 +93,32 @@ public function __construct()
     }
 
     public function getOne($id)
-    {$li = [];
-        $sql = "SELECT 
+    {
+        try{
+            $li = [];//lineas de pedido
+            $sql = "SELECT 
                   p.id,p.usuario_id,p.fecha,p.estado,l.id as linea_id, 
                   l.* FROM pedido p INNER  JOIN  linea_pedido l  ON p.id = l.pedido_id  WHERE  p.id = :id";
-        $q = $this->db->prepare($sql);
-        $q->execute([':id'=>$id]);
-        while($data = $q->fetch(\PDO::FETCH_ASSOC)){
-            $l = new LineaPedido();
-            $l->setId($data['linea_id']);
-            $l->setCantidad($data['cantidad']);
-            $l->setPrecioCompra($data['precio_compra']);
-            $l->setPedidoId($data['pedido_id']);
-            $l->setProductoId($data['producto_id']);
-            $pedido = new Pedido($data);
+            $q = $this->db->prepare($sql);
+            $q->execute([':id'=>$id]);
+            while($data = $q->fetch(\PDO::FETCH_ASSOC)){
+                $l = new LineaPedido();
+                $l->setId($data['linea_id']);
+                $l->setCantidad($data['cantidad']);
+                $l->setPrecioCompra($data['precio_compra']);
+                $l->setPedidoId($data['pedido_id']);
+                $l->setProductoId($data['producto_id']);
+                $pedido = new Pedido($data);
 
-            $li[] = $l;
-            foreach ($li as $item){
-                $pedido->setLineas($item);
+                $li[] = $l;
+                foreach ($li as $item){
+                    $pedido->setLineas($item);
+                }
             }
+            return $pedido;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $pedido;
     }
 
     public function gastosCliente($cliente_id)
@@ -126,17 +138,21 @@ public function __construct()
 
     public function pedidosEstadisicas()
     {
-        $estadisticas = [];
-        $sql = "SELECT u.id ,u.nombre,p.id,p.fecha,sum(lp.precio_compra) as precio  FROM usuario u INNER JOIN pedido p ON u.id = p.usuario_id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP by u.id";
-        $q = $this->db->prepare($sql);
-        $q->execute();
-        while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
-            $estadistica = [];
-            $estadistica['nombre'] = $row['nombre'];
-            $estadistica['precio'] = $row['precio'];
-            $estadisticas[] = $estadistica;
+        try{
+            $estadisticas = [];
+            $sql = "SELECT u.id ,u.nombre,p.id,p.fecha,sum(lp.precio_compra) as precio  FROM usuario u INNER JOIN pedido p ON u.id = p.usuario_id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP by u.id";
+            $q = $this->db->prepare($sql);
+            $q->execute();
+            while ($row = $q->fetch(\PDO::FETCH_ASSOC)){
+                $estadistica = [];
+                $estadistica['nombre'] = $row['nombre'];
+                $estadistica['precio'] = $row['precio'];
+                $estadisticas[] = $estadistica;
+            }
+            return $estadisticas;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
         }
-        return $estadisticas;
     }
 
     public function updateStatus(Pedido $p)

@@ -34,24 +34,19 @@ require_once 'application/parts/frontend/header.php';
 									<div class="col-md-12 col-sm-12 col-12">
 											<div class="row">
                       <?php
-                      //crear la logica
-                      $clientes_por_pagina = 100;
                       $num_product_database = $categoria_manager->contProductsCategory($_GET['id']);
 											$url = 'categoria.php?id='.htmlspecialchars($_GET['id']);
                       $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
-											$pagination = new \App\Pagination($page,$num_product_database,2);
+											$pagination = new \App\Pagination($page,$num_product_database,6);
 											$prod = $categoria_manager->getProductsCategory($_GET['id'],$pagination->offset(),$pagination->getRecordsPerPage());
-
-
-
-                      ?>
+											?>
                       <?php if(count($prod) > 0):?>
 											<?php foreach ($prod as $products):?>
 															<div class="col-sm-4 col-md-4 col-6">
 																	<div class="product-image-wrapper">
 																			<div class="single-products">
 																					<div class="productinfo text-center">
-<!--																							<span class="indicator rebaja">promoción</span>-->
+																							<!--<span class="indicator rebaja">promoción</span>-->
 																							<img src="uploads/products/<?= $products->imagen ?>" alt="" class="img-fluid" />
 																							<h6 class="lead title"><?= $products->nombre; ?> </h6>
 																							<p><span class="precio"><?= $products->precio; ?> €</span></p>

@@ -19,7 +19,7 @@ require_once 'application/parts/frontend/header.php' ;
 												</div>
 												<div class="col-md-8 col-12 col-sm-8 mt-4">
 
-														<p class="lead">No piedes las mejores ofertas de nustra tienda descubre las últimas tecnologias en nustra tienda movilelx</p>
+														<p class="lead">No pierdes las mejores ofertas de nustra tienda descubre las últimas tecnologias en nustra tienda movilelx</p>
 														<p class="lead mt-5 ">
 																<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
 														</p>
