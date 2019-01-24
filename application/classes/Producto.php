@@ -17,13 +17,24 @@ class Producto
     private $descripcion;
     private  $precio;
     private $active;
+    private $es_oferta;
+    private $precio_reducido;
     private $categoria_id;
     private $created_at;
     private $updated_at;
+    private $tipo_oferta;
     private $imagen;
     private static $ESTADO_ACTIVO = 1;
     private static $ESTADO_INACTIVO = 0;
     private $caracteristicas = [];
+
+    private static $SALE_TRUE = 1;
+    private static $SALE_FALSE = 0;
+
+    private static $TIPO_NO_OFERTA= 0;
+    private static $TIPO_REBAJA = 1;
+    private static $TIPO_PROMOCION = 2;
+
 
 
     //clave
@@ -109,7 +120,8 @@ class Producto
      */
     public function setPrecio($precio)
     {
-        if(empty(trim($precio)) ){
+        if (empty(trim($precio)) || !preg_match("/^\d+(\.\d{2})?$/",trim($precio))){
+
             $this->errors[] = "Introduce el precio del producto con valores numericos";
         }
         $this->precio = $precio;
@@ -140,6 +152,41 @@ class Producto
         }
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEsOferta()
+    {
+        return $this->es_oferta;
+    }
+
+    /**
+     * @param mixed $es_oferta
+     */
+    public function setEs_oferta($es_oferta)
+    {
+        $this->es_oferta = $es_oferta;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrecioReducido()
+    {
+        return $this->precio_reducido;
+    }
+
+    /**
+     * @param mixed $precio_reducido
+     */
+    public function setPrecio_reducido($precio_reducido)
+    {
+        $this->precio_reducido = $precio_reducido;
+    }
+
+
+
 
     /**
      * @return mixed
@@ -252,6 +299,24 @@ class Producto
 
     }
 
+    public function esOferta()
+    {
+        return[
+            self::$SALE_TRUE => 'Si',
+            self::$SALE_FALSE =>'No'
+        ];
+
+    }
+
+    public function tipoOfertaOpcion()
+    {
+        return [
+          self::$TIPO_NO_OFERTA = 'Sin oferta',
+          self::$TIPO_REBAJA =>'Rebaja',
+          self::$TIPO_PROMOCION =>'Promcion'
+        ];
+
+    }
 
     public function upload($index,$destination,$maxsize=FALSE,$extensions= array( 'jpg' , 'jpeg' , 'gif' , 'png' ))
     {
@@ -283,10 +348,24 @@ class Producto
         }else{
             $this->errors[] = "Imagen no existe";
         }
-
-
-
-
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTipo_oferta()
+    {
+        return $this->tipo_oferta;
+    }
+
+    /**
+     * @param mixed $tipo_oferta
+     */
+    public function setTipo_oferta($tipo_oferta)
+    {
+        $this->tipo_oferta = $tipo_oferta;
+    }
+
+
 
 }

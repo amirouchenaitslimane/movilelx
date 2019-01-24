@@ -20,14 +20,19 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 												<div class="card-body">
                             <?php
                             $producto = $producto_manager->getProduct($_GET['id']);
-                            //DEBUG($producto);die();
+                           // DEBUG($producto->getEsOferta());die();
                             if(isset($_POST['submit']))
                             {
+
+                            		echo $_POST['es_oferta'];': es oferta <br>';
+                                echo $_POST['tipo_oferta'];': tipo oferta <br>';
+                                echo $_POST['precio_reducido'];':precio_reducido <br>';
+
                                 if(isset($_POST['nombre'])){
                                     $producto->setNombre(trim(htmlspecialchars($_POST['nombre'])));
                                 }
                                 if(isset($_POST['descripcion'])){
-                                    $producto->setDescripcion(trim(htmlspecialchars($_POST['descripcion'])));
+                                    $producto->setDescripcion($_POST['descripcion']);
                                 }
                                 if(isset($_POST['precio'])){
                                     if (!preg_match("/^\d+(\.\d{2})?$/",trim($_POST['precio']))) {
@@ -45,6 +50,29 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                     $producto->delete($producto->getImagen());
                                     $producto->setImagen($_FILES['image']['name']);
                                 }
+
+                                if($_POST['es_oferta']=== '0'){
+                                    $producto->setPrecio_reducido(null);
+                                    $producto->setTipo_oferta('0');
+                                    $producto->setEs_oferta('0');
+                                }else{
+                                    $p_reducido = $_POST['precio_reducido'];
+                                    if($p_reducido ==""){
+                                        $producto->addErrors('Elegi el precio de oferta');
+
+																		}
+                                    $producto->setPrecio_reducido($p_reducido);
+                                    $tipo_oferta = $_POST['tipo_oferta'];
+                                    if($tipo_oferta == '0'){
+                                    		$producto->addErrors('Elige tipo de oferta');
+																		}else{
+                                        $producto->setTipo_oferta($tipo_oferta);
+
+																		}
+                                    $producto->setEs_oferta('1');
+                                }
+
+
                                 if(isset($_POST['categoria_id'])){
                                     $c = $categoria_manager->getOneCategory($_POST['categoria_id']);
                                     if($c == null){
@@ -53,6 +81,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                         $producto->setCategoria_id((int)$_POST['categoria_id']);
                                     }
                                 }
+
+
+                              //  DEBUG($producto);die();
                                 if (empty($producto->getErrors())){
                                     $producto_manager->updateProduct($producto);
                                     flash('info','producto actualizado con exito! ','info');
@@ -128,6 +159,44 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                         <?php endforeach; ?>
 
 																		</select>
+																</div>
+																<div class="jumbotron bg-light">
+																		<div class="card">
+																				<div class="card-header">
+																						<h4 class="card-title">
+																								crear oferta <small>(Opcional)</small>
+																						</h4>
+																				</div>
+																				<div class="card-body">
+																						<div class="form-group">
+																								<label for="es_oferta">¿ Es Oferta ?</label>
+																								<select name="es_oferta" id="es_oferta" class="form-control">
+																										<option value="0" <?= (($producto->getEsOferta() == 0 ) ? "selected": ""  ) ?>>No</option>
+																										<option value="1" <?= (($producto->getEsOferta()== 1 ) ? "selected": ""  ) ?>>Si</option>
+																								</select>
+																								<small id="activo" class="form-text text-muted text-info">si es oferta selecciona Si</small>
+
+																						</div>
+																						<div class="form-group">
+																								<label for="tipo_oferta">Tipo de Oferta </label>
+																								<select name="tipo_oferta" id="tipo_oferta" class="form-control">
+																										<option value="0" <?= (($producto->getTipo_oferta() == '0') ? 'selected':'')?>>No</option>
+
+																										<option value="1" <?= (($producto->getTipo_oferta() == '1') ? 'selected':'')?>>Rebaja</option>
+																										<option value="2" <?= (($producto->getTipo_oferta() == '2') ? 'selected':'')?>>Promocion</option>
+																								</select>
+																								<small id="activo" class="form-text text-muted text-info">Elije el tipo de oferta </small>
+
+																						</div>
+
+																						<div class="form-group">
+																								<label for="precio_reducido">precio reducción <small>(*)	</small></label>
+																								<input type="text" class="form-control" name="precio_reducido"  title="se acceptan solo numeros" id="precio_reducido"  value="<?= $producto->getPrecioReducido() ?>" >
+																								<small id="precio" class="form-text text-muted text-info">Escriba el precio del producto usa punto(.) para decimales ex: 99.99</small>
+
+																						</div>
+																				</div>
+																		</div>
 																</div>
 
 																<button class="btn btn-group-lg btn-success btn-fill pull-right" name="submit" type="submit">Crear</button>

@@ -16,6 +16,12 @@ function upload($index,$destination,$maxsize=FALSE,$extensions=FALSE)
     return move_uploaded_file($_FILES[$index]['tmp_name'],$destination.$_FILES[$index]['name']);
 }
 
+
+function porcentaje($price_real,$reduc){
+    $value = $price_real - $reduc;
+    $porcentaje = ($value * 100)/$price_real;
+    return round($porcentaje).'%';
+}
 function arrayHelperCaracteristicas($array)
 {
     $fields = [];

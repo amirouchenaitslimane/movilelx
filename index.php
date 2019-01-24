@@ -29,112 +29,38 @@ require_once 'application/parts/frontend/header.php' ;
 						</div>
 						<div class="col-md-12 col-sm-12 col-12">
 								<div class="row">
-										<div class="col-sm-4 col-md-4 col-6">
-												<div class="product-image-wrapper">
-														<div class="single-products">
-																<div class="productinfo text-center">
-																		<span class="indicator rebaja">promoción</span>
-																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
-																		<h6 class="lead title">Samsung galaxy not 9 </h6>
-																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+							<?php
+              $products = $producto_manager->promo();
+              foreach ($products as $product):?>
+									<div class="col-sm-4 col-md-4 col-6">
+											<div class="product-image-wrapper">
+													<div class="single-products">
+															<div class="productinfo text-center">
 
-																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-																</div>
+																	<span class="p-2 indicator <?=($product->tipo_oferta !== '0')?(new \app\Producto())->tipoOfertaOpcion()[$product->tipo_oferta]:'d-none' ?>"><?= (new \app\Producto())->tipoOfertaOpcion()[$product->tipo_oferta]; ?></span>
+																	<img src="uploads/products/<?= $product->imagen ?>" alt="" class="img-fluid" />
+																	<h6 class="lead title"><?= $product->nombre; ?> </h6>
+                                  <?php if($product->precio_reducido !== null):?>
+																			<p><span class="precio"><?= $product->precio_reducido; ?> €</span></p>
+																			<span class="dashed text-muted"><?= $product->precio ?>€</span> <span class="tt"><?= porcentaje($product->precio,$product->precio_reducido)?></span>
+                                  <?php else:?>
+																			<p><span class="precio"><?= $product->precio; ?> €</span></p>
 
-														</div>
-												</div>
-										</div>
-										<div class="col-sm-4 col-md-4 col-6">
-												<div class="product-image-wrapper">
-														<div class="single-products">
-																<div class="productinfo text-center">
-																		<span class="indicator rebaja">promoción</span>
-																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
-																		<h6 class="lead title">Samsung galaxy not 9 </h6>
-																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+                                  <?php endif;?>
 
-																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-																</div>
+																	<p>
+																			<a href="verproducto.php?id=<?= $product->id ?>" class="btn btn-movilex  btn-success "> Ver</a>
 
-														</div>
-												</div>
-										</div>
-										<div class="col-sm-4 col-md-4 col-6">
-												<div class="product-image-wrapper">
-														<div class="single-products">
-																<div class="productinfo text-center">
-																		<span class="indicator rebaja">promoción</span>
-																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
-																		<h6 class="lead title">Samsung galaxy not 9 </h6>
-																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+																			<a href="addcard.php?product_id=<?= $product->id ?>" class="btn btn-default add-to-cart btn-movilex"> <i class="fa fa-shopping-cart"></i> Añadir</a>
 
-																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-																</div>
+																	</p>
+															</div>
 
-														</div>
-												</div>
-										</div>
-										<div class="col-sm-4 col-md-4 col-6">
-												<div class="product-image-wrapper">
-														<div class="single-products">
-																<div class="productinfo text-center">
-																		<span class="indicator rebaja">promoción</span>
-																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
-																		<h6 class="lead title">Samsung galaxy not 9 </h6>
-																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
+													</div>
+											</div>
+									</div>
 
-																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-																</div>
-
-														</div>
-												</div>
-										</div>
-										<div class="col-sm-4 col-md-4 col-6">
-												<div class="product-image-wrapper">
-														<div class="single-products">
-																<div class="productinfo text-center">
-																		<span class="indicator rebaja">promoción</span>
-																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
-																		<h6 class="lead title">Samsung galaxy not 9 </h6>
-																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
-
-																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-																</div>
-
-														</div>
-												</div>
-										</div>
-										<div class="col-sm-4 col-md-4 col-6">
-												<div class="product-image-wrapper">
-														<div class="single-products">
-																<div class="productinfo text-center">
-																		<span class="indicator rebaja">promoción</span>
-																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
-																		<h6 class="lead title">Samsung galaxy not 9 </h6>
-																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
-
-																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-																</div>
-
-														</div>
-												</div>
-										</div>
-										<div class="col-sm-4 col-md-4 col-6">
-												<div class="product-image-wrapper">
-														<div class="single-products">
-																<div class="productinfo text-center">
-																		<span class="indicator rebaja">promoción</span>
-																		<img src="assets/frontend/img/img1.jpg" alt="" class="img-fluid" />
-																		<h6 class="lead title">Samsung galaxy not 9 </h6>
-																		<span class="precio">$56</span><span class="dashed text-muted">$160</span> <span class="tt">16%</span>
-
-																		<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-																</div>
-
-														</div>
-												</div>
-										</div>
-
+						<?php endforeach;?>
 
 								</div>
 						</div>

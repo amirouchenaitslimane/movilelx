@@ -24,7 +24,16 @@ require_once 'application/parts/frontend/header.php';?>
                       <h1 class="mb-3 lead product_name " ><?= $producto->getNombre()?></h1>
 											 <hr class="lead">
 
-                       <h3 class="font-italic pull-right precio"><?= $producto->getPrecio()?> €</h3>
+											 <?php if($producto->getPrecioReducido() !== null):?>
+													 <h3 class="float-right"><span class="dashed text-muted"><?= $producto->getPrecio()?>€</span> </h3>
+											 <h3><span class="tt"><?= porcentaje($producto->getPrecio(),$producto->getPrecioReducido())?></span></h3>
+
+
+													 <h3 class="font-italic pull-right precio "><?= $producto->getPrecioReducido()?> €</h3>
+												<?php else: ?>
+													 <h3 class="font-italic pull-right precio"><?= $producto->getPrecio()?> €</h3>
+
+											 <?php endif;?>
 											 <form action="addcard.php" method="get">
 																<div class="form-group">
 																		<label for="cantidad" class="lead ">Cantidad: </label>

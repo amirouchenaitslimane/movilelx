@@ -39,6 +39,8 @@ require_once 'application/parts/frontend/header.php';
                       $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1);
 											$pagination = new \App\Pagination($page,$num_product_database,6);
 											$prod = $categoria_manager->getProductsCategory($_GET['id'],$pagination->offset(),$pagination->getRecordsPerPage());
+
+
 											?>
                       <?php if(count($prod) > 0):?>
 											<?php foreach ($prod as $products):?>
@@ -46,11 +48,17 @@ require_once 'application/parts/frontend/header.php';
 																	<div class="product-image-wrapper">
 																			<div class="single-products">
 																					<div class="productinfo text-center">
-																							<!--<span class="indicator rebaja">promoción</span>-->
+
+																							<span class="p-2 indicator <?=($products->tipo_oferta !== '0')?(new \app\Producto())->tipoOfertaOpcion()[$products->tipo_oferta]:'d-none' ?>"><?= (new \app\Producto())->tipoOfertaOpcion()[$products->tipo_oferta]; ?></span>
 																							<img src="uploads/products/<?= $products->imagen ?>" alt="" class="img-fluid" />
 																							<h6 class="lead title"><?= $products->nombre; ?> </h6>
-																							<p><span class="precio"><?= $products->precio; ?> €</span></p>
-<!--																							<span class="dashed text-muted">$160</span> <span class="tt">16%</span>-->
+																							<?php if($products->precio_reducido !== null):?>
+																									<p><span class="precio"><?= $products->precio_reducido; ?> €</span></p>
+																									<span class="dashed text-muted"><?= $products->precio ?>€</span> <span class="tt"><?= porcentaje($products->precio,$products->precio_reducido)?></span>
+																								<?php else:?>
+																									<p><span class="precio"><?= $products->precio; ?> €</span></p>
+
+                                              <?php endif;?>
 
 																					<p>
 																							<a href="verproducto.php?id=<?= $products->id ?>&cat=<?= $_GET['id'] ?>" class="btn btn-movilex  btn-success "> Ver</a>

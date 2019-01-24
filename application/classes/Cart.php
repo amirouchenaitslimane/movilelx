@@ -58,9 +58,14 @@ class Cart
             echo 0;
         } else {
             foreach ($nums as $value) {
-                $total += $manager->getProduct($value)
-                        ->getPrecio() * $this->products[$manager->getProduct($value)->getId()];
-            }
+                if(($manager->getProduct($value)->getPrecioReducido()) !== null){
+                    $total += $manager->getProduct($value)->getPrecioReducido()* $this->products[$manager->getProduct($value)->getId()];
+                }else{
+                    $total += $manager->getProduct($value)
+                            ->getPrecio() * $this->products[$manager->getProduct($value)->getId()];
+
+                }
+                  }
 
             return $total;
         }

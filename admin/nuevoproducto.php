@@ -22,10 +22,30 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														$product->upload('image','../uploads/products/');
 
 
+														if(isset($_POST['es_oferta']) && $_POST['es_oferta']== '1' )
+														{
+                                $p_reducido = $_POST['precio_reducido'];
+                                $product->setPrecio_reducido($p_reducido);
+
+                                $tipo_oferta = (int)$_POST['tipo_oferta'];
+                                if($tipo_oferta !== 0 && $tipo_oferta !== 1 && $tipo_oferta !== 2){
+                                    $product->addErrors('Tipo de oferta es requerido ');
+
+                                }else{
+                                    $product->setTipo_oferta($tipo_oferta);
+																}
+
+														}else{
+																$product->setPrecio_reducido(null);
+																$product->setTipo_oferta(0);
+														}
+
+
+
+
 
                             if(empty($product->getErrors())){
                                 $producto_manager->addProducto($product);
-
                                 redirect('productos');
                             }else{
                                 echo displayError($product->getErrors());
@@ -51,12 +71,12 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 														<div class="form-group">
 																<label for="precio">precio producto <small>(*)	</small></label>
-																<input type="text" class="form-control" name="precio"  title="se acceptan solo numeros" id="precio" required value="<?= (isset($_POST['precio']) ? $_POST['precio'] : " " )?>">
+																<input type="text" class="form-control" name="precio"  title="se acceptan solo numeros" id="precio" required value="<?= (isset($_POST['precio']) ? $_POST['precio'] : "" )?>">
 																<small id="precio" class="form-text text-muted text-info">Escriba el precio del producto usa punto(.) para decimales ex: 99.99</small>
 
 														</div>
 														<div class="form-group">
-																<label for="activo">Es Activo</label>
+																<label for="activo">Estado</label>
 																<select name="active" id="activo" class="form-control">
 																		<option value="1" <?= ((isset($_POST['activo'])&& $_POST['activo'] == "1" ) ? "selected": ""  ) ?>>Activo</option>
 																		<option value="0" <?= ((isset($_POST['activo'])&& $_POST['activo'] == "0" ) ? "selected": ""  ) ?>>Inactivo</option>
@@ -98,8 +118,44 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 																</select>
 														</div>
+														<div class="jumbotron bg-light">
+																<div class="card">
+																		<div class="card-header">
+																				<h4 class="card-title">
+																						crear oferta <small>(Opcional)</small>
+																				</h4>
+																		</div>
+																		<div class="card-body">
+																				<div class="form-group">
+																						<label for="es_oferta">¿ Es Oferta ?</label>
+																						<select name="es_oferta" id="es_oferta" class="form-control">
+																								<option value="0" <?= ((isset($_POST['es_oferta'])&& $_POST['es_oferta'] == "0" ) ? "selected": ""  ) ?>>No</option>
+																								<option value="1" <?= ((isset($_POST['es_oferta'])&& $_POST['es_oferta'] == "1" ) ? "selected": ""  ) ?>>Si</option>
+																						</select>
+																						<small id="activo" class="form-text text-muted text-info">si es oferta selecciona Si</small>
 
-														<button class="btn btn-group-lg btn-success btn-fill pull-right" name="submit" type="submit">Crear</button>
+																				</div>
+																				<div class="form-group">
+																						<label for="tipo_oferta">Tipo de Oferta </label>
+																						<select name="tipo_oferta" id="tipo_oferta" class="form-control">
+																								<option value="0">No</option>
+																								<option value="1" <?= ((isset($_POST['tipo_oferta'])&& $_POST['tipo_oferta'] == "1" ) ? "selected": ""  ) ?>>Rebaja</option>
+																								<option value="2" <?= ((isset($_POST['tipo_oferta'])&& $_POST['es_oferta'] == "2" ) ? "selected": ""  ) ?>>Promocion</option>
+																						</select>
+																						<small id="activo" class="form-text text-muted text-info">Elije el tipo de oferta </small>
+
+																				</div>
+
+																				<div class="form-group">
+																						<label for="precio_reducido">precio reducción <small>(*)	</small></label>
+																						<input type="text" class="form-control" name="precio_reducido"  title="se acceptan solo numeros" id="precio_reducido"  value="<?= (isset($_POST['precio_reducido']) ? $_POST['precio_reducido'] : "" )?>" >
+																						<small id="precio" class="form-text text-muted text-info">Escriba el precio del producto usa punto(.) para decimales ex: 99.99</small>
+
+																				</div>
+																		</div>
+																</div>
+														</div>
+														<button class="btn btn-group-lg btn-success btn-fill pull-right" name="submit" id="btn_sub" type="submit">Crear</button>
 												</form>
 
 										</div>
@@ -114,7 +170,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
         </div>
         <!-- /.container-fluid -->
     </div>
-</div>
+
 
 
 <?php include_once  '../application/parts/backend/footer.php'?>
@@ -123,5 +179,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     $("#imagen").change(function() {
         readURL(this);
     });
+
+// validarOferta();
+
+
 
 </script>

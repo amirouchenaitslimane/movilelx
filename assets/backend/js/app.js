@@ -58,6 +58,46 @@ function readImg(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+/*
+function validarOferta(){
+    let oferta = document.getElementById('oferta');
+    oferta.addEventListener('change',()=>{
+        if(parseInt(oferta.value) === 1){
+
+            let precio = document.getElementById('precio_reducido').value;
+            if(precio.length === 0 || precio=== ""){
+                $('#msg').html('valor requerido')
+                document.getElementById('btn_sub').setAttribute('disabled', 'disabled');
+
+            }
+            document.getElementById('precio_reducido').addEventListener('change',()=>{
+               if(this.value ==="" || this.length === 0){
+
+
+
+               }else{
+                   $('#msg').html('')
+                   document.getElementById('btn_sub').removeAttribute('disabled');
+
+               }
+                  })
+
+        }else{
+            $('#msg').html('')
+            document.getElementById('btn_sub').removeAttribute('disabled');
+        }
+    })
+
+
+}
+*/
+
+
+
+
+
+
 var pontsData = [];
 $.each(estadisticas, function(index, value) {
     var subObject = { label: value.nombre,  y: parseInt(value.precio)  };
@@ -83,3 +123,5 @@ window.onload = function () {
     chart.render();
 
 };
+
+

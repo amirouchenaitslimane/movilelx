@@ -29,8 +29,8 @@ class ProductoManager
     {
         try{
             $sql = "INSERT 
-                    INTO `producto`(`id`, `nombre`, `descripcion`, `precio`, `imagen`, `active`, `categoria_id`, `created_at`, `updated_at`)
-                    VALUES (null,:nombre,:descripcion,:precio,:imagen,:active,:categoria_id,:created_at,null)";
+                    INTO `producto`(`id`, `nombre`, `descripcion`, `precio`, `imagen`, `active`, `es_oferta`, `tipo_oferta`, `precio_reducido`, `categoria_id`, `created_at`, `updated_at`)
+                    VALUES (null,:nombre,:descripcion,:precio,:imagen,:active, :es_oferta,:tipo_oferta,:precio_reducido,:categoria_id,:created_at,null)";
 
             $q = $this->db->prepare($sql);
             $q->bindValue(':nombre',$p->getNombre());
@@ -38,6 +38,10 @@ class ProductoManager
             $q->bindValue(':precio',$p->getPrecio());
             $q->bindValue(':imagen',$p->getImagen());
             $q->bindValue(':active',$p->getActive());
+            $q->bindValue(':es_oferta',$p->getEsOferta());
+            $q->bindValue(':tipo_oferta',$p->getTipo_oferta());
+            $q->bindValue(':precio_reducido',$p->getPrecioReducido());
+
             $q->bindValue(':categoria_id',$p->getCategoriaId());
             $q->bindValue(':created_at',(new \DateTime('now'))->format('Y-m-d'));
 
@@ -59,7 +63,7 @@ class ProductoManager
        try{
            $products = [];
 
-           $sql ="SELECT p.id,p.nombre,p.precio,p.imagen,p.active,p.created_at, c.nombre as category FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id WHERE 1=1";
+           $sql ="SELECT p.id,p.nombre,p.precio,p.imagen,p.active,p.es_oferta,p.tipo_oferta,p.precio_reducido,p.created_at, c.nombre as category  FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id WHERE 1=1";
 
            if($start !== null && $offset!== null){
                $sql .=" LIMIT $start,$offset";
@@ -134,6 +138,9 @@ $sql .=" ORDER BY created_at DESC;";
                     `precio`=:precio,
                     `imagen`=:imagen,
                     `active`=:active,
+                    `es_oferta`=:es_oferta,
+                    `tipo_oferta`=:tipo_oferta,
+                    `precio_reducido`=:precio_reducido,                    
                     `categoria_id`=:categoria_id,                    
                     `updated_at`=:updated_at 
                 WHERE 
@@ -144,6 +151,9 @@ $sql .=" ORDER BY created_at DESC;";
             $q->bindValue(':precio',$producto->getPrecio());
             $q->bindValue(':imagen',$producto->getImagen());
             $q->bindValue(':active',$producto->getActive());
+            $q->bindValue(':es_oferta',$producto->getEsOferta());
+            $q->bindValue(':tipo_oferta',$producto->getTipo_oferta());
+            $q->bindValue(':precio_reducido',$producto->getPrecioReducido());
             $q->bindValue('categoria_id',$producto->getCategoriaId());
             $q->bindValue(':updated_at',(new \DateTime('now'))->format('Y-m-d'));
             $q->bindValue(':id',$producto->getId());
@@ -202,6 +212,18 @@ $sql .=" ORDER BY created_at DESC;";
             echo $e->getMessage();
         }
 
+    }
+
+    public function promo()
+    {
+        $promo = [];
+        $sql = "SELECT p.id,p.nombre,p.precio,p.es_oferta,p.precio_reducido,p.tipo_oferta,p.imagen,p.categoria_id, c.nombre FROM producto p INNER join categoria c ON p.categoria_id = c.id where p.es_oferta = 1 and p.active = 1 and p.tipo_oferta > 0 ;";
+        $q = $this->db->prepare($sql);
+        $q->execute();
+        while ($data = $q->fetch(\PDO::FETCH_OBJ)){
+            $promo[] = $data;
+        }
+return $promo;
     }
 
 }

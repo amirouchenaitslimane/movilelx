@@ -304,7 +304,21 @@ html, body {
     display: inline-block;
     text-decoration: line-through;
 }
-
+.dashed{
+    padding-left: .5rem;
+    padding-right: .5rem;
+    font-size: 1.15rem;
+    display: inline-block;
+    text-decoration: line-through;
+}
+.tt{
+    display: inline-block;
+    padding: 1px 3px;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #0a97f6;
+    vertical-align: text-bottom;
+}
 .productinfo .indicator{
     position: absolute;
     top: 0;
@@ -327,9 +341,13 @@ html, body {
     background-color: #0fc0f6;
     border:1px solid #0fc0f6;
 }
-.productinfo .rebaja{
+.productinfo .Rebaja{
     background-color: #05d620;
     border: 1px solid #05d620;
+}
+.productinfo .Promcion{
+    background-color: #ff5404;
+    border: 1px solid #ff5404;
 }
 
 .productinfo h6{
@@ -758,3 +776,31 @@ form #cantidad{
 
 }
 
+.total_area {
+    padding-bottom: 18px !important;
+}
+.total_area {
+    border: 1px solid #E6E4DF;
+    color: #696763;
+    padding: 30px 25px 30px 0;
+    margin-bottom: 80px;
+}
+.total_area span {
+    float: right;
+}
+
+.total_area ul li {
+    background:#E6E4DF;
+    color: #696763;
+    margin-top: 10px;
+    padding: 7px 20px;
+}
+.cart_product img{
+    width: 100px;
+    height: 100px;
+}
+#qty{
+
+    width: 70px;
+    border: solid 1px #bfbfbf;
+}

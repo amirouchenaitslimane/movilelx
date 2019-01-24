@@ -15,17 +15,18 @@ require_once '../application/parts/backend/header.php';?>
                             <?php  $productos=$producto_manager->getAll(); ?>
 														<hr>
 												</div>
-												<div class="card-body table-full-width table-responsive ml-1 mr-1">
+												<div class="card-body table-full-width table-responsive  ">
 														<table id="table_id"  class="table table-hover table-striped table-bordered">
 																<thead>
 																<tr>
 																		<th>image</th>
 																		<th>nombre</th>
 																		<th>precio</th>
-
 																		<th>Estado</th>
+																		<th>Tipo oferta</th>
+																			<th>Reducción</th>
 																		<th>categoría</th>
-																		<th>fecha creacion</th>
+
 																		<th>Accion</th>
 																</tr>
 																</thead>
@@ -38,8 +39,10 @@ require_once '../application/parts/backend/header.php';?>
 																				<td><?= precioES($p->precio) ?> €</td>
 
 																				<td> <span class="text-white p-1 <?= (($p->active=='1')?'bg-success':'bg-danger') ?>"><?= ((new \app\Producto())->getEstadoOption()[$p->active]) ?></span></td>
+																				<td><?= ($p->tipo_oferta !== null)?(new \app\Producto())->tipoOfertaOpcion()[$p->tipo_oferta]:'-' ?></td>
+																				<td><?= (($p->precio_reducido!== null) ? $p->precio_reducido.' €':'-')?> </td>
 																				<td><?= $p->category ?></td>
-																				<td><?= $p->created_at?></td>
+<!--																				 $p->created_at?></td>-->
 																				<td>
 																						<a href="productocaractiristicas.php?id=<?= $p->id?>" title="Caracteristicas" class="btn btn-success btn-fill m-1"><i class="fa fa-cog"></i></a>
 

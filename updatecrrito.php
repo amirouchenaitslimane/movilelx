@@ -17,7 +17,7 @@ if(isset($_POST['qty'])){
     $qty = 1;
 }
 
-if($qty <= 10 || (int)($qty + $_SESSION['carrito'][$product->getId()]) <= 10 ) {
+if($qty <= 10 || (int)($qty + $cart->countProductSingle($product)) <= 10 ) {
     $cart->updateQty($product, $qty);
     flash('info', 'Has actualizado la cantidad del producto', 'success');
     redirect('vercarrito');

@@ -33,4 +33,16 @@ class CarritoManager
 
     }
 
+    public function precioTotal(Producto $producto,array $carrito)
+    {
+
+        if($producto->getPrecioReducido() !== null){
+            $total = $producto->getPrecioReducido() * $carrito[$producto->getId() ];
+        }else{
+            $total = $producto->getPrecio() * $carrito[$producto->getId() ];
+
+        }
+        return $total;
+    }
+
 }
