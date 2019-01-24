@@ -24,10 +24,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             if(isset($_POST['submit']))
                             {
 
-                            		echo $_POST['es_oferta'];': es oferta <br>';
-                                echo $_POST['tipo_oferta'];': tipo oferta <br>';
-                                echo $_POST['precio_reducido'];':precio_reducido <br>';
-
+                            		
                                 if(isset($_POST['nombre'])){
                                     $producto->setNombre(trim(htmlspecialchars($_POST['nombre'])));
                                 }
