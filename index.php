@@ -10,7 +10,7 @@ require_once 'application/parts/frontend/header.php' ;
 				<div class="col-md-9 col-sm-12 col-12 wrapper">
 						<div class="row">
 								<div class="jumbotron oferta_banner">
-										<p class="lead text-center">Descubre las mejores ofertas de Navidad!</p>
+										<p class="lead text-center">Descubre las mejores ofertas de Movilelx!</p>
 										<div class="row no-gutters">
 
 												<hr class="my-4">

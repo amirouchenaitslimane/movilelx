@@ -24,7 +24,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             if(isset($_POST['submit']))
                             {
 
-                            		
+
                                 if(isset($_POST['nombre'])){
                                     $producto->setNombre(trim(htmlspecialchars($_POST['nombre'])));
                                 }

@@ -17,10 +17,14 @@ function upload($index,$destination,$maxsize=FALSE,$extensions=FALSE)
 }
 
 
-function porcentaje($price_real,$reduc){
-    $value = $price_real - $reduc;
-    $porcentaje = ($value * 100)/$price_real;
-    return round($porcentaje).'%';
+function porcentaje($price_init,$reduc){
+
+
+
+
+    $value = $price_init - $reduc;
+    $porcentaje = ($value * 100)/$price_init;
+    return number_format($porcentaje, 1, ',', ' ').'%';
 }
 function arrayHelperCaracteristicas($array)
 {
