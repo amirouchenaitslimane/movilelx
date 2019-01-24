@@ -73,11 +73,11 @@
 								</div>
 						</div><!--/header-middle-->
 						<div class="header-bottom"><!--header-bottom-->
-								<nav class="navbar navbar-expand-lg navbar-light " style="margin-right: 47px;">
+								<nav class="navbar navbar-expand-lg navbar-light " id="#nav" style="margin-right: 47px;">
 										<div class="container">
 												<div class="collapse navbar-collapse mainmenu" id="navbarSupportedContent">
 														<ul class="navbar-nav mr-auto">
-																<li class="nav-item active">
+																<li class="nav-item ">
 																		<a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
 																</li>
 																<li class="nav-item"> <a class="nav-link" href="quienessomos.php">Quiénes somos</a> </li>

@@ -178,6 +178,7 @@ html, body {
 }
 .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
     color:   #29b6f6;
+    border-bottom:  3px solid #fa6c51;
 }
 
 
@@ -803,4 +804,62 @@ form #cantidad{
 
     width: 70px;
     border: solid 1px #bfbfbf;
+}
+
+
+.carousel-inner {
+   background-image: url("../img/carousel_bg.png");
+    background-repeat: no-repeat;
+    min-height: 490px;
+
+}
+
+.carousel-item {
+    position: initial;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    background: #0fc0f6;
+}
+
+.carousel-item h3,
+.carousel-item p {
+    color: #29b6f6;
+}
+
+.carousel-item h3 {
+    margin-bottom: 50px;
+    font-size: 45px;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+.carousel-item {
+            text-align: center;
+}
+
+.carousel-item p {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.carousel-control-prev,.carousel-control-next {
+    background: none;
+    color: #ff5404;
+}
+.carousel-control-next span.carousel-control-next-icon{
+    color: #ff5404;
+}
+.oferta{
+    background: linear-gradient(60deg,  #fa8b71,#29b6f6);
+}
+.oferta h3{
+    font-size: 30px;
+    color: #0f8dc6;
+
+}
+.oferta h3 span{
+    color: #ec5634;
 }
