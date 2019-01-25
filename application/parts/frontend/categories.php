@@ -38,4 +38,44 @@
 
 
 		</div>
+		<div class="col-12 col-sm-12 col-12 order-1">
+				<div class="row">
+        <?php
+				$lastAddedProducts = $producto_manager->lastAdded();
+				if(count($lastAddedProducts) > 0):
+						foreach ($lastAddedProducts as $product):?>
+
+								<div class="col-sm-4 col-md-12 col-6">
+										<div class="product-image-wrapper">
+												<div class="single-products">
+														<div class="productinfo text-center">
+
+																<span class="p-2 indicator <?=($product->tipo_oferta !== '0')?(new \app\Producto())->tipoOfertaOpcion()[$product->tipo_oferta]:'d-none' ?>"><?= (new \app\Producto())->tipoOfertaOpcion()[$product->tipo_oferta]; ?></span>
+																<img src="uploads/products/<?= $product->imagen ?>" alt="" class="img-fluid" />
+																<h6 class="lead title"><?= $product->nombre_producto; ?> </h6>
+                                <?php if($product->precio_reducido !== null):?>
+																		<p><span class="precio"><?= $product->precio_reducido; ?> €</span></p>
+																		<span class="dashed text-muted"><?= $product->precio ?>€</span> <span class="tt"><?= porcentaje($product->precio,$product->precio_reducido)?></span>
+                                <?php else:?>
+																		<p><span class="precio"><?= $product->precio; ?> €</span></p>
+
+                                <?php endif;?>
+
+																<p>
+																		<a href="verproducto.php?id=<?= $product->id ?>" class="btn btn-movilex  btn-success "> Ver</a>
+
+																		<a href="addcard.php?product_id=<?= $product->id ?>" class="btn btn-default add-to-cart btn-movilex"> <i class="fa fa-shopping-cart"></i> Añadir</a>
+
+																</p>
+														</div>
+
+												</div>
+										</div>
+								</div>
+				<?php endforeach;?>
+				<?php endif;?>
+		</div>
+		</div>
+
+
 </div>

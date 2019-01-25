@@ -203,7 +203,7 @@ $sql .=" ORDER BY created_at DESC;";
     public function getProductInfo($id)
     {
         try{
-            $sql = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.imagen, p.active, p.created_at, p.categoria_id, c.nombre as category, SUM(lp.producto_id) as en_venta FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id INNER JOIN linea_pedido lp ON p.id = lp.producto_id WHERE P.id=:id";
+            $sql = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.imagen, p.active, p.created_at, p.categoria_id, c.nombre as category, SUM(lp.producto_id) as en_venta FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id INNER JOIN linea_pedido lp ON p.id = lp.producto_id WHERE p.id=:id";
             $q = $this->db->prepare($sql);
             $q->execute([':id'=>$id]);
             $result = $q->fetch(\PDO::FETCH_OBJ);
@@ -229,6 +229,13 @@ return $promo;
 
     public function lastAdded()
     {
-        
+        $promo = [];
+        $sql = "SELECT p.id,p.nombre as nombre_producto,p.precio,p.es_oferta,p.precio_reducido,p.tipo_oferta,p.imagen,p.categoria_id, c.nombre FROM producto p INNER join categoria c ON p.categoria_id = c.id where  p.active = 1 ORDER BY p.created_at DESC , RAND() LIMIT 2";
+        $q = $this->db->prepare($sql);
+        $q->execute();
+        while ($data = $q->fetch(\PDO::FETCH_OBJ)){
+            $promo[] = $data;
+        }
+        return $promo;
     }
 }

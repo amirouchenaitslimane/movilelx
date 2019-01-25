@@ -78,10 +78,12 @@
 <script src="assets/frontend/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
+        //console.log(window.location.pathname);
         var links = $('.navbar ul li a');
         $.each(links, function (key, va) {
+            //console.log(va000000)
             $(this).removeClass('active');
-            if (va.href == document.URL) {
+            if (va.href == document.URL ) {
                 $(this).addClass('active');
             }else{
 

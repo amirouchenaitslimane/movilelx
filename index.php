@@ -7,6 +7,7 @@ require_once 'application/parts/frontend/header.php' ;
 <div class="container">
 		<div class="row">
         <?php require_once 'application/parts/frontend/categories.php'?>
+
 				<div class="col-md-9 col-sm-12 col-12 wrapper">
 
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
