@@ -60,7 +60,7 @@ require_once 'application/parts/frontend/header.php' ;
 
 																				<span class="p-2 indicator <?=($product->tipo_oferta !== '0')?(new \app\Producto())->tipoOfertaOpcion()[$product->tipo_oferta]:'d-none' ?>"><?= (new \app\Producto())->tipoOfertaOpcion()[$product->tipo_oferta]; ?></span>
 																				<img src="uploads/products/<?= $product->imagen ?>" alt="" class="img-fluid" />
-																				<h6 class="lead title"><?= $product->nombre; ?> </h6>
+																				<h6 class="lead title"><?= $product->nombre_producto; ?> </h6>
                                         <?php if($product->precio_reducido !== null):?>
 																						<p><span class="precio"><?= $product->precio_reducido; ?> €</span></p>
 																						<span class="dashed text-muted"><?= $product->precio ?>€</span> <span class="tt"><?= porcentaje($product->precio,$product->precio_reducido)?></span>

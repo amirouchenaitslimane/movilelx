@@ -2,29 +2,22 @@
 $title ="Usuarios";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
-    header('location:/movilelx/index.php');
-}
-
-?>
-
+    header('location:/movilelx/index.php');}?>
 		<div class="content">
 				<div class="container-fluid">
 						<div class="row">
-                <?php
+							 <?php
+								if(isset($_GET['id'])){
+										$user = $usuario_manager->findUsuario($_GET['id']);
 
-            if(isset($_GET['id'])){
-                $user = $usuario_manager->findUsuario($_GET['id']);
+										if($user === null){
+												redirect('usuarios');
+										}
 
-                if($user === null){
-                    redirect('usuarios');
-                }
-
-            }else{
-                redirect('usuarios');
-            }
-            ?>
-
-
+								}else{
+										redirect('usuarios');
+								}
+							?>
 								<div class="col-md-8">
 										<div class="card">
 												<div class="card-header">
@@ -32,7 +25,7 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
 												</div>
 												<div class="card-body">
                             <?php
-                            if(isset($_POST['submit'])){
+                            	if(isset($_POST['submit'])){
                                 $user->setNombre(htmlspecialchars(trim($_POST['nombre'])));
                                 $user->setApellido(htmlspecialchars(trim($_POST['apellido'])));
                                 if($_POST['email'] !== $user->getEmail())
@@ -91,16 +84,11 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
 																		<small id="activo" class="form-text text-muted">si no quieres desabilitar acceso a ese Admin ponlo en 	INACTIVO </small>
 
 																</div>
-																<input type="submit" name="submit" class="btn btn-primary" value="Submit">
+																<input type="submit" name="submit" class="btn btn-primary btn-fill pull-right" value="Submit">
 														</form>
-
-
 												</div>
 										</div>
 								</div>
-
-
-
 								<div class="col-md-4">
 										<div class="card card-user">
 												<div class="card-image">
@@ -113,8 +101,6 @@ if(!isset($_SESSION['user']) || !$_SESSION['user']->isSuperAdmin()){
 														<p class="text-info "><a href="mailto:<?= $user->getEmail()?>"><i class="fa fa-envelope"></i> <?= htmlspecialchars($user->getEmail())?></a></p>
 														<p class="mb-0 mt-2">Fecha de inicio: </p>
 														<p class="text-muted "><i class="fa fa-calendar"></i> <?= htmlspecialchars($user->getCreated())?></p>
-
-
 														<p class="mb-0 mt-2">Estado: </p>
 														<p class="text-white badge p-2 <?= (($user->isActive() == '1') ?'bg-success' :'bg-danger') ?> "> <?= htmlspecialchars($user->getEstadoOption()[$user->isActive()])?></p>
 

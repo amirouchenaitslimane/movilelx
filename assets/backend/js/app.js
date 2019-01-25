@@ -36,6 +36,8 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function(e) {
+
+
             $('#img').attr('src', e.target.result);
             $('#img').addClass('img-thumbnail');
         }

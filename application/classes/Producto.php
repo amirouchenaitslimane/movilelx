@@ -367,5 +367,40 @@ class Producto
     }
 
 
+    public function uploadImage($name)
+    {
+        $filename = $_FILES[$name]['name'];
+        $file_basename = substr($filename, 0, strripos($filename, '.'));
+
+        $file_ext = substr($filename, strripos($filename, '.'));
+        $filesize = $_FILES[$name]["size"];
+        $allowed_file_types = array('.jpg' , '.jpeg' , '.gif' , '.png');
+        if(!empty($file_basename)) {
+            if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
+                $newfilename = md5($file_basename) . $file_ext;
+
+                if (file_exists('../uploads/products/' . $newfilename)) {
+                    $this->errors[] = "La imagen siempre existe en la base de datos";
+                } else {
+                    $this->setImagen($newfilename);
+
+                    return move_uploaded_file($_FILES[$name]["tmp_name"], '../uploads/products/' . $newfilename);
+
+
+                }
+
+            }else{
+                $this->errors[] = "fichero seleccionado no es imagen siempre :".implode(', ',$allowed_file_types);;
+                unlink($_FILES[$name]["tmp_name"]);
+
+            }
+        }elseif($filesize > 200000){
+            $this->errors[] = 'La imagen selleccionada es demasiada grande ';
+
+        }else{
+            $this->errors[] = 'Selecciona una imagen para cargar la ';
+        }
+
+    }
 
 }

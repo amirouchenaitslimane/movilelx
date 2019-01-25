@@ -18,9 +18,8 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         <?php
                         if(isset($_POST['submit'])){
                             $product = new \app\Producto($_POST);
-                            $product->setImagen($_FILES['image']['name']);
-														$product->upload('image','../uploads/products/');
 
+														$product->uploadImage('image');
 
 														if(isset($_POST['es_oferta']) && $_POST['es_oferta']== '1' )
 														{

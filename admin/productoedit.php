@@ -43,9 +43,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                     $producto->setActive(trim(htmlspecialchars($_POST['active'])));
                                 }
                                 if($_FILES['image']['name'] !=="" ){
-                                    $producto->upload('image','../uploads/products/');
                                     $producto->delete($producto->getImagen());
-                                    $producto->setImagen($_FILES['image']['name']);
+                                    $producto->uploadImage('image');
+
                                 }
 
                                 if($_POST['es_oferta']=== '0'){

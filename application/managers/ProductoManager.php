@@ -217,7 +217,7 @@ $sql .=" ORDER BY created_at DESC;";
     public function promo()
     {
         $promo = [];
-        $sql = "SELECT p.id,p.nombre,p.precio,p.es_oferta,p.precio_reducido,p.tipo_oferta,p.imagen,p.categoria_id, c.nombre FROM producto p INNER join categoria c ON p.categoria_id = c.id where p.es_oferta = 1 and p.active = 1 and p.tipo_oferta > 0 ;";
+        $sql = "SELECT p.id,p.nombre as nombre_producto,p.precio,p.es_oferta,p.precio_reducido,p.tipo_oferta,p.imagen,p.categoria_id, c.nombre FROM producto p INNER join categoria c ON p.categoria_id = c.id where p.es_oferta = 1 and p.active = 1 and p.tipo_oferta > 0 ;";
         $q = $this->db->prepare($sql);
         $q->execute();
         while ($data = $q->fetch(\PDO::FETCH_OBJ)){
