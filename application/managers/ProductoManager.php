@@ -226,4 +226,9 @@ $sql .=" ORDER BY created_at DESC;";
 return $promo;
     }
 
+
+    public function lastAdded()
+    {
+        
+    }
 }
