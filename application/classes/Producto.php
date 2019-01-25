@@ -318,29 +318,6 @@ class Producto
 
     }
 
-    public function upload($index,$destination,$maxsize=FALSE,$extensions= array( 'jpg' , 'jpeg' , 'gif' , 'png' ))
-    {
-
-        if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0){
-          $this->errors[] = 'Error en la imagen ';
-        }
-
-        if ($maxsize !== FALSE AND $_FILES[$index]['size'] > $maxsize){
-            $this->errors[] = 'Tamaño de la imagen es demasiado grande ';
-        }
-
-        $ext = substr(strrchr($_FILES[$index]['name'],'.'),1);
-        if (!in_array($ext,$extensions)){
-            $this->errors[] = 'La imagen requiere extensiones : jpg, png, jpeg ';
-        }
-        if(empty($this->errors)) {
-           return move_uploaded_file($_FILES[$index]['tmp_name'], $destination . $_FILES[$index]['name']);
-
-        }
-
-
-    }
-
     public function delete($file) {
 
         if(file_exists('../uploads/products/'.$file)){
