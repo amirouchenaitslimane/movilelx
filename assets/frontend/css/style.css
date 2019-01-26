@@ -863,3 +863,19 @@ form #cantidad{
 .oferta h3 span{
     color: #ec5634;
 }
+#accordion{
+    margin-top: 10px;
+}
+
+#accordion .card-header{
+    background: linear-gradient(60deg,  #fa8b71,#29b6f6);
+}
+#accordion .card-header h5{
+    font-size: 15px;
+}
+#accordion .card-header h5 p{
+    font-size: 15px;
+}
+#accordion .card-header h5 p:hover{
+    cursor: pointer;
+}
