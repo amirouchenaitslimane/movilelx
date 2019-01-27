@@ -34,7 +34,7 @@ class Cart
             }
         }
         //crear la cookie serializando el array de articulos
-        setcookie('carrito',serialize($this->products),time() + 3600);
+        setcookie('carrito',serialize($this->products),time() + (86400 * 30));
     }
 
     public function count()
@@ -89,14 +89,14 @@ class Cart
             $this->products[$p->getId()] = 1;
 
         }
-        setcookie('carrito',serialize($this->products),time() + 3600);
+        setcookie('carrito',serialize($this->products),time() + (86400 * 30));
 
     }
 
     public function remove(Producto $p)
     {
         unset($this->products[$p->getId()]);
-        setcookie('carrito',serialize($this->products),time() + 3600);
+        setcookie('carrito',serialize($this->products),time() + (86400 * 30));
 
     }
 

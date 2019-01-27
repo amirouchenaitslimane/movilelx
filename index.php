@@ -10,6 +10,9 @@ require_once 'application/parts/frontend/header.php' ;
 
 				<div class="col-md-9 col-sm-12 col-12 wrapper">
 
+
+
+
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 								<ol class="carousel-indicators">
 										<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

@@ -8,12 +8,7 @@ if(!isset($_SESSION['user']) ){
 		$user = $_SESSION['user'];
 }
 ?>
-<div class="container">
-    <div class="row">
-        <?php
-        include_once 'application/parts/frontend/categories.php';
-        ?>
-        <div class="col-md-9">
+
 <?php
 $p = [];//devolver los productos del carrito
 $c = unserialize($_COOKIE['carrito']);
@@ -41,13 +36,12 @@ foreach ($p as $product) {//recorrer productos para crear lineas de pedido
 
 
 $pedido_manager->process($pedido);
-setcookie('carrito','',time() - 3600);
+setcookie('carrito','',time() - (86400 / 30));
+
+//DEBUG($_COOKIE['carrito']);
+
 flash('info','Pedido procesado con exito ! Gracias por confiar en movilelx','alert-success');
 
 redirectWithParam('areacliente','id='.$user->getId())
 
 ?>
-
-        </div>
-    </div>
-</div>

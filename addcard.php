@@ -21,8 +21,16 @@ if(isset($_GET['product_id'])) {
             flash('info', 'Producto añadido a la cesta  ', 'success');
 
             $cart->add($product,$cty);
-            (isset($_GET['cantidad']) ? redirectWithParam('verproducto', 'id=' . $_GET['product_id']) : redirectWithParam('categoria', 'id=' . $_GET['cat']));
+            if(isset($_GET['cantidad'])){//si existe la cantidad (ha venido de ver producto)
+                redirectWithParam('verproducto', 'id=' . $_GET['product_id']);
+            }elseif(isset($_GET['cat'])){ //si existe la categiria ha venido de la categoria
+                redirectWithParam('categoria', 'id=' . $_GET['cat']);
+            }else{//ha venido de productos aleatorios
+                redirect('vercarrito');
+            }
+            //(isset($_GET['cantidad']) ? redirectWithParam('verproducto', 'id=' . $_GET['product_id']) : redirectWithParam('categoria', 'id=' . $_GET['cat']));
             } else {
+
             redirectWithParam('categoria', 'id=' . $_GET['cat']);
          }
 
