@@ -113,11 +113,11 @@ window.onload = function () {
         theme: "light1", // "light2", "dark1", "dark2"
         animationEnabled: true, // change to true
         title:{
-            text: "Gastos de cliente en € "
+            text: "Gastos por cliente en € "
         },
         data: [
             {
-                type: "line",
+                type: "bar",
                 dataPoints: pontsData
             }
         ]

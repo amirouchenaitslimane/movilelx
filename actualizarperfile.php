@@ -1,5 +1,5 @@
 <?php
-$title = "Login";
+$title = "Actualizar perfil";
 require_once 'application/parts/frontend/header.php';
 if(!isset($_SESSION['user'])){
     redirect('index');
@@ -16,8 +16,7 @@ if(!isset($_SESSION['user'])){
             <div class="card card-form  ">
                 <div class="card-header card-header-primary">
                     <h4 class="card-title lead"><?= $title ?></h4>
-                    <p class="card-sub-title lead"><strong>¿Quieres unirte a movilelx ?</strong> registrate  <a href="registrar.php">aqui</a>	</p>
-                </div>
+                    </div>
                 <div class="card-body">
                     <?php
 

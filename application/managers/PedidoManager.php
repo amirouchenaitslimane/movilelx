@@ -67,7 +67,7 @@ class PedidoManager
     {
         try{
             $pedidos = [];
-            $sql = "SELECT p.id,p.usuario_id,p.fecha,p.estado,u.nombre,u.direccion, COUNT(lp.pedido_id) as num_lineas FROM pedido p INNER JOIN usuario u ON p.usuario_id = u.id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP BY p.id";
+            $sql = "SELECT p.id,p.usuario_id,p.fecha,p.estado,u.nombre,u.direccion, COUNT(lp.pedido_id) as num_lineas FROM pedido p INNER JOIN usuario u ON p.usuario_id = u.id INNER JOIN linea_pedido lp ON p.id = lp.pedido_id GROUP BY p.id ORDER BY p.fecha desc ";
             $q = $this->db->prepare($sql);
             $q->execute();
             while ($row = $q->fetch(\PDO::FETCH_OBJ )){

@@ -109,23 +109,35 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 														</thead>
 														<tbody>
-
+<?php $t = 0;?>
                             <?php foreach ($cliente->getPedidos()->getLineas() as $pedido):?>
 																<tr>
-                                    <?php foreach ($pedido->getProductos() as $producto):?>
+                                    <?php foreach ($pedido->getProductos() as $producto): ?>
 																				<td><img class="img-fluid img-thumbnail" src="../uploads/products/<?= $producto->getImagen()?>" alt="" width="50%" height="50%"></td>
 
 																				<td><?= $producto->getNombre() ?></td>
 																				<td> <?= $producto->getPrecio() ?> €</td>
+
+
                                     <?php endforeach;?>
 																		<td><?=$pedido->getCantidad()?></td>
 																		<td><?= $pedido->getPrecioCompra()?> €</td>
+                                    <?php $t += $pedido->getPrecioCompra() ?>
+
 																</tr>
                             <?php endforeach ;?>
 
 
 														</tbody>
+														<tfoot>
+														<th>total</th>
+														<th></th>
+														<th></th>
+														<th></th>
+														<th><span class="badge p-2 badge-dark"><?= $t ?>€ </span></th>
+														</tfoot>
 												</table>
+
 										</div>
 								</div>
 						</div>
