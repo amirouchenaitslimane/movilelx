@@ -3,25 +3,46 @@ function redirect($page)
 {
     echo "<script>location.href='".$page.".php'</script>";
 }
-function upload($index,$destination,$maxsize=FALSE,$extensions=FALSE)
+
+
+//define function name
+function m_log($arMsg)
 {
+    //define empty string
+    $stEntry="";
+    //get the event occur date time,when it will happened
+    $arLogData['event_datetime']='['.date('D Y-m-d h:i:s A').'] [client '.$_SERVER['REMOTE_ADDR'].']';
+    //if message is array type
+    if(is_array($arMsg))
+    {
+        //concatenate msg with datetime
+        foreach($arMsg as $msg)
+            $stEntry.=$arLogData['event_datetime']." ".$msg.",";
+    }
+    else
+    {   //concatenate msg with datetime
 
-    if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0) return FALSE;
+        $stEntry.=$arLogData['event_datetime']." ".$arMsg;
+    }
 
-    if ($maxsize !== FALSE AND $_FILES[$index]['size'] > $maxsize) return FALSE;
+//create file with current date name
+    $stCurLogFileName='log_'.date('Ymd').'.txt';
+//open the file append mode,dats the log file will create day wise
 
-    $ext = substr(strrchr($_FILES[$index]['name'],'.'),1);
-    if ($extensions !== FALSE AND !in_array($ext,$extensions)) return FALSE;
 
-    return move_uploaded_file($_FILES[$index]['tmp_name'],$destination.$_FILES[$index]['name']);
+    $fHandler=fopen('application/logs/'.$stCurLogFileName,'w');
+
+
+    //write the info into the file
+    fwrite($fHandler,$stEntry);
+
+//close handler
+    fclose($fHandler);
 }
 
 
+
 function porcentaje($price_init,$reduc){
-
-
-
-
     $value = $price_init - $reduc;
     $porcentaje = ($value * 100)/$price_init;
     return number_format($porcentaje, 1, ',', ' ').'%';

@@ -9,7 +9,10 @@ require_once 'application/parts/frontend/header.php' ;
         <?php require_once 'application/parts/frontend/categories.php'?>
 
 				<div class="col-md-9 col-sm-12 col-12 wrapper">
+<?php
 
+
+?>
 
 
 

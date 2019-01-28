@@ -229,13 +229,17 @@ return $promo;
 
     public function lastAdded()
     {
-        $promo = [];
-        $sql = "SELECT p.id,p.nombre as nombre_producto,p.precio,p.es_oferta,p.precio_reducido,p.tipo_oferta,p.imagen,p.categoria_id, c.nombre FROM producto p INNER join categoria c ON p.categoria_id = c.id where  p.active = 1 ORDER BY p.created_at DESC , RAND() LIMIT 2";
-        $q = $this->db->prepare($sql);
-        $q->execute();
-        while ($data = $q->fetch(\PDO::FETCH_OBJ)){
-            $promo[] = $data;
+        try{
+            $promo = [];
+            $sql = "SELECT p.id,p.nombre as nombre_producto,p.precio,p.es_oferta,p.precio_reducido,p.tipo_oferta,p.imagen,p.categoria_id, c.nombre FROM producto p INNER join categoria c ON p.categoria_id = c.id where  p.active = 1 ORDER BY p.created_at DESC , RAND() LIMIT 2";
+            $q = $this->db->prepare($sql);
+            $q->execute();
+            while ($data = $q->fetch(\PDO::FETCH_OBJ)){
+                $promo[] = $data;
+            }
+            return $promo;
+        }catch (\PDOException $e){
+            m_log($e->getMessage().' en la linea ('.$e->getLine().') '.$e->getTrace().' - '.$e);
         }
-        return $promo;
     }
 }
