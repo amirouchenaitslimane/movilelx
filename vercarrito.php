@@ -88,7 +88,9 @@ require_once 'application/parts/frontend/header.php' ;
 												<div class="col-md-12 col-12 col-sm-12">
 														<div class="total_area">
 																<ul class="">
-																<li >Total  <span><?= $cart->total(); ?> €</span></li>
+																<li >Total sin IVA  <span><?= $cart->total(); ?> €</span></li>
+																<li >IVA  <span><?= (\app\Cart::_IVA * 100); ?> %</span></li>
+																<li >Total con IVA  <span><?= $cart->totalIva(); ?> €</span></li>
 														</ul>
 														</div>
 														<a href="index.php" class="btn btn-movilex pull-left" >

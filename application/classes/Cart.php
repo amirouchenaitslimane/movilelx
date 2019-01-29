@@ -12,6 +12,7 @@ namespace app;
 class Cart
 {
     protected $products;
+    const _IVA = 0.21;
 
     public function __construct()
     {
@@ -106,6 +107,30 @@ class Cart
 
         return (isset($this->products[$p->getId()])?$this->products[$p->getId()]:0);
 
+    }
+    public function totalIva()
+    {
+        $nums = array_keys($this->products);
+        $total = 0;
+        $manager = new ProductoManager();
+
+        if (!empty($nums)) {
+            foreach ($nums as $value) {
+                if(($manager->getProduct($value)->getPrecioReducido()) !== null){
+                    $total += $manager->getProduct($value)->getPrecioReducido()* $this->products[$manager->getProduct($value)->getId()];
+                }else{
+                    $total += $manager->getProduct($value)
+                            ->getPrecio() * $this->products[$manager->getProduct($value)->getId()];
+
+                }
+            }
+
+            $iva = $total * self::_IVA;
+
+            return ($total + $iva);
+        } else {
+            return 0;
+        }
     }
 
 }
