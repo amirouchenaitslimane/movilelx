@@ -43,7 +43,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                     $producto->setActive(trim(htmlspecialchars($_POST['active'])));
                                 }
                                 if($_FILES['image']['name'] !=="" ){
-                                    $producto->delete($producto->getImagen());
+                                    //$producto->delete($producto->getImagen());
                                     $producto->uploadImage('image');
 
                                 }
@@ -137,7 +137,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																		<label for="categoria">Su Categoria</label>
 																		<select name="categoria_id" id="categoria" class="form-control">
                                         <?php foreach ($categoria_manager->displayCategorias() as $categoria): ?>
-                                            <?php if(!empty($categoria->getChilds())):?>
+                                            <?php if(!empty($categoria->getChilds())|| $categoria->getPadreId()=='0'):?>
 																								<optgroup label="<?= $categoria->getNombre() ?>">
                                                     <?php foreach ($categoria->getChilds() as $child):?>
 																												<option value="<?= $child->getId();?>" <?= (($producto->getCategoriaId() == $child->getId()) ? "selected":"" ) ?> > <?= $child->getNombre();?> </option>

@@ -23,7 +23,7 @@ class Producto
     private $created_at;
     private $updated_at;
     private $tipo_oferta;
-    private $imagen;
+    private $imagen = 'no_image.jpg';
     private static $ESTADO_ACTIVO = 1;
     private static $ESTADO_INACTIVO = 0;
     private $caracteristicas = [];
@@ -267,7 +267,12 @@ class Producto
      */
     public function setImagen($imagen)
     {
-        $this->imagen =$imagen;
+        if(empty($imagen)){
+            $this->imagen = 'no_image.jpg';
+        }else{
+            $this->imagen =$imagen;
+        }
+
     }
 
     public function getEstadoOption()
@@ -353,30 +358,27 @@ class Producto
         $filesize = $_FILES[$name]["size"];
         $allowed_file_types = array('.jpg' , '.jpeg' , '.gif' , '.png');
         if(!empty($file_basename)) {
-            if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
-                $newfilename = md5($file_basename) . $file_ext;
+            if($filesize < 200000) {
+                if (in_array($file_ext, $allowed_file_types)) {
+                    $newfilename = md5($file_basename) . $file_ext;
 
-                if (file_exists('../uploads/products/' . $newfilename)) {
-                    $this->errors[] = "La imagen siempre existe en la base de datos";
+                    if (file_exists('../uploads/products/' . $newfilename) && $this->imagen == $newfilename) {
+                        $this->errors[] = "La imagen siempre existe en la base de datos";
+                    } else {
+                        $this->setImagen($newfilename);
+                        return move_uploaded_file($_FILES[$name]["tmp_name"], '../uploads/products/' . $newfilename);
+                       // DEBUG($this->imagen);
+                    }
                 } else {
-                    $this->setImagen($newfilename);
-
-                    return move_uploaded_file($_FILES[$name]["tmp_name"], '../uploads/products/' . $newfilename);
-
-
+                    $this->errors[] = "fichero seleccionado no es imagen siempre :" . implode(', ', $allowed_file_types);;
+                    unlink($_FILES[$name]["tmp_name"]);
                 }
-
             }else{
-                $this->errors[] = "fichero seleccionado no es imagen siempre :".implode(', ',$allowed_file_types);;
-                unlink($_FILES[$name]["tmp_name"]);
+                $this->errors[] = 'La imagen selleccionada es demasiada grande ';
 
             }
-        }elseif($filesize > 200000){
-            $this->errors[] = 'La imagen selleccionada es demasiada grande ';
-
-        }else{
-            $this->errors[] = 'Selecciona una imagen para cargar la ';
         }
+
 
     }
 

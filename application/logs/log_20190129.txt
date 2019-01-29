@@ -1,7 +1,0 @@
-[Tue 2019-01-29 10:48:50 AM] [client ::1] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nan' in 'field list'en linea (75)
-
-[Tue 2019-01-29 10:48:50 AM] [client ::1] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nan' in 'field list' in E:\Amirouche\htdocs\movilelx\application\managers\ProductoManager.php:75
-Stack trace:
-#0 E:\Amirouche\htdocs\movilelx\application\managers\ProductoManager.php(75): PDO->query('SELECT p.id,p.n...')
-#1 E:\Amirouche\htdocs\movilelx\admin\productos.php(15): app\ProductoManager->getAll()
-#2 {main}

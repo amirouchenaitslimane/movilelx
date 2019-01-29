@@ -21,6 +21,8 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 														$product->uploadImage('image');
 
+
+
 														if(isset($_POST['es_oferta']) && $_POST['es_oferta']== '1' )
 														{
                                 $p_reducido = $_POST['precio_reducido'];
@@ -38,7 +40,6 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																$product->setPrecio_reducido(null);
 																$product->setTipo_oferta(0);
 														}
-
 
 
 
@@ -87,7 +88,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 
 														<div class="form-group">
 																<label for="imagen">Imagen <small>(*)</small></label>
-																<input type="file" class="form-control"  name="image" id="imagen" value="<?=(isset($_FILES['image']['name']) ? $_FILES['image']['name'] : "") ?>"  required>
+																<input type="file" class="form-control"  name="image" id="imagen" value="<?=(isset($_FILES['image']['name']) ? $_FILES['image']['name'] : "") ?>" >
 																<small id="imagen-s" class="form-text text-muted text-info">(*) Imagen del product es obligatoria con (.png,jpg..) </small>
 
 																<div class="col-md-5 mt-2">

@@ -52,7 +52,7 @@ class ProductoManager
             agregarLog([
                 $e->getMessage().'en linea ('.$e->getLine().')'."\n",
                 $e
-            ]);
+            ],'../application/logs/');
         }
 
 
