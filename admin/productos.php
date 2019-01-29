@@ -15,6 +15,7 @@ require_once '../application/parts/backend/header.php';?>
                             <?php  $productos=$producto_manager->getAll(); ?>
 														<hr>
 												</div>
+												<?php if($productos !== null):?>
 												<div class="card-body table-full-width table-responsive  ">
 														<table id="table_id"  class="table table-hover table-striped table-bordered">
 																<thead>
@@ -57,7 +58,9 @@ require_once '../application/parts/backend/header.php';?>
 														</table>
 
 												</div>
-										</div>
+
+												<?php else:echo'<h3 class="display-4">No Hay Productos </h3>'; endif;?>
+		</div>
 
 
 				</div>

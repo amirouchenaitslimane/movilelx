@@ -65,7 +65,8 @@
 
 
                                     <?php endif;?>
-																		<li class="nav-item"><a href="vercarrito.php"><i class="fa fa-shopping-cart"></i> Cart(<?= (($cart !== null) ? $cart->count() : 0 ) ?>)</a></li>
+
+																		<li class="nav-item"><a href="vercarrito.php"><i class="fa fa-shopping-cart"></i> Cart <?= (($cart !== null) ? '('.$cart->count().') Total '.$cart->total().' €'  : 0 ) ?></a></li>
 
 																</ul>
 														</div>

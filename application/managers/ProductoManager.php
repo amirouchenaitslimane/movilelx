@@ -23,7 +23,8 @@ class ProductoManager
 
     /**
      * @param Producto $p
-     *
+     * @return bool true si es regestrado | false si es failed
+     * @throws \Exception
      */
     public function addProducto(Producto $p)
     {
@@ -44,13 +45,14 @@ class ProductoManager
 
             $q->bindValue(':categoria_id',$p->getCategoriaId());
             $q->bindValue(':created_at',(new \DateTime('now'))->format('Y-m-d'));
+           return $q->execute();//true si es success | false si es failed
 
-            if($q->execute()){
-
-            }
 
         }catch (\PDOException $e){
-            die($e->getMessage());
+            agregarLog([
+                $e->getMessage().'en linea ('.$e->getLine().')'."\n",
+                $e
+            ]);
         }
 
 
@@ -69,7 +71,7 @@ class ProductoManager
                $sql .=" LIMIT $start,$offset";
 
            }
-$sql .=" ORDER BY created_at DESC;";
+            $sql .=" ORDER BY created_at DESC;";
            $q = $this->db->query($sql);
 
            while ($row = $q->fetch(\PDO::FETCH_OBJ))
@@ -79,7 +81,11 @@ $sql .=" ORDER BY created_at DESC;";
            return $products;
        }catch (\PDOException $e)
        {
-           echo "error :".$e->getMessage();
+           agregarLog([
+               $e->getMessage().'en linea ('.$e->getLine().')'."\n",
+               $e
+           ],'../application/logs/');
+           //echo "error :".$e->getMessage();
        }
     }
 
@@ -239,7 +245,10 @@ return $promo;
             }
             return $promo;
         }catch (\PDOException $e){
-            m_log($e->getMessage().' en la linea ('.$e->getLine().') '.$e->getTrace().' - '.$e);
+            agregarLog([
+                $e->getMessage().'en linea ('.$e->getLine().')'."\n",
+                $e
+            ]);
         }
     }
 }

@@ -42,7 +42,7 @@
 				<div class="row">
         <?php
 				$lastAddedProducts = $producto_manager->lastAdded();
-				if(count($lastAddedProducts) > 0):
+				if(($lastAddedProducts !== null )&&count($lastAddedProducts) > 0):
 						foreach ($lastAddedProducts as $product):?>
 
 								<div class="col-sm-4 col-md-12 col-6">

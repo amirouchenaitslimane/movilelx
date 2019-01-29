@@ -54,9 +54,8 @@ class Cart
         $nums = array_keys($this->products);
         $total = 0;
         $manager = new ProductoManager();
-        if (empty($nums)) {
-            echo 0;
-        } else {
+        
+        if (!empty($nums)) {
             foreach ($nums as $value) {
                 if(($manager->getProduct($value)->getPrecioReducido()) !== null){
                     $total += $manager->getProduct($value)->getPrecioReducido()* $this->products[$manager->getProduct($value)->getId()];
@@ -65,9 +64,11 @@ class Cart
                             ->getPrecio() * $this->products[$manager->getProduct($value)->getId()];
 
                 }
-                  }
+            }
 
             return $total;
+        } else {
+            return 0;
         }
     }
     function getCrrito() {

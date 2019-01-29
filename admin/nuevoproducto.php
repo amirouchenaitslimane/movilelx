@@ -46,6 +46,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                             if(empty($product->getErrors())){
                                 $producto_manager->addProducto($product);
                                 redirect('productos');
+
                             }else{
                                 echo displayError($product->getErrors());
                             }
@@ -97,7 +98,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 																<label for="categoria">Su Categoria</label>
 																<select name="categoria_id" id="categoria" class="form-control">
                                     <?php foreach ($categoria_manager->displayCategorias() as $categoria): ?>
-                                        <?php if(!empty($categoria->getChilds())):?>
+                                        <?php if(!empty($categoria->getChilds()) || $categoria->getPadreId()=='0'):?>
 																						<optgroup label="<?= $categoria->getNombre() ?>">
                                                 <?php foreach ($categoria->getChilds() as $child):?>
 																										<option value="<?= $child->getId();?>"><?= $child->getNombre();?></option>

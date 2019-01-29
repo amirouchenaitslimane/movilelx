@@ -22,10 +22,13 @@ class Database
             try{
 
                 self::$instance = new PDO("mysql:host=".DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PASSWORD,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-            }catch (\Exception $error){
+            }catch (\Exception $e){
                 //die(" Fallo de connexion ".$error->getMessage());
-                m_log('error el connexion a la base de datos '.$error->getMessage());
-                redirect('error');
+                agregarLog([
+                    '>'.$e->getMessage().'en linea ('.$e->getLine().')'."\n",
+                    $e
+                ]);
+               redirect('error');
         }
 
             return self::$instance;

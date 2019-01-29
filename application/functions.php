@@ -6,7 +6,7 @@ function redirect($page)
 
 
 //define function name
-function m_log($arMsg)
+function agregarLog($arMsg,$path='application/logs/')
 {
     //define empty string
     $stEntry="";
@@ -17,7 +17,7 @@ function m_log($arMsg)
     {
         //concatenate msg with datetime
         foreach($arMsg as $msg)
-            $stEntry.=$arLogData['event_datetime']." ".$msg.",";
+            $stEntry.=$arLogData['event_datetime']." ".$msg."\n";
     }
     else
     {   //concatenate msg with datetime
@@ -30,7 +30,7 @@ function m_log($arMsg)
 //open the file append mode,dats the log file will create day wise
 
 
-    $fHandler=fopen('application/logs/'.$stCurLogFileName,'w');
+    $fHandler=fopen($path.$stCurLogFileName,'a+');
 
 
     //write the info into the file
