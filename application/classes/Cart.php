@@ -128,6 +128,7 @@ class Cart
             $iva = $total * self::_IVA;
 
             return ($total + $iva);
+
         } else {
             return 0;
         }

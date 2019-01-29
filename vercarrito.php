@@ -71,14 +71,7 @@ require_once 'application/parts/frontend/header.php' ;
 																		</tr>
                                 <?php endforeach;?>
 
-																<tr>
-																		<td>  </td>
-																		<td>  </td>
 
-																		<td><h3>Total</h3></td>
-																		<td>  </td>
-																		<td class="text-right"><h5><strong><?= $cart->total(); ?> €</strong></h5></td>
-																</tr>
 
 
 
@@ -88,9 +81,9 @@ require_once 'application/parts/frontend/header.php' ;
 												<div class="col-md-12 col-12 col-sm-12">
 														<div class="total_area">
 																<ul class="">
-																<li >Total sin IVA  <span><?= $cart->total(); ?> €</span></li>
-																<li >IVA  <span><?= (\app\Cart::_IVA * 100); ?> %</span></li>
-																<li >Total con IVA  <span><?= $cart->totalIva(); ?> €</span></li>
+																<li >Subtotal:  <span><?= $cart->total(); ?> €</span></li>
+																<li >IVA (<?= (\app\Cart::_IVA * 100); ?> %):  <span><?= ($cart->total()* \app\Cart::_IVA)  ?> €</span></li>
+																<li >Total: <span><?= $cart->totalIva(); ?> €</span></li>
 														</ul>
 														</div>
 														<a href="index.php" class="btn btn-movilex pull-left" >
