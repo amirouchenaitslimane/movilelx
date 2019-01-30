@@ -98,10 +98,12 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 														</div>
 														<div class="form-group">
 																<label for="categoria">Su Categoria</label>
+																<a href="#" data-toggle="tooltip" id="tt" title="No se puede poner un producto en la categoria Padre" class="pull-right"><i class="fa fa-question-circle"></i></a>
+
 																<select name="categoria_id" id="categoria" class="form-control">
                                     <?php foreach ($categoria_manager->displayCategorias() as $categoria): ?>
                                         <?php if(!empty($categoria->getChilds()) || $categoria->getPadreId()=='0'):?>
-																						<optgroup label="<?= $categoria->getNombre() ?>">
+																						<optgroup  label="<?= $categoria->getNombre() ?>">
                                                 <?php foreach ($categoria->getChilds() as $child):?>
 																										<option value="<?= $child->getId();?>"><?= $child->getNombre();?></option>
 
@@ -185,5 +187,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 // validarOferta();
 
 
-
+    $('#tt').tooltip({
+        'selector': '',
+        'placement': 'top',
+        'container':'body'
+    });
 </script>

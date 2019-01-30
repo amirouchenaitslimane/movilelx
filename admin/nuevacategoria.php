@@ -89,3 +89,4 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 		</div>
 </div>
 <?php include_once  '../application/parts/backend/footer.php'?>
+
