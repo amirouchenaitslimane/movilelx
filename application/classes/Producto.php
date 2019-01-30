@@ -362,12 +362,13 @@ class Producto
                 if (in_array($file_ext, $allowed_file_types)) {
                     $newfilename = md5($file_basename) . $file_ext;
 
-                    if (file_exists('../uploads/products/' . $newfilename) && $this->imagen == $newfilename) {
+                    if (file_exists('../uploads/products/' . $newfilename) || $this->imagen == $newfilename) {
                         $this->errors[] = "La imagen siempre existe en la base de datos";
                     } else {
 
                         if(move_uploaded_file($_FILES[$name]["tmp_name"], '../uploads/products/' . $newfilename)){
                             $this->setImagen($newfilename);
+                            return true;
                         }
 
                     }
@@ -382,7 +383,7 @@ class Producto
             }
         }
 
-
+return false;
     }
 
 }

@@ -19,8 +19,9 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                         if(isset($_POST['submit'])){
                             $product = new \app\Producto($_POST);
 
-														$product->uploadImage('image');
-
+                        if($_FILES['image']['name'] !=="" ) {
+                            $product->uploadImage('image');
+                        }
 
 
 														if(isset($_POST['es_oferta']) && $_POST['es_oferta']== '1' )

@@ -44,8 +44,13 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                 }
                                 if($_FILES['image']['name'] !=="" ){
 
-                                    $producto->uploadImage('image');
-                                    		$producto->delete($lastImage);
+                                    if($producto->uploadImage('image')){
+                                    		if($lastImage !== 'no_image.jpg'){
+                                            $producto->delete($lastImage);
+
+																				}
+
+																		}
 
 
 
