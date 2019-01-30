@@ -1,5 +1,5 @@
 <?php
-$title ="Categorias";
+$title ="Nuevo Producto";
 require_once '../application/parts/backend/header.php';
 if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
     header('location:/movilelx.site/index.php');

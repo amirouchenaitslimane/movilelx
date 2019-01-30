@@ -20,10 +20,10 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 												<div class="card-body">
                             <?php
                             $producto = $producto_manager->getProduct($_GET['id']);
-                           // DEBUG($producto->getEsOferta());die();
+
                             if(isset($_POST['submit']))
                             {
-
+															$lastImage = $producto->getImagen();
 
                                 if(isset($_POST['nombre'])){
                                     $producto->setNombre(trim(htmlspecialchars($_POST['nombre'])));
@@ -43,8 +43,12 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                     $producto->setActive(trim(htmlspecialchars($_POST['active'])));
                                 }
                                 if($_FILES['image']['name'] !=="" ){
-                                    //$producto->delete($producto->getImagen());
+
                                     $producto->uploadImage('image');
+                                    		$producto->delete($lastImage);
+
+
+
 
                                 }
 
@@ -80,7 +84,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                 }
 
 
-                              //  DEBUG($producto);die();
+
                                 if (empty($producto->getErrors())){
                                     $producto_manager->updateProduct($producto);
                                     flash('info','producto actualizado con exito! ','info');

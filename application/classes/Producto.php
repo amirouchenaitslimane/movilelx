@@ -365,10 +365,13 @@ class Producto
                     if (file_exists('../uploads/products/' . $newfilename) && $this->imagen == $newfilename) {
                         $this->errors[] = "La imagen siempre existe en la base de datos";
                     } else {
-                        $this->setImagen($newfilename);
-                        return move_uploaded_file($_FILES[$name]["tmp_name"], '../uploads/products/' . $newfilename);
-                       // DEBUG($this->imagen);
+
+                        if(move_uploaded_file($_FILES[$name]["tmp_name"], '../uploads/products/' . $newfilename)){
+                            $this->setImagen($newfilename);
+                        }
+
                     }
+
                 } else {
                     $this->errors[] = "fichero seleccionado no es imagen siempre :" . implode(', ', $allowed_file_types);;
                     unlink($_FILES[$name]["tmp_name"]);
