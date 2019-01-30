@@ -135,6 +135,10 @@ endforeach;
     $(document).ready(()=>{
         $('#ped').tab('show')
     });
+
+
+
+
 function download_DIVPdf(id) {
         $("#download-"+id).remove();
         var pdf = new jsPDF('p', 'pt', 'a4');
@@ -142,7 +146,7 @@ function download_DIVPdf(id) {
         pdf.addImage(imageData, 'png', 20, 20, 100, 30);
 
         pdf.text(140, 40, "amirouchenaitslimane@gmail.com -  (34) 966 91 22 60 ");
-        var user = $("#user");
+        var user = $("#user").html();
 
 
 
@@ -152,8 +156,11 @@ function download_DIVPdf(id) {
         var pdf_name = nombre+'pedido.pdf';
         // source can be HTML-formatted string, or a reference
         // to an actual DOM element from which the text will be scraped.
-				htm = user.append($("#acco-"+id));
-        htmlsource = $.trim(htm.html());
+
+		var table = $("#acco-"+id).html();
+
+
+       var htmlsource = user + table;
 
         specialElementHandlers = {
             // element with id of "bypass" - jQuery style selector
@@ -183,5 +190,35 @@ function download_DIVPdf(id) {
             }, margins);
         $('#ignore').show();
         location.reload();
+    }
+
+    function process(str) {
+
+        var div = document.createElement('div');
+        div.innerHTML = str.trim();
+
+        return format(div, 0).innerHTML;
+    }
+
+    function format(node, level) {
+
+        var indentBefore = new Array(level++ + 1).join('  '),
+            indentAfter  = new Array(level - 1).join('  '),
+            textNode;
+
+        for (var i = 0; i < node.children.length; i++) {
+
+            textNode = document.createTextNode('\n' + indentBefore);
+            node.insertBefore(textNode, node.children[i]);
+
+            format(node.children[i], level);
+
+            if (node.lastElementChild == node.children[i]) {
+                textNode = document.createTextNode('\n' + indentAfter);
+                node.appendChild(textNode);
+            }
+        }
+
+        return node;
     }
 </script>
