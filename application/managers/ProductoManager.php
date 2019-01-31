@@ -89,7 +89,6 @@ class ProductoManager
        }
     }
 
-
     public function getProduct($id)
     {
        try{
@@ -163,9 +162,12 @@ class ProductoManager
             $q->bindValue('categoria_id',$producto->getCategoriaId());
             $q->bindValue(':updated_at',(new \DateTime('now'))->format('Y-m-d'));
             $q->bindValue(':id',$producto->getId());
-            $q->execute();
+           return $q->execute();
         }catch (\PDOException $e){
-            echo $e->getMessage();
+            agregarLog([
+                $e->getMessage().'en linea ('.$e->getLine().')'."\n",
+                $e
+            ],'../application/logs/');
         }
 
 

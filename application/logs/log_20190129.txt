@@ -1,7 +1,0 @@
-[Tue 2019-01-29 01:36:55 PM] [client ::1] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'movilelx.product' doesn't existen linea (75)
-
-[Tue 2019-01-29 01:36:55 PM] [client ::1] PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'movilelx.product' doesn't exist in E:\Amirouche\htdocs\movilelx\application\managers\ProductoManager.php:75
-Stack trace:
-#0 E:\Amirouche\htdocs\movilelx\application\managers\ProductoManager.php(75): PDO->query('SELECT p.id,p.n...')
-#1 E:\Amirouche\htdocs\movilelx\admin\productos.php(15): app\ProductoManager->getAll()
-#2 {main}
