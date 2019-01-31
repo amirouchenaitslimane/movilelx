@@ -134,7 +134,7 @@ if(isset($_POST['submit']))
 																		<small id="imagen-s" class="form-text text-muted text-info">(*) Imagen del product es obligatoria con (.png,jpg..) </small>
 																		<div class="col-md-5 mt-2">
 																				<img src="../uploads/products/<?= $producto->getImagen() ?>" class="img-thumbnail" id="img1">
-																				<img id="blah" src="" alt="visualizar imagen aqui"  />
+																				<img id="blah" src="" alt=""  />
 																		</div>
 																</div>
 																<div class="form-group">

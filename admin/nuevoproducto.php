@@ -76,7 +76,7 @@ if(isset($_POST['submit'])){
 												<input type="file" class="form-control"  name="image" id="imagen" value="<?=(isset($_FILES['image']['name']) ? $_FILES['image']['name'] : "") ?>" >
 												<small id="imagen-s" class="form-text text-muted text-info">(*) Imagen del product es obligatoria con (.png,jpg..) </small>
 												<div class="col-md-5 mt-2">
-														<img id="img" src="#" alt="image  upload"  />
+														<img id="img" src="" alt=""  />
 												</div>
 										</div>
 										<div class="form-group">
