@@ -145,7 +145,7 @@ class Categoria
     }
 
     /**
-     * @param array $errors
+     * @param string $errors
      */
     public function setErrors($errors)
     {
@@ -156,7 +156,7 @@ class Categoria
     {
         return [
             self::ESTADO_ACTIVO =>"Activa",
-            self::ESTADO_INACTIVO =>"Iactiva",
+            self::ESTADO_INACTIVO =>"Inactiva",
         ];
     }
 

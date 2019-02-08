@@ -7,11 +7,8 @@
  */
 
 namespace app;
-
-
 class Producto
 {
-
     private $id;
     private $nombre;
     private $descripcion;
@@ -35,12 +32,6 @@ class Producto
     private static $TIPO_REBAJA = 1;
     private static $TIPO_PROMOCION = 2;
 
-
-
-    //clave
-    const PREFIX_IMAGE = 'comprar-movilex-';
-    const DIR_UPLOADS = "../application/uploads/products/";
-    const MAX_IMG_SIZE = 500000;
     private $errors;
 
     use Hydrator;
@@ -316,7 +307,7 @@ class Producto
     public function tipoOfertaOpcion()
     {
         return [
-          self::$TIPO_NO_OFERTA = 'Sin oferta',
+          self::$TIPO_NO_OFERTA = '-',
           self::$TIPO_REBAJA =>'Rebaja',
           self::$TIPO_PROMOCION =>'Promcion'
         ];

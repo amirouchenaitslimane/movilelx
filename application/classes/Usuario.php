@@ -178,12 +178,10 @@ class Usuario
     }
 
 
-
-
-
-
-
-
+  public function addError($error)
+  {
+    $this->errors[] = $error;
+  }
 
     public function getErrors()
     {
@@ -225,10 +223,7 @@ class Usuario
 
     }
 
-    public function addError($error)
-    {
-        $this->errors[] = $error;
-    }
+
 
     /**
      * @return mixed

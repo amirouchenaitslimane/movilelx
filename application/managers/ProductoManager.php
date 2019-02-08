@@ -163,7 +163,7 @@ class ProductoManager
             $q->bindValue('categoria_id',$producto->getCategoriaId());
             $q->bindValue(':updated_at',(new \DateTime('now'))->format('Y-m-d'));
             $q->bindValue(':id',$producto->getId());
-            $q->execute();
+           return  $q->execute();
         }catch (\PDOException $e){
             echo $e->getMessage();
         }
@@ -251,4 +251,36 @@ return $promo;
             ]);
         }
     }
+
+  public function countOfertas()
+  {
+    try{
+      $sql = "SELECT id FROM producto WHERE active= 1 and es_oferta=1";
+      $q = $this->db->prepare($sql);
+      $q->execute();
+      return $q->rowCount();
+    }catch(\PDOException $e){
+      echo $e->getMessage();
+    }
+  }
+
+  public function getOfertas($start=null,$offset=null)
+  {
+    try{
+      $sql = "SELECT p.id,p.nombre as nombre_producto,p.precio,p.es_oferta,p.precio_reducido,p.tipo_oferta,p.imagen,p.categoria_id, c.nombre FROM producto p INNER join categoria c ON p.categoria_id = c.id where  p.active = 1 and p.es_oferta = 1 ";
+      if($start !==null && $offset !== null){
+        $sql .=" LIMIT $start,$offset";
+      }
+
+      $q = $this->db->query($sql);
+
+      $ofertas = [];
+      while ($data = $q->fetch(\PDO::FETCH_OBJ)){
+        $ofertas[] = $data;
+      }
+      return $ofertas;
+    }catch (\PDOException $e){
+      echo $e;
+    }
+  }
 }

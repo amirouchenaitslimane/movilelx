@@ -51,7 +51,6 @@ function arrayHelperCaracteristicas($array)
 {
     $fields = [];
     $label = $array['label'];
-
     $valor = $array['valor'];
     for ($i = 0; $i < count($label); $i++) {
         if (!empty($label[$i])  && $valor !== "") {
@@ -59,7 +58,6 @@ function arrayHelperCaracteristicas($array)
             $tmp_array['label'] =  htmlspecialchars(trim($label[$i]));
             $tmp_array['valor'] =  htmlspecialchars(trim($valor[$i]));
             $fields[] = $tmp_array;
-
         }
     }
 
@@ -88,6 +86,16 @@ function displayError(array  $errors){
     }
     return $string;
 
+}
+function reduceText($string, $nb_car, $delim='...') {
+  $length = $nb_car;
+  if($nb_car<strlen($string)){
+    while (($string{$length} != " ") && ($length > 0)) {
+      $length--;
+    }
+    if ($length == 0) return substr($string, 0, $nb_car) . $delim;
+    else return substr($string, 0, $length) . $delim;
+  }else return $string;
 }
 
 function flash( $name = '', $message = '', $class = 'alert alert-danger' )

@@ -6,7 +6,9 @@ require_once '../application/parts/backend/header.php';?>
 						<div class="row">
 								<div class="col-md-12">
 									<?php flash('info')?>
-										<div class="card strpied-tabled-with-hover ">
+								</div>
+										<div class="card ">
+
 												<div class="card-header ">
 														<h4 class="card-title mb-4">productos de la tienda
 
@@ -16,8 +18,9 @@ require_once '../application/parts/backend/header.php';?>
 														<hr>
 												</div>
 												<?php if($productos !== null):?>
-												<div class="card-body table-full-width table-responsive  ">
-														<table id="table_id"  class="table table-hover table-striped table-bordered">
+												<div class="card-body  ">
+														<div class="table-responsive table-full-width">
+														<table id="table_id"  class="table table-hover table-striped ">
 																<thead>
 																<tr>
 																		<th>image</th>
@@ -35,7 +38,7 @@ require_once '../application/parts/backend/header.php';?>
                                 <?php foreach ($productos as $p):?>
 																		<tr>
 																				<td><img src="../uploads/products/<?= $p->imagen ?>" class="img-fluid " width="100px" height="100px">	</td>
-																				<td><?= $p->nombre ?></td>
+																				<td><?= reduceText($p->nombre,3,'...') ?></td>
 
 																				<td><?= precioES($p->precio) ?> €</td>
 
@@ -56,16 +59,18 @@ require_once '../application/parts/backend/header.php';?>
 																</tbody>
 
 														</table>
-
+														</div>
 												</div>
 
 												<?php else:echo'<h3 class="display-4">No Hay Productos </h3>'; endif;?>
 		</div>
 
 
-				</div>
+
 		</div>
 				</div>
 		</div>
+
+
 
 <?php include_once  '../application/parts/backend/footer.php'?>

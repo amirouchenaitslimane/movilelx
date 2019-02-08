@@ -28,6 +28,10 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
                                 $descripcion = $_POST['descripcion'];
                                 $padre = $_POST['padre_id'];
                                 $estado = $_POST['activo'];
+
+
+
+
                                 if($nombre !== $category->getNombre()){
                                     if($categoria_manager->getByName($nombre)){
                                         $category->setErrors('Nombre de la categoría ya existe');
