@@ -75,7 +75,7 @@ class Producto
     public function setNombre($nombre)
     {
         //required;
-        if(empty(trim($nombre))){
+        if($nombre === ""){
             $this->errors[]= "Nombre del producto es requirido";
         }
         $this->nombre = (string)$nombre;

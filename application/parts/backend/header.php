@@ -18,6 +18,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 </head>
 <body>
 <div class="wrapper">
+<<<<<<< HEAD
 		<?php
 		require_once 'sidebar.php';
 		?>
@@ -40,5 +41,27 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->isCliente()){
 												<li class="nav-item"><a class="nav-link" href="../logout.php"><span class="no-icon">Logout<span class="small">(<?= htmlspecialchars(trim($_SESSION['user']->getNombre()));?>)</span></span></a></li>
 										</ul>
 								</div>
+=======
+<?php
+require_once 'sidebar.php';
+?>
+<div class="main-panel">
+		<nav class="navbar navbar-expand-lg " color-on-scroll="500">
+				<div class=" container-fluid ">
+						<a class="navbar-brand" href="index.php"> Administración </a>
+						<button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-bar burger-lines"></span>
+								<span class="navbar-toggler-bar burger-lines"></span>
+								<span class="navbar-toggler-bar burger-lines"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navigation">
+								<ul class="nav navbar-nav mr-auto">
+										<li class="nav-item"><a href="index.php" class="nav-link" data-toggle="dropdown"><i class="nc-icon nc-palette"></i><span class="d-lg-none">Administración</span></a></li>
+								</ul>
+								<ul class="navbar-nav ml-auto">
+										<li class="nav-item"><a class="nav-link" href="../logout.php"><span class="no-icon">Logout<span class="small">(<?= htmlspecialchars(trim($_SESSION['user']->getNombre()));?>)</span></span></a></li>
+								</ul>
+>>>>>>> 24e013f8aab2d650405fbfa03c078968ee153f06
 						</div>
-				</nav>
+				</div>
+		</nav>
