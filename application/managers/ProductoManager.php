@@ -162,11 +162,7 @@ class ProductoManager
             $q->bindValue('categoria_id',$producto->getCategoriaId());
             $q->bindValue(':updated_at',(new \DateTime('now'))->format('Y-m-d'));
             $q->bindValue(':id',$producto->getId());
-<<<<<<< HEAD
-           return  $q->execute();
-=======
-           return $q->execute();
->>>>>>> 24e013f8aab2d650405fbfa03c078968ee153f06
+        return $q->execute();
         }catch (\PDOException $e){
             agregarLog([
                 $e->getMessage().'en linea ('.$e->getLine().')'."\n",
