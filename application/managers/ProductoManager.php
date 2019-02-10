@@ -285,4 +285,33 @@ return $promo;
       echo $e;
     }
   }
+
+
+  public function buscador_productos($category,$qstring )
+  {
+    try{
+      $sql = "SELECT * FROM producto where producto.active=1 ";
+      if($category !== '0'){
+        $sql .= " and categoria_id=:category AND  producto.nombre LIKE :queryString ";
+        $q = $this->db->prepare($sql);
+        $q->execute([':category'=>$category,':queryString'=>'%'.$qstring.'%']);
+      }else{
+        $sql .= " and   producto.nombre LIKE :queryString";
+        $q = $this->db->prepare($sql);
+        $q->execute([':queryString'=>'%'.$qstring.'%']);
+      }
+
+      $products = [];
+      while ($data = $q->fetch(\PDO::FETCH_OBJ)){
+        $products[] = $data;
+      }
+      return $products;
+    }catch (\PDOException $e){
+      echo $e->getMessage();
+    }
+
+
+  }
+  
+  
 }

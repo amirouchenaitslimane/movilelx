@@ -108,3 +108,44 @@
 										</div>
 								</nav>
 						</div>
+				</header>
+		<div class="col-md-12">
+				<div class="row">
+
+
+				<div class="col-md-3"></div>
+				<div class="col-md-9">
+						<form action="buscar.php" method="get" class="form-inline float-right mb-4">
+								<div class="form-group">
+										<select class="form-control" name="cat" id="exampleFormControlSelect1">
+												<option value="0" <?= (isset($_GET['cat']) && $_GET['cat']=== '0'  ? 'selected' : '')?>>Todas las categorías</option>
+											<?php
+                      foreach ($categoria_manager->displayCategorias() as $categoria): if(!empty($categoria->getChilds()) || $categoria->getPadreId()=='0'):
+                        ?>
+													<optgroup  label="<?= htmlspecialchars(trim($categoria->getNombre())); ?>">
+                            <?php
+                            foreach ($categoria->getChilds() as $child):
+                              ?>
+																<option value="<?= $child->getId();?>" <?= (isset($_GET['cat']) && $_GET['cat']=== $child->getId()  ? 'selected': '')?>><?= $child->getNombre().' ('.$categoria->getNombre().' )';?></option>
+                            <?php
+                            endforeach;
+                            ?>
+													</optgroup>
+                      <?php
+                      else:
+                        ?>
+													<option value="<?= $categoria->getId() ?>" <?= (isset($_GET['cat']) && $_GET['cat']=== $categoria->getId()  ? 'selected' : '')?>><?= $categoria->getNombre();?></option>
+                      <?php
+                      endif;endforeach;
+                      ?>
+										</select>
+								</div>
+								<div class="form-group">
+										<input type="text" name="q" class="form-control" placeholder="buscar..." value="<?= (isset($_GET['q']) ? $_GET['q'] : '') ?>" required>
+								</div>
+								<button type="submit" class="btn btn-light"><i class="fa fa-search"></i></button>
+						</form>
+
+				</div>
+				</div>
+		</div>
